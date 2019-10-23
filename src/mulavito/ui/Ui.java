@@ -47,6 +47,7 @@ import mulavito.ui.components.ConsolePanel;
 import mulavito.ui.components.FloatingTabbedPane;
 import mulavito.ui.control.MouseOverHintManager;
 import mulavito.utils.Resources;
+import vnreal.algorithms.argf.config.Constants;
 
 /**
  * Base class for a paneled GUI.
@@ -159,7 +160,7 @@ public class Ui extends JFrame {
 		JComponent right = createRightPane(), left = createLeftPane();
 		if (content != null && right != null)
 			content = new MySplit(JSplitPane.HORIZONTAL_SPLIT, content, right,
-					0.9);
+					Constants.CENTER_TO_RIGHT_RATION);
 		else if (right != null)
 			content = right;
 		//

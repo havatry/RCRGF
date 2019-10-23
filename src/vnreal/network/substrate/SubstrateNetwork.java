@@ -37,7 +37,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.argf.config.GraphType;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.mapping.Mapping;
@@ -115,7 +115,7 @@ public class SubstrateNetwork extends
 		result += "\nEDGES:\n";
 		for (SubstrateLink l : getEdges()) {
 			result += "[id:" + l.getId() + " name:" + l.getName() + "\n";
-			if (GraphType.DIRECTED) {
+			if (Constants.DIRECTED) {
 				result += l.getId() + "  (" + getSource(l).getName() + "-->"
 						+ getDest(l).getName() + ") \n";
 			}

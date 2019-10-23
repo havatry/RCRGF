@@ -19,7 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
-import vnreal.algorithms.argf.config.GraphType;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.network.Link;
 import vnreal.network.Network;
 import vnreal.network.Node;
@@ -114,7 +114,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 
 			@Override
 			protected SubstrateNetwork createNetwork() {
-				return new SubstrateNetwork(autoUnregisterConstraints, GraphType.DIRECTED); // 调整有向和无向图
+				return new SubstrateNetwork(autoUnregisterConstraints, Constants.DIRECTED); // 调整有向和无向图
 			}
 
 			@Override
@@ -140,7 +140,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 			
 			@Override
 			protected VirtualNetwork createNetwork() {
-				return new VirtualNetwork(level, true, GraphType.DIRECTED); // 调整有向和无向
+				return new VirtualNetwork(level, true, Constants.DIRECTED); // 调整有向和无向
 			}
 			
 			@Override

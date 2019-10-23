@@ -88,7 +88,7 @@ public final class UI extends Ui {
 		// Pane initialization requires this.scenario to be set,
 		// therefore it cannot take place in the super constructor.
 		this.scenario = scenario;
-		this.initializeRightPane();
+//		this.initializeRightPane();
 		this.initializeCenterPane();
 
 		singleton = this;

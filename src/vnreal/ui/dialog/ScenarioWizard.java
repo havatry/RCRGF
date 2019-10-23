@@ -59,7 +59,7 @@ import javax.swing.table.TableColumn;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.ui.dialogs.AbstractButtonDialog;
-import vnreal.algorithms.argf.config.GraphType;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.core.Scenario;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateLink;
@@ -346,7 +346,7 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			double[] vnsBeta) {
 		
 		NetworkStack result;
-		if (GraphType.DIRECTED) {
+		if (Constants.DIRECTED) {
 			result = new NetworkStack(new SubstrateNetwork(false),
 					new LinkedList<VirtualNetwork>());
 		} else {
@@ -375,7 +375,7 @@ public class ScenarioWizard extends AbstractButtonDialog {
 		double virtualAlpha;
 		double virtualBeta;
 		for (int layer = 1; layer <= vnNumber; layer++) {
-			if (GraphType.DIRECTED) {
+			if (Constants.DIRECTED) {
 				vn = new VirtualNetwork(layer);
 			} else {
 				vn = new VirtualNetwork(layer, true, false); // ÎÞÏòµÄÐéÄâÍøÂç

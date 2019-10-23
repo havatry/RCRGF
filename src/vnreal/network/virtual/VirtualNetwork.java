@@ -40,7 +40,7 @@ import java.util.Map;
 
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.argf.config.GraphType;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;
@@ -134,7 +134,7 @@ public class VirtualNetwork extends
 
 		result += "\nEDGES:\n";
 		for (VirtualLink l : getEdges()) {
-			if (GraphType.DIRECTED) {
+			if (Constants.DIRECTED) {
 				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getSource(l).getId() + "-->"
 						+ getDest(l).getId() + ")\n";
 			} else {
