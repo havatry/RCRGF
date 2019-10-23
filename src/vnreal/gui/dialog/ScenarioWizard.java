@@ -59,6 +59,7 @@ import javax.swing.table.TableColumn;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.gui.dialogs.AbstractButtonDialog;
+import vnreal.algorithms.argf.config.GraphType;
 import vnreal.core.Scenario;
 import vnreal.gui.GUI;
 import vnreal.network.NetworkStack;
@@ -344,9 +345,14 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			double snBeta, int vnNumber, int[] vnsNodes, double[] vnsAlpha,
 			double[] vnsBeta) {
 		
-		NetworkStack result =
-				new NetworkStack(new SubstrateNetwork(false, false), // 改成无向的
+		NetworkStack result;
+		if (GraphType.DIRECTED) {
+			result = new NetworkStack(new SubstrateNetwork(false),
+					new LinkedList<VirtualNetwork>());
+		} else {
+			result = new NetworkStack(new SubstrateNetwork(false, false), // 无向的
 						new LinkedList<VirtualNetwork>());
+		}
 		SubstrateNetwork substrate = result.getSubstrate();
 
 		// generate substrate network
@@ -369,7 +375,11 @@ public class ScenarioWizard extends AbstractButtonDialog {
 		double virtualAlpha;
 		double virtualBeta;
 		for (int layer = 1; layer <= vnNumber; layer++) {
-			vn = new VirtualNetwork(layer, true, false); // 改成无向的虚拟网络
+			if (GraphType.DIRECTED) {
+				vn = new VirtualNetwork(layer);
+			} else {
+				vn = new VirtualNetwork(layer, true, false); // 无向的虚拟网络
+			}
 			result.addLayer(vn);
 			virtualNodes = vnsNodes[layer - 1];
 			virtualAlpha = vnsAlpha[layer - 1];

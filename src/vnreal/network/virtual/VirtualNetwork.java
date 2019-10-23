@@ -39,6 +39,7 @@ import java.util.List;
 
 import org.apache.commons.collections15.Factory;
 
+import vnreal.algorithms.argf.config.GraphType;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;
@@ -121,7 +122,7 @@ public class VirtualNetwork extends
 	public String toString() {
 		String result = "NODES:\n";
 		for (VirtualNode n : getVertices()) {
-			result += "id:" + n.getId() + " name:" + n.getName() + ")\n";
+			result += "id:" + n.getId() + " name:" + n.getName() + "\n";
 			for (AbstractDemand d : n.get()) {
 				result += "  " + d.toString() + "\n";
 			}
@@ -129,8 +130,12 @@ public class VirtualNetwork extends
 
 		result += "\nEDGES:\n";
 		for (VirtualLink l : getEdges()) {
-			result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getSource(l).getId() + "-->"
-					+ getDest(l).getId() + ")\n";
+			if (GraphType.DIRECTED) {
+				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getSource(l).getId() + "-->"
+						+ getDest(l).getId() + ")\n";
+			} else {
+				result += "id:" + l.getId() + " name:" + l.getName() + "\n";
+			}
 			for (AbstractDemand d : l.get()) {
 				result += "  " + d.toString() + "\n";
 			}

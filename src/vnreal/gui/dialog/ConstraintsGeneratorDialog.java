@@ -461,12 +461,12 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 					// link demand
 					System.out.println(stack.getLayer(l + 1));
 					Collection<VirtualLink> edges = ((VirtualNetwork) stack.getLayer(l + 1)).getEdges();
-							if (edges != null) {
-								for (VirtualLink vLink : edges)
-									addDemand(vLink, demClasses.get(l).get(d),
-											demParamNames.get(l).get(d), demParamMaxValues
-											.get(l).get(d), stack);
-							}
+					if (edges != null) {
+						for (VirtualLink vLink : edges)
+							addDemand(vLink, demClasses.get(l).get(d),
+									demParamNames.get(l).get(d), demParamMaxValues
+									.get(l).get(d), stack);
+					}
 				}
 			}
 		}
