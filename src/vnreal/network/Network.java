@@ -36,6 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.graph.ILayer;
+import vnreal.algorithms.argf.adapter.MyUndirectedGraph;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.AbstractConstraint;
 import edu.uci.ics.jung.graph.DirectedOrderedSparseMultigraph;
 import edu.uci.ics.jung.graph.ObservableGraph;
@@ -53,10 +55,11 @@ public abstract class Network<T extends AbstractConstraint, V extends Node<T>, E
 	protected Network(boolean autoUnregisterConstraints) {
 		this(autoUnregisterConstraints, true);
 	}
-
-	// 将directed改成无向
+	
+	// 将directed改成无向, 适配无向图起点和终点的获取
 	protected Network(boolean autoUnregisterConstraints, boolean directed) {
-		super(directed ? new DirectedOrderedSparseMultigraph<V, E>() : new UndirectedOrderedSparseMultigraph<V,E>());
+		super(directed ? new DirectedOrderedSparseMultigraph<V, E>() : 
+			(Constants.ADAPTE_UNDIRECTEDGRAPH ? new MyUndirectedGraph<>() : new UndirectedOrderedSparseMultigraph<V,E>()));
 		this.autoUnregisterConstraints = autoUnregisterConstraints;
 		this.directed = directed;
 	}

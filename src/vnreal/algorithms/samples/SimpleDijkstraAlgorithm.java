@@ -40,6 +40,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import org.apache.commons.collections15.ListUtils;
 
 import vnreal.algorithms.AbstractSequentialAlgorithm;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Network;
@@ -118,8 +119,9 @@ public final class SimpleDijkstraAlgorithm extends
 
 	@Override
 	protected boolean process(final VirtualLink p) {
-		final SubstrateNode srcSnode;
-		final SubstrateNode dstSnode;
+		// remove the final at 10/23
+		SubstrateNode srcSnode;
+		SubstrateNode dstSnode = null;
 
 		processedLinks++; // increase number of processed.
 
@@ -161,7 +163,29 @@ public final class SimpleDijkstraAlgorithm extends
 			System.out.println("Cannot find destination for " + p);
 			return true;
 		} else {
-			dstSnode = dstCandidates.get(0);
+			if (Constants.ASSURE_UNIQUE) {
+				if (dstCandidates.size() == 1) {
+					// 从src中取一个不相同的
+					if (srcCandidates.size() == 1) {
+						if (dstCandidates.get(0) == srcCandidates.get(0)) {
+							System.out.println("Cannot find path, because the start and end are same point");
+							return true;
+						} else {
+							dstSnode = dstCandidates.get(0);
+						}
+					}
+				} else {
+					for (SubstrateNode ss : dstCandidates) {
+						if (ss != srcSnode) {
+							// find
+							dstSnode = ss;
+							break;
+						}
+					}
+				}
+			} else {
+				dstSnode = dstCandidates.get(0);
+			}
 		}
 
 		// 3. Build node filter predicate
