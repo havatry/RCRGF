@@ -459,7 +459,6 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 										.get(l).get(d), stack);
 				} else {
 					// link demand
-					System.out.println(stack.getLayer(l + 1));
 					Collection<VirtualLink> edges = ((VirtualNetwork) stack.getLayer(l + 1)).getEdges();
 					if (edges != null) {
 						for (VirtualLink vLink : edges)
@@ -469,6 +468,8 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 					}
 				}
 			}
+			System.out.println("\n======================== VN " + (l + 1) + " ========================");
+			System.out.println(stack.getLayer(l + 1));
 		}
 	}
 

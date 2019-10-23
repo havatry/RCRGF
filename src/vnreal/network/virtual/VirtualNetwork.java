@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections15.Factory;
 
@@ -58,6 +59,7 @@ public class VirtualNetwork extends
 		Network<AbstractDemand, VirtualNode, VirtualLink> {
 	/** The layer resp. virtual network id which start from 0. */
 	private String name = null;
+	private Map<VirtualLink, Pair<VirtualNode>> map = new HashMap<>();
 
 	public VirtualNetwork(int layer, boolean autoUnregisterConstraints, boolean directed) {
 		super(autoUnregisterConstraints, directed);
@@ -84,8 +86,10 @@ public class VirtualNetwork extends
 	@Override
 	public boolean addEdge(VirtualLink edge, VirtualNode v, VirtualNode w) {
 		if (edge.getLayer() == getLayer() && v.getLayer() == getLayer()
-				&& w.getLayer() == getLayer())
+				&& w.getLayer() == getLayer()) {
+			map.put(edge, new Pair<>(v, w)); // 将边和节点对应上
 			return super.addEdge(edge, new Pair<VirtualNode>(v, w));
+		}
 		else
 			return false;
 	}
@@ -134,7 +138,8 @@ public class VirtualNetwork extends
 				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getSource(l).getId() + "-->"
 						+ getDest(l).getId() + ")\n";
 			} else {
-				result += "id:" + l.getId() + " name:" + l.getName() + "\n";
+				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + map.get(l).getFirst().getId() + "<-->"
+						+ map.get(l).getSecond().getId() + ")\n";
 			}
 			for (AbstractDemand d : l.get()) {
 				result += "  " + d.toString() + "\n";
