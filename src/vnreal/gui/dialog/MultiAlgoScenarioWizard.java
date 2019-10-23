@@ -162,6 +162,9 @@ public class MultiAlgoScenarioWizard extends AbstractButtonDialog {
 		return content;
 	}
 
+	/**
+	 * 模板方法，核心触发创建的方法
+	 */
 	@Override
 	protected void doAction() {
 		if (JOptionPane.showConfirmDialog(
@@ -176,6 +179,9 @@ public class MultiAlgoScenarioWizard extends AbstractButtonDialog {
 		SubstrateNetwork substrate = null;
 		List<VirtualNetwork> vns = new ArrayList<>(generators.length - 1);
 
+		// 初始没有add行的时候，只生成一个底层网络拓扑
+		// 当添加后，将添加的配置作为虚拟网络拓扑进行生成
+		// 都是使用WaxmanGenerator来生成网络的
 		for (int i = 0; i < generators.length; i++) {
 			if (i == 0) {
 				substrate = generators[i].generateSubstrateNetwork(false);

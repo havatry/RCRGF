@@ -345,7 +345,7 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			double[] vnsBeta) {
 		
 		NetworkStack result =
-				new NetworkStack(new SubstrateNetwork(false),
+				new NetworkStack(new SubstrateNetwork(false, false), // 改成无向的
 						new LinkedList<VirtualNetwork>());
 		SubstrateNetwork substrate = result.getSubstrate();
 
@@ -369,7 +369,7 @@ public class ScenarioWizard extends AbstractButtonDialog {
 		double virtualAlpha;
 		double virtualBeta;
 		for (int layer = 1; layer <= vnNumber; layer++) {
-			vn = new VirtualNetwork(layer);
+			vn = new VirtualNetwork(layer, true, false); // 改成无向的虚拟网络
 			result.addLayer(vn);
 			virtualNodes = vnsNodes[layer - 1];
 			virtualAlpha = vnsAlpha[layer - 1];

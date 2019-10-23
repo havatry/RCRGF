@@ -113,7 +113,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 
 			@Override
 			protected SubstrateNetwork createNetwork() {
-				return new SubstrateNetwork(autoUnregisterConstraints);
+				return new SubstrateNetwork(autoUnregisterConstraints, false); // 改成无向图
 			}
 
 			@Override
@@ -139,7 +139,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 			
 			@Override
 			protected VirtualNetwork createNetwork() {
-				return new VirtualNetwork(level);
+				return new VirtualNetwork(level, true, false);
 			}
 			
 			@Override

@@ -31,6 +31,10 @@ import vnreal.io.experiment.ParamType;
 import vnreal.io.experiment.RNGType;
 import vnreal.network.NetworkStack;
 
+/**
+ * 一种编排器
+ * 2019年10月23日 下午12:51:06
+ */
 public class Orchestrator {
 	public static void execute(String xmlfile) throws SAXException, JAXBException, ClassNotFoundException {
 		SchemaFactory schemaFactory = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );

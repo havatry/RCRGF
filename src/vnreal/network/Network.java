@@ -53,7 +53,8 @@ public abstract class Network<T extends AbstractConstraint, V extends Node<T>, E
 	protected Network(boolean autoUnregisterConstraints) {
 		this(autoUnregisterConstraints, true);
 	}
-		
+
+	// 将directed改成无向
 	protected Network(boolean autoUnregisterConstraints, boolean directed) {
 		super(directed ? new DirectedOrderedSparseMultigraph<V, E>() : new UndirectedOrderedSparseMultigraph<V,E>());
 		this.autoUnregisterConstraints = autoUnregisterConstraints;
