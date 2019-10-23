@@ -31,12 +31,16 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
+import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
@@ -53,6 +57,7 @@ import vnreal.network.virtual.VirtualNode;
 public abstract class AbstractLinkMapping {
 	protected int processedLinks, mappedLinks;
 	protected List<IHiddenHopMapping> hhMappings;
+	protected Map<VirtualLink, List<SubstrateLink>> linkMapping;
 
 	/**
 	 * The constructor of the class initializes its variables
@@ -65,6 +70,7 @@ public abstract class AbstractLinkMapping {
 	protected AbstractLinkMapping() {
 		this.processedLinks = 0;
 		this.mappedLinks = 0;
+		this.linkMapping = new LinkedHashMap<>(); // 新加的映射链路结果
 	}
 
 	/**

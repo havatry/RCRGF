@@ -56,7 +56,10 @@ import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 /**
  * Maps {@link VirtualLink}s using the Dijkstra algorithm to find a path in the
  * filtered {@link SubstrateNetwork}.
- * 
+ * <br>
+ * 首先对虚拟节点进行找所有同时满足节点多种需求的候选节点，然后取集合中的第一个作为映射节点。这里会出现起点和终点被映射到同一个
+ * 底层网络节点中，对此进行了设置。 当映射到两个底层节点后，就开始使用Dijkstra算法，在底层网络中找到一条最短路径。如果该路径满足
+ * 虚拟网络的链路带宽需求就进行映射，否则抛出异常。
  * @author Michael Duelli
  * @since 2010-09-14
  */

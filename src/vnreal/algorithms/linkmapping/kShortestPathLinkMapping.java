@@ -40,6 +40,7 @@ import mulavito.algorithms.shortestpath.ksp.Eppstein;
 import mulavito.algorithms.shortestpath.ksp.KShortestPathAlgorithm;
 import mulavito.algorithms.shortestpath.ksp.Yen;
 import vnreal.algorithms.AbstractLinkMapping;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.algorithms.utils.LinkWeight;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;
@@ -120,7 +121,7 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 			if (vNet.isDirected()) {
 				srcVnode = vNet.getSource(tVLink);
 				dstVnode = vNet.getDest(tVLink);
-			} else {
+			} else { // 对于无向图的处理
 				Pair<VirtualNode> p = vNet.getEndpoints(tVLink);
 				srcVnode = p.getFirst();
 				dstVnode = p.getSecond();
@@ -164,7 +165,8 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 						// the path.
 						if (!NodeLinkAssignation.vlm(tVLink, path, sNet, sNode))
 							throw new AssertionError("But we checked before!");
-
+						// find map for link
+						linkMapping.put(tVLink, path);
 						mappedLinks++;
 						ind2 = 0;
 						break;
@@ -178,6 +180,10 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 			} else {
 				// FIXME Hidden hops demand will be applied?
 			}
+		}
+		if (Constants.PRINT_LINK_MAPPING_RESULT) {
+			System.out.println();
+			System.out.println(linkMapping); // 打印链路映射的结果
 		}
 		return true;
 	}

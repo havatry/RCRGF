@@ -38,7 +38,11 @@ import vnreal.ui.UI;
 
 /**
  * An implementation of MuLaViTo's {@link ProgessBarDialog}.
- * 
+ * <br>
+ * 二阶段的流程
+ * MyProgressBarDialog的构造函数 -> 调用super的构造函数,传入alg -> 实例化ProgressTask(alg)任务 -> 弹出框是否选择HiddenHop & 执行任务 
+ * -> 调用任务的doInBackground方法 -> 执行AbstractAlgorithm的performEvaluation方法 -> 执行AbstractSequentialAlgorithm的evalute方法
+ * -> 执行GenericMappingAlgorithm的process方法 -> 执行传入alg的nodemapping和linkmapping方法 -> 统计算法的计算结果，在onDone的时候显示
  * @author Michael Duelli
  * @since 2010-11-18
  */

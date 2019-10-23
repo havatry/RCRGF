@@ -156,7 +156,7 @@ public class AvailableResourcesNodeMapping extends AbstractNodeMapping {
 				}
 			}
 		}
-		System.out.println(nodeMapping);
+		System.out.println(nodeMapping); // 输出到控制台关于节点的映射情况
 		return true;
 	}
 
