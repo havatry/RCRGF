@@ -40,9 +40,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import mulavito.gui.Gui;
 import mulavito.samples.utils.SampleGraphDocument;
 import mulavito.samples.utils.SampleGraphPanel;
+import mulavito.ui.Ui;
 import mulavito.utils.Resources;
 
 /**
@@ -54,7 +54,7 @@ import mulavito.utils.Resources;
  * @since 2010-08-24
  */
 @SuppressWarnings("serial")
-public final class GraphPanelDemo extends Gui implements ActionListener {
+public final class GraphPanelDemo extends Ui implements ActionListener {
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.

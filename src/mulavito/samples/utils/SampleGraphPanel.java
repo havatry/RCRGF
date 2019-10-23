@@ -34,10 +34,10 @@ import java.awt.Event;
 import java.awt.Paint;
 import java.awt.Stroke;
 
-import mulavito.gui.components.GraphPanel;
-import mulavito.gui.components.LayerViewer;
-import mulavito.gui.control.ViewerContext;
 import mulavito.samples.utils.SampleGraphDocument.MyV;
+import mulavito.ui.components.GraphPanel;
+import mulavito.ui.components.LayerViewer;
+import mulavito.ui.control.ViewerContext;
 
 import org.apache.commons.collections15.Transformer;
 

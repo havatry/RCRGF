@@ -47,16 +47,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 
-import mulavito.gui.Gui;
-import mulavito.gui.components.LayerDataPanel;
-import mulavito.gui.components.LayerViewer;
-import mulavito.gui.components.QuickSearchBar;
-import mulavito.gui.components.selectionpanel.SelectionPanel;
-import mulavito.gui.control.FileDropTargetListener;
 import mulavito.samples.utils.MyE;
 import mulavito.samples.utils.MyL;
 import mulavito.samples.utils.SampleGraphDocument;
 import mulavito.samples.utils.SampleGraphDocument.MyV;
+import mulavito.ui.Ui;
+import mulavito.ui.components.LayerDataPanel;
+import mulavito.ui.components.LayerViewer;
+import mulavito.ui.components.QuickSearchBar;
+import mulavito.ui.components.selectionpanel.SelectionPanel;
+import mulavito.ui.control.FileDropTargetListener;
 import mulavito.samples.utils.SampleGraphPanel;
 
 /**
@@ -69,7 +69,7 @@ import mulavito.samples.utils.SampleGraphPanel;
  * @since 2010-08-24
  */
 @SuppressWarnings("serial")
-public final class PaneledGuiDemo extends Gui implements ActionListener {
+public final class PaneledGuiDemo extends Ui implements ActionListener {
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.

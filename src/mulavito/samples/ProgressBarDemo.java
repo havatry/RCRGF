@@ -44,15 +44,15 @@ import javax.swing.JToolBar;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import mulavito.algorithms.IAlgorithm;
-import mulavito.gui.Gui;
-import mulavito.gui.dialogs.ProgressBarDialog;
+import mulavito.ui.Ui;
+import mulavito.ui.dialogs.ProgressBarDialog;
 
 /**
  * @author Michael Duelli
  * @since 2011-04-18
  */
 @SuppressWarnings("serial")
-public final class ProgressBarDemo extends Gui implements ActionListener {
+public final class ProgressBarDemo extends Ui implements ActionListener {
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.

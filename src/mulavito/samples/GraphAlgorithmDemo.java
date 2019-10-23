@@ -45,11 +45,11 @@ import javax.swing.JToolBar;
 import mulavito.algorithms.shortestpath.disjoint.SuurballeTarjan;
 import mulavito.algorithms.shortestpath.ksp.Eppstein;
 import mulavito.algorithms.shortestpath.ksp.Yen;
-import mulavito.gui.Gui;
 import mulavito.samples.utils.MyE;
 import mulavito.samples.utils.MyL;
 import mulavito.samples.utils.SampleGraphDocument;
 import mulavito.samples.utils.SampleGraphDocument.MyV;
+import mulavito.ui.Ui;
 import mulavito.samples.utils.SampleGraphPanel;
 import mulavito.utils.Resources;
 import mulavito.utils.distributions.UniformStream;
@@ -66,7 +66,7 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * @since 2011-04-29
  */
 @SuppressWarnings("serial")
-public final class GraphAlgorithmDemo extends Gui implements ActionListener {
+public final class GraphAlgorithmDemo extends Ui implements ActionListener {
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.

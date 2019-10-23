@@ -46,10 +46,10 @@ import org.xml.sax.SAXException;
 import vnreal.core.Orchestrator;
 import vnreal.core.Scenario;
 import vnreal.core.oldFramework.TestOrchestrator;
-import vnreal.gui.GUI;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
+import vnreal.ui.UI;
 
 public final class Main {
 
@@ -90,7 +90,7 @@ public final class Main {
 	
 					Scenario scenario = new Scenario();
 					scenario.setNetworkStack(new NetworkStack(new SubstrateNetwork(true), new LinkedList<VirtualNetwork>()));
-					new GUI(scenario);
+					new UI(scenario);
 				}
 			});
 		}

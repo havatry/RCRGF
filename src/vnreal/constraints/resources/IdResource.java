@@ -41,12 +41,12 @@ import vnreal.constraints.INodeConstraint;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.DemandVisitorAdapter;
 import vnreal.constraints.demands.IdDemand;
-import vnreal.gui.GUI;
 import vnreal.mapping.Mapping;
 import vnreal.network.NetworkEntity;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.ui.UI;
 
 /**
  * A resource for an identifier.
@@ -94,8 +94,8 @@ public final class IdResource extends AbstractResource implements
 		if (checkUniquness(id)) {
 			this.id = id;
 		} else {
-			if (GUI.isInitialized())
-				JOptionPane.showMessageDialog(GUI.getInstance(),
+			if (UI.isInitialized())
+				JOptionPane.showMessageDialog(UI.getInstance(),
 						"IdResource is not unique.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			System.err.println("IdResource: id is not unique.");

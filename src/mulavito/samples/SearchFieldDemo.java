@@ -43,8 +43,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import mulavito.gui.Gui;
-import mulavito.gui.components.AbstractSearchField;
+import mulavito.ui.Ui;
+import mulavito.ui.components.AbstractSearchField;
 
 /**
  * @author Michael Duelli
@@ -52,7 +52,7 @@ import mulavito.gui.components.AbstractSearchField;
  * @since 2011-02-09
  */
 @SuppressWarnings("serial")
-public final class SearchFieldDemo extends Gui implements ActionListener {
+public final class SearchFieldDemo extends Ui implements ActionListener {
 	public static void main(String[] args) {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
