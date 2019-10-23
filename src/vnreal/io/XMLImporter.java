@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.IdDemand;
@@ -220,7 +221,7 @@ public class XMLImporter {
 			}
 			
 			if(localName.equals("SubstrateNetwork")) {
-				currentSNet = new SubstrateNetwork(false);
+				currentSNet = new SubstrateNetwork(false, Constants.DIRECTED);
 			}
 			
 			if(localName.equals("SubstrateNode")) {
@@ -287,7 +288,7 @@ public class XMLImporter {
 			
 			if(localName.equals("VirtualNetwork")) {
 				int layer = Integer.parseInt(attributes.getValue("layer"));
-				currentVNetwork = new VirtualNetwork(layer);
+				currentVNetwork = new VirtualNetwork(layer, true, Constants.DIRECTED);
 			}
 			
 			if(localName.equals("VirtualNode")) {

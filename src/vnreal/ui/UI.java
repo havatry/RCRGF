@@ -51,6 +51,7 @@ import javax.swing.event.ChangeListener;
 import mulavito.ui.Ui;
 import mulavito.ui.components.selectionpanel.SelectionPanel;
 import mulavito.utils.Resources;
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.core.Scenario;
 import vnreal.ui.mapping.MappingPanel;
 import vnreal.ui.menu.AlgorithmsMenu;
@@ -88,7 +89,9 @@ public final class UI extends Ui {
 		// Pane initialization requires this.scenario to be set,
 		// therefore it cannot take place in the super constructor.
 		this.scenario = scenario;
-//		this.initializeRightPane();
+		if (!Constants.HIDDEN_RIGHT_TAB) {
+			this.initializeRightPane();
+		}
 		this.initializeCenterPane();
 
 		singleton = this;
@@ -210,7 +213,11 @@ public final class UI extends Ui {
 	}
 
 	public void update() {
-		mappingPanel.update();
+		if (!Constants.HIDDEN_RIGHT_TAB) {
+			mappingPanel.update(); // 没有隐藏对应选项卡，则更新界面
+		} else {
+			// TODO
+		}
 	}
 
 	public static UI getInstance() {

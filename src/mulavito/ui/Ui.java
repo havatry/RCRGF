@@ -160,7 +160,7 @@ public class Ui extends JFrame {
 		JComponent right = createRightPane(), left = createLeftPane();
 		if (content != null && right != null)
 			content = new MySplit(JSplitPane.HORIZONTAL_SPLIT, content, right,
-					Constants.CENTER_TO_RIGHT_RATION);
+					Constants.HIDDEN_RIGHT_TAB ? 1.0 : 0.9);
 		else if (right != null)
 			content = right;
 		//
