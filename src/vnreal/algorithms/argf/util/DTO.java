@@ -5,5 +5,6 @@ package vnreal.algorithms.argf.util;
  * 2019年10月24日 下午9:26:54
  */
 public class DTO {
+	private int[][] BTL;
 	
 }

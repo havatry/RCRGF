@@ -1,5 +1,10 @@
 package vnreal.algorithms.argf.util;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;
@@ -9,9 +14,12 @@ import vnreal.network.Network;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
+import vnreal.network.virtual.VirtualNode;
 
 public class Utils {
 	private static final double esp = 1e-3;
+	private static final Map<Long, Integer> mapVirtualNode = new HashMap<Long, Integer>();
+	private static final Map<Long, Integer> mapSubstrateNode = new HashMap<>();
 	
 	public static double getBandwith(Link<?> l) {
 		if (l instanceof VirtualLink) {
@@ -58,7 +66,6 @@ public class Utils {
 		return !great(a, b);
 	}
 	
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static double getReferencedResource(Node node, Network network, double alpha) {
 		double bandwith_total = 0.0;
@@ -68,5 +75,27 @@ public class Utils {
 		}
 		double v1 = getCpu(node) + bandwith_total;
 		return v1;
+	}
+	
+	public static void initMapVirtualNode(Collection<VirtualNode> virtualNodes) {
+		int index = 0;
+		for (VirtualNode vn : virtualNodes) {
+			mapVirtualNode.put(vn.getId(), index++);
+		}
+	}
+	
+	public static void initMapSubstrateNode(Collection<SubstrateNode> substrateNodes) {
+		int index = 0;
+		for (SubstrateNode sn : substrateNodes) {
+			mapVirtualNode.put(sn.getId(), index++);
+		}
+	}
+	
+	public int getIndexForVirtualNode(VirtualNode vn) {
+		return mapVirtualNode.get(vn.getId());
+	}
+	
+	public int getIndexForSubstrateNode(SubstrateNode sn) {
+		return mapSubstrateNode.get(sn.getId());
 	}
 }
