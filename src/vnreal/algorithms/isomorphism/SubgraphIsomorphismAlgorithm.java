@@ -38,6 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import vnreal.algorithms.argf.config.Constants;
 import vnreal.algorithms.singlenetworkmapping.SingleNetworkMappingAlgorithm;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.algorithms.utils.SubgraphBasicVN.ResourceDemandEntry;
@@ -66,7 +67,9 @@ import edu.uci.ics.jung.graph.util.Pair;
  */
 public class SubgraphIsomorphismAlgorithm extends
 		SingleNetworkMappingAlgorithm {
-	public static final boolean debug = false;
+//	public static final boolean debug = false;
+	
+	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // 由变量控制
 
 	private int numberOfTries;
 
@@ -179,6 +182,7 @@ public class SubgraphIsomorphismAlgorithm extends
 		return path;
 	}
 
+	// 对边进行映射, 无向图这里所作些修改
 	Collection<ResourceDemandEntry> mapEdges(
 			VirtualNetwork g_V, SubstrateNetwork orig_g_P,
 			MappingCandidate<VirtualNode, SubstrateNode> candidate, NodeLinkMapping m,
@@ -188,6 +192,9 @@ public class SubgraphIsomorphismAlgorithm extends
 				g_V, orig_g_P, candidate, m, epsilon);
 		if (out == null) {
 			return null;
+		} else if (!Constants.DIRECTED) {
+			// 无向图直接返回out
+			return out;
 		}
 		Collection<ResourceDemandEntry> in = mapInEdges(
 				g_V, orig_g_P, candidate, m, epsilon);
@@ -388,8 +395,12 @@ public class SubgraphIsomorphismAlgorithm extends
 	public NodeLinkMapping mapNetwork(SubstrateNetwork sNetwork,
 			VirtualNetwork vNetwork, int epsilon, int omega) {
 		numberOfTries = 0;
-		return vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
+		NodeLinkMapping result = vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
 				sNetwork, omega, epsilon);
+		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
+			System.out.println(result);
+		}
+		return result;
 	}
 
 	static class MappingCandidate<T, U> {

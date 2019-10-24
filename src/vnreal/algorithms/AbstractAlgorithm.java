@@ -72,6 +72,10 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 * <p>
 	 * It implements the "template method" design pattern.
 	 * </p>
+	 * 
+	 * <p>
+	 * 对于一阶段算法，首先执行performEvaluation方法 -> 执行其evalute方法
+	 * </p>
 	 */
 	@Override
 	public final void performEvaluation() {
