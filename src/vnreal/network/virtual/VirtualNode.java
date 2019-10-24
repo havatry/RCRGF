@@ -41,7 +41,11 @@ import vnreal.network.Node;
  * @author Vlad Singeorzan
  */
 public class VirtualNode extends Node<AbstractDemand> {
-
+	private VirtualNode upnode;
+	private VirtualNode downnode;
+	private VirtualLink uplink;
+	private VirtualLink downlink;
+	
 	public VirtualNode(int layer) {
 		super(layer);
 	}
@@ -70,5 +74,36 @@ public class VirtualNode extends Node<AbstractDemand> {
 		}
 		return result;
 	}
-	
+
+	public VirtualNode getUpnode() {
+		return upnode;
+	}
+
+	public void setUpnode(VirtualNode upnode) {
+		this.upnode = upnode;
+	}
+
+	public VirtualNode getDownnode() {
+		return downnode;
+	}
+
+	public void setDownnode(VirtualNode downnode) {
+		this.downnode = downnode;
+	}
+
+	public VirtualLink getUplink() {
+		return uplink;
+	}
+
+	public void setUplink(VirtualLink uplink) {
+		this.uplink = uplink;
+	}
+
+	public VirtualLink getDownlink() {
+		return downlink;
+	}
+
+	public void setDownlink(VirtualLink downlink) {
+		this.downlink = downlink;
+	}
 }

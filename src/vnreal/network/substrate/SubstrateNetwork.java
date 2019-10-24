@@ -118,6 +118,9 @@ public class SubstrateNetwork extends
 			if (Constants.DIRECTED) {
 				result += l.getId() + "  (" + getSource(l).getName() + "-->"
 						+ getDest(l).getName() + ") \n";
+			} else {
+				result += l.getId() + "  (" + getEndpoints(l).getFirst().getName() + "-->"
+						+ getEndpoints(l).getSecond().getName() + ") \n";
 			}
 			for (AbstractResource r : l.get()) {
 				result += "  " + r.getClass().getSimpleName() + "." + r.toString() + "\n";

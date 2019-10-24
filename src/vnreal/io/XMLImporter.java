@@ -120,7 +120,6 @@ public class XMLImporter {
 			//Validate the source and parse the contents
 			validator.validate(source, sax);
 			
-			
 			//Return the ready to use TestSeries
 			return handler.currentScenario;
 			

@@ -346,13 +346,8 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			double[] vnsBeta) {
 		
 		NetworkStack result;
-		if (Constants.DIRECTED) {
-			result = new NetworkStack(new SubstrateNetwork(false),
+		result = new NetworkStack(new SubstrateNetwork(false, Constants.DIRECTED), // 无向的
 					new LinkedList<VirtualNetwork>());
-		} else {
-			result = new NetworkStack(new SubstrateNetwork(false, false), // 无向的
-						new LinkedList<VirtualNetwork>());
-		}
 		SubstrateNetwork substrate = result.getSubstrate();
 
 		// generate substrate network

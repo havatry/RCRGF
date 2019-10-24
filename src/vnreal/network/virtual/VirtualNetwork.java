@@ -138,7 +138,8 @@ public class VirtualNetwork extends
 				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getSource(l).getId() + "-->"
 						+ getDest(l).getId() + ")\n";
 			} else {
-				
+				result += "id:" + l.getId() + " name:" + l.getName() + "  (" + getEndpoints(l).getFirst().getId() + "-->"
+						+ getEndpoints(l).getSecond().getId() + ")\n";
 			}
 			for (AbstractDemand d : l.get()) {
 				result += "  " + d.toString() + "\n";
