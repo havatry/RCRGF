@@ -1,5 +1,6 @@
 package vnreal.algorithms.argf.core;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +24,7 @@ import vnreal.network.virtual.VirtualNode;
  */
 public class MappingRules {
 	// 核心方法, 完成虚拟节点到底层节点的映射
-	public SubstrateNode mapTo(VirtualNode virtualNode, List<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
+	public SubstrateNode mapTo(VirtualNode virtualNode, Collection<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
 		List<SubstrateNode> candicates = support(virtualNode, substrateNodeLists, virtualNetwork, substrateNetwork);
 		SubstrateNode ret = null;
@@ -39,7 +40,7 @@ public class MappingRules {
 	}
 	
 	// 一个虚拟节点映射到多个候选节点上，过滤一些不符合带宽规则的
-	private List<SubstrateNode> support(VirtualNode virtualNode, List<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
+	private List<SubstrateNode> support(VirtualNode virtualNode, Collection<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
 		for (SubstrateNode sn : substrateNodeLists) {

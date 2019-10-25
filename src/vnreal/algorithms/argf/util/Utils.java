@@ -1,17 +1,21 @@
 package vnreal.algorithms.argf.util;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
+import vnreal.constraints.resources.AbstractResource;
 import vnreal.constraints.resources.BandwidthResource;
 import vnreal.constraints.resources.CpuResource;
 import vnreal.network.Link;
 import vnreal.network.Network;
 import vnreal.network.Node;
+import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNode;
@@ -91,11 +95,81 @@ public class Utils {
 		}
 	}
 	
-	public int getIndexForVirtualNode(VirtualNode vn) {
+	public static int getIndexForVirtualNode(VirtualNode vn) {
 		return mapVirtualNode.get(vn.getId());
 	}
 	
-	public int getIndexForSubstrateNode(SubstrateNode sn) {
+	public static int getIndexForSubstrateNode(SubstrateNode sn) {
 		return mapSubstrateNode.get(sn.getId());
+	}
+	
+	public static double computeSE(double previousSE, SubstrateLink sl) {
+		double bandwith = getBandwith(sl);
+		if (equal(previousSE, 0.0)) {
+			return bandwith;
+		} else {
+			return Math.min(bandwith, previousSE);
+		}
+	}
+	
+	public static List<SubstrateNode> filter(List<SubstrateNode> list, SubstrateNode spec, double cpuConstraint, double bandwithConstraint) {
+		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
+		for (SubstrateNode sn : list) {
+			if (small(Utils.getCpu(sn), cpuConstraint)) {
+				// 候选节点不满足cpu需求
+				continue;
+			}
+			if (small(sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)], bandwithConstraint)) {
+				// 候选节点不满足bandwith需求
+				continue;
+			}
+			result.add(sn);
+		}
+		return result;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Node opposite(Link l, Node c, Network network) {
+		Node s = (Node) network.getEndpoints(l).getFirst();
+		Node t = (Node) network.getEndpoints(l).getSecond();
+		if (c != s && c != t) {
+			throw new AssertionError("The link not contains the two nodes");
+		}
+		return s == c ? t : s;
+	}
+	
+	public static void vnm(VirtualNode vn, SubstrateNode sn) {
+		for (AbstractDemand dem : vn) {
+			boolean fulfilled = false;
+			for (AbstractResource res : sn)
+				if (res.accepts(dem) && res.fulfills(dem) && dem.occupy(res)) {
+					fulfilled = true;
+					break;
+				}
+
+			if (!fulfilled)
+				throw new AssertionError("But we checked before!");
+		}
+	}
+
+	public static void vlm(VirtualLink vl, List<SubstrateLink> spath) {
+		for (SubstrateLink sl : spath)
+			// ... a resource to each link demand must be assigned.
+			for (AbstractDemand dem : vl) {
+				boolean fulfilled = false;
+
+				// FIXME Consider resources of intermediate nodes.
+				// if (req instanceof INodeConstraint)
+
+				for (AbstractResource res : sl)
+					if (res.accepts(dem) && res.fulfills(dem)
+							&& dem.occupy(res)) {
+						fulfilled = true;
+						break;
+					}
+
+				if (!fulfilled)
+					throw new AssertionError("But we checked before!");
+			}
 	}
 }

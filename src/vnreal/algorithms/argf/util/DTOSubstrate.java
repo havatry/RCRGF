@@ -1,8 +1,10 @@
 package vnreal.algorithms.argf.util;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNode;
 
 /**
@@ -10,39 +12,33 @@ import vnreal.network.substrate.SubstrateNode;
  * 2019年10月24日 下午9:26:54
  */
 public class DTOSubstrate {
-	private int[][] BTL;
-	private Map<SubstrateNode, PriorityQueue<SubstrateNode>> map;
-	private double SE;
-	private SubstrateNode upstream;
-	private SubstrateNode downstream;
-	public int[][] getBTL() {
+	private double[] BTL;
+	private Map<SubstrateNode, PriorityQueue<SubstrateNode>> EBTL = new HashMap<>();
+	private Map<SubstrateNode, SubstrateNode> bestUpStream = new HashMap<>();
+	private Map<SubstrateNode, SubstrateLink> bestUpLink = new HashMap<>();
+	
+	public double[] getBTL() {
 		return BTL;
 	}
-	public void setBTL(int[][] bTL) {
+	public void setBTL(double[] bTL) {
 		BTL = bTL;
 	}
-	public Map<SubstrateNode, PriorityQueue<SubstrateNode>> getMap() {
-		return map;
+	public Map<SubstrateNode, PriorityQueue<SubstrateNode>> getEBTL() {
+		return EBTL;
 	}
-	public void setMap(Map<SubstrateNode, PriorityQueue<SubstrateNode>> map) {
-		this.map = map;
+	public void setEBTL(Map<SubstrateNode, PriorityQueue<SubstrateNode>> eBTL) {
+		EBTL = eBTL;
 	}
-	public double getSE() {
-		return SE;
+	public Map<SubstrateNode, SubstrateNode> getBestUpStream() {
+		return bestUpStream;
 	}
-	public void setSE(double sE) {
-		SE = sE;
+	public void setBestUpStream(Map<SubstrateNode, SubstrateNode> bestUpStream) {
+		this.bestUpStream = bestUpStream;
 	}
-	public SubstrateNode getUpstream() {
-		return upstream;
+	public Map<SubstrateNode, SubstrateLink> getBestUpLink() {
+		return bestUpLink;
 	}
-	public void setUpstream(SubstrateNode upstream) {
-		this.upstream = upstream;
-	}
-	public SubstrateNode getDownstream() {
-		return downstream;
-	}
-	public void setDownstream(SubstrateNode downstream) {
-		this.downstream = downstream;
+	public void setBestUpLink(Map<SubstrateNode, SubstrateLink> bestUpLink) {
+		this.bestUpLink = bestUpLink;
 	}
 }
