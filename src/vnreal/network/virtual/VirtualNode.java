@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.virtual;
 
+import vnreal.algorithms.argf.util.DTOVirtual;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.network.Node;
 
@@ -41,10 +42,7 @@ import vnreal.network.Node;
  * @author Vlad Singeorzan
  */
 public class VirtualNode extends Node<AbstractDemand> {
-	private VirtualNode upnode;
-	private VirtualNode downnode;
-	private VirtualLink uplink;
-	private VirtualLink downlink;
+	private DTOVirtual dtoVirtual = new DTOVirtual();
 	
 	public VirtualNode(int layer) {
 		super(layer);
@@ -75,35 +73,7 @@ public class VirtualNode extends Node<AbstractDemand> {
 		return result;
 	}
 
-	public VirtualNode getUpnode() {
-		return upnode;
-	}
-
-	public void setUpnode(VirtualNode upnode) {
-		this.upnode = upnode;
-	}
-
-	public VirtualNode getDownnode() {
-		return downnode;
-	}
-
-	public void setDownnode(VirtualNode downnode) {
-		this.downnode = downnode;
-	}
-
-	public VirtualLink getUplink() {
-		return uplink;
-	}
-
-	public void setUplink(VirtualLink uplink) {
-		this.uplink = uplink;
-	}
-
-	public VirtualLink getDownlink() {
-		return downlink;
-	}
-
-	public void setDownlink(VirtualLink downlink) {
-		this.downlink = downlink;
+	public DTOVirtual getDtoVirtual() {
+		return dtoVirtual;
 	}
 }

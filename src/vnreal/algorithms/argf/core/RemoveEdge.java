@@ -108,9 +108,9 @@ public class RemoveEdge {
 		// 上溯更新带宽
 		while (current != root) {
 			// 关联的边
-			VirtualLink uplink = current.getUplink();
+			VirtualLink uplink = current.getDtoVirtual().getUplink();
 			Utils.setBandwith(uplink, Utils.getBandwith(uplink) + addedBandwith);
-			current = current.getUpnode();
+			current = current.getDtoVirtual().getUpnode();
 		}
 	}
 	
@@ -126,17 +126,17 @@ public class RemoveEdge {
 			visited.add(l);
 			if (s == root) {
 				// 那么t是下游
-				s.setDownnode(t);
-				t.setUpnode(s);
-				s.setDownlink(l);
-				t.setUplink(l);
+				s.getDtoVirtual().setDownnode(t);
+				t.getDtoVirtual().setUpnode(s);
+				s.getDtoVirtual().setDownlink(l);
+				t.getDtoVirtual().setUplink(l);
 				build(t, added, visited);
 			} else {
 				// 那么下游是s
-				t.setDownnode(s);
-				s.setUpnode(t);
-				t.setDownlink(l);
-				s.setUplink(l);
+				t.getDtoVirtual().setDownnode(s);
+				s.getDtoVirtual().setUpnode(t);
+				t.getDtoVirtual().setDownlink(l);
+				s.getDtoVirtual().setUplink(l);
 				build(s, added, visited);
 			}
 		}

@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.substrate;
 
+import vnreal.algorithms.argf.util.DTOSubstrate;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Node;
 
@@ -41,7 +42,8 @@ import vnreal.network.Node;
  * @author Vlad Singeorzan
  */
 public class SubstrateNode extends Node<AbstractResource> {
-
+	private DTOSubstrate dtoSubstrate = new DTOSubstrate();
+	
 	public SubstrateNode() {
 		super(0);
 	}
@@ -68,5 +70,9 @@ public class SubstrateNode extends Node<AbstractResource> {
 	@Override
 	public String toStringShort() {
 		return "SN(" + getId() + ")";
+	}
+	
+	public DTOSubstrate getDtoSubstrate() {
+		return dtoSubstrate;
 	}
 }
