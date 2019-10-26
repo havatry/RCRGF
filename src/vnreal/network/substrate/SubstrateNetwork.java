@@ -189,7 +189,7 @@ public class SubstrateNetwork extends
 				}
 			} else {
 				// ÎÞÏòÍ¼
-				result.addEdge(tmpSLink, getEndpoints(tmpSLink).getFirst(), getEndpoints(tmpSLink).getSecond());
+				result.addEdge(tmpSLink.getCopy(deepCopy), getEndpoints(tmpSLink).getFirst(), getEndpoints(tmpSLink).getSecond());
 			}
 		}
 
