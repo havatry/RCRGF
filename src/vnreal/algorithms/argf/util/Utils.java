@@ -29,7 +29,7 @@ public class Utils {
 		if (l instanceof VirtualLink) {
 			return ((BandwidthDemand)l.get().get(0)).getDemandedBandwidth();
 		} else {
-			return ((BandwidthResource)l.get().get(0)).getBandwidth();
+			return ((BandwidthResource)l.get().get(0)).getBandwidth() - ((BandwidthResource)l.get().get(0)).getOccupiedBandwidth();
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class Utils {
 	
 	public static double getCpu(Node<?> n) {
 		if (n instanceof SubstrateNode) {
-			return ((CpuResource)n.get().get(0)).getCycles();
+			return ((CpuResource)n.get().get(0)).getCycles() - ((CpuResource)n.get().get(0)).getOccupiedCycles();
 		} else {
 			return ((CpuDemand)n.get().get(0)).getDemandedCycles();
 		}
@@ -91,7 +91,7 @@ public class Utils {
 	public static void initMapSubstrateNode(Collection<SubstrateNode> substrateNodes) {
 		int index = 0;
 		for (SubstrateNode sn : substrateNodes) {
-			mapVirtualNode.put(sn.getId(), index++);
+			mapSubstrateNode.put(sn.getId(), index++);
 		}
 	}
 	
@@ -171,5 +171,12 @@ public class Utils {
 				if (!fulfilled)
 					throw new AssertionError("But we checked before!");
 			}
+	}
+	
+	public static void processBTL(SubstrateNode sn, int length) {
+		if (sn.getDtoSubstrate().getBTL() == null) {
+			// ≥ı ºªØ
+			sn.getDtoSubstrate().setBTL(new double[length]);
+		}
 	}
 }
