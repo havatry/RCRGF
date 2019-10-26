@@ -44,7 +44,8 @@ public class MappingRules {
 			SubstrateNetwork substrateNetwork) {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
 		for (SubstrateNode sn : substrateNodeLists) {
-			if (rulesForLinks(virtualNode, sn, virtualNetwork, substrateNetwork)) {
+			if (rulesForNodes(virtualNode, sn, virtualNetwork, substrateNetwork) && 
+					rulesForLinks(virtualNode, sn, virtualNetwork, substrateNetwork)) {
 				result.add(sn);
 			}
 		}
@@ -53,7 +54,7 @@ public class MappingRules {
 	
 	@SuppressWarnings({ "rawtypes", "unused" })
 	@Deprecated
-	private boolean rulesForNodes(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
+	private boolean rulesForNodesOld(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
 		// 判断虚拟节点的周围邻居节点是否都满足底层节点的周围邻居节点
 		Comparator<Node> c = new Comparator<Node>() {
@@ -86,6 +87,11 @@ public class MappingRules {
 			}
 		}
 		return true;
+	}
+	
+	private boolean rulesForNodes(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
+			SubstrateNetwork substrateNetwork) {
+		return Utils.smallEqual(Utils.getCpu(virtualNode), Utils.getCpu(substrateNode));
 	}
 	
 	@SuppressWarnings("rawtypes")

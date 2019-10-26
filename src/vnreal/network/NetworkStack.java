@@ -82,6 +82,10 @@ public final class NetworkStack extends AbstractLayerStack<Network<?, ?, ?>> {
 		return substrate;
 	}
 	
+	public void setSubstrate(SubstrateNetwork substrate) {
+		this.substrate = substrate;
+	}
+	
 	public List<VirtualNetwork> getVirtuals() {
 		
 		LinkedList<VirtualNetwork> vns = new LinkedList<VirtualNetwork>();

@@ -37,7 +37,6 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
-import edu.uci.ics.jung.graph.util.EdgeType;
 import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
