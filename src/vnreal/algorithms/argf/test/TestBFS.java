@@ -31,8 +31,8 @@ import vnreal.ui.dialog.ScenarioWizard;
  */
 public class TestBFS {
 	private NetworkStack networkStack;
-	private String filename = "serial.xml";
-	private boolean SKIP_TEST = false;
+	private String filename = "serial3.xml";
+	private boolean SKIP_TEST = true;
 	
 	@Before
 	public void generateTopology() throws FileNotFoundException, IOException {
@@ -41,7 +41,7 @@ public class TestBFS {
 			return;
 		}
 		// 生成底层网络
-		NetworkStack networkStack = ScenarioWizard.generateTopology(15, 1.0, 0.5, 1, new int[]{6}, new double[]{1.0}, new double[]{0.5});
+		NetworkStack networkStack = ScenarioWizard.generateTopology(150, 1.0, 0.5, 1, new int[]{50}, new double[]{1.0}, new double[]{0.5});
 		// 为底层网络生成约束
 		List<Class<?>> resClassesToGenerate = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerate = new LinkedList<String[]>();
@@ -51,8 +51,8 @@ public class TestBFS {
 		resClassesToGenerate.add(BandwidthResource.class);
 		resParamNamesToGenerate.add(new String[]{"cycles"});
 		resParamNamesToGenerate.add(new String[]{"bandwidth"});
-		resMaxValues.add(new String[]{"50"});
-		resMaxValues.add(new String[]{"50"});
+		resMaxValues.add(new String[]{"2000"});
+		resMaxValues.add(new String[]{"2000"});
 		ConstraintsGeneratorDialog.generateConstraintsSubstrate(resClassesToGenerate, resParamNamesToGenerate, resMaxValues, networkStack);
 		// 为虚拟网络生成约束
 		List<List<Class<?>>> resClassesToGenerate_vn_all = new LinkedList<>();
@@ -66,14 +66,15 @@ public class TestBFS {
 		resClassesToGenerate_vn.add(BandwidthDemand.class);
 		resParamNamesToGenerate_vn.add(new String[]{"demandedCycles"});
 		resParamNamesToGenerate_vn.add(new String[]{"demandedBandwidth"});
-		resMaxValues_vn.add(new String[]{"20"});
-		resMaxValues_vn.add(new String[]{"20"});
+		resMaxValues_vn.add(new String[]{"2"});
+		resMaxValues_vn.add(new String[]{"2"});
 		resClassesToGenerate_vn_all.add(resClassesToGenerate_vn);
 		resParamNamesToGenerate_vn_all.add(resParamNamesToGenerate_vn);
 		resMaxValues_vn_all.add(resMaxValues_vn);
 		ConstraintsGeneratorDialog.generateConstraintsVirtual(resClassesToGenerate_vn_all,
 				resParamNamesToGenerate_vn_all, resMaxValues_vn_all, networkStack);
 		writeToFile(networkStack);
+		System.out.println("write finish");
 	}
 	
 	// 测试BFS的搜索功能有效

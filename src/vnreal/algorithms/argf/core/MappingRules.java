@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import vnreal.algorithms.argf.auxi.SelectCoreNode;
 import vnreal.algorithms.argf.util.Utils;
@@ -25,8 +26,15 @@ import vnreal.network.virtual.VirtualNode;
 public class MappingRules {
 	// 核心方法, 完成虚拟节点到底层节点的映射
 	public SubstrateNode mapTo(VirtualNode virtualNode, Collection<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
-			SubstrateNetwork substrateNetwork) {
-		List<SubstrateNode> candicates = support(virtualNode, substrateNodeLists, virtualNetwork, substrateNetwork);
+			SubstrateNetwork substrateNetwork, Set<SubstrateNode> hasMapped) {
+		List<SubstrateNode> c = support(virtualNode, substrateNodeLists, virtualNetwork, substrateNetwork);
+		List<SubstrateNode> candicates = new LinkedList<>();
+		for (SubstrateNode sn : c) {
+			if (hasMapped.contains(sn)) {
+				continue;
+			}
+			candicates.add(sn);
+		}
 		SubstrateNode ret = null;
 		double max = Double.MIN_VALUE;
 		for (SubstrateNode sn : candicates) {
@@ -45,7 +53,7 @@ public class MappingRules {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
 		for (SubstrateNode sn : substrateNodeLists) {
 			if (rulesForNodes(virtualNode, sn, virtualNetwork, substrateNetwork) && 
-					rulesForLinks(virtualNode, sn, virtualNetwork, substrateNetwork)) {
+					rulesForLinksSimple(virtualNode, sn, virtualNetwork, substrateNetwork)) {
 				result.add(sn);
 			}
 		}
@@ -94,7 +102,7 @@ public class MappingRules {
 		return Utils.smallEqual(Utils.getCpu(virtualNode), Utils.getCpu(substrateNode));
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unused" })
 	private boolean rulesForLinks(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
 		// 按照带宽从大到小排序
@@ -132,6 +140,11 @@ public class MappingRules {
 				return false; // 不满足带宽规则
 			}
 		}
+		return true;
+	}
+	
+	private boolean rulesForLinksSimple(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
+			SubstrateNetwork substrateNetwork) {
 		return true;
 	}
 }
