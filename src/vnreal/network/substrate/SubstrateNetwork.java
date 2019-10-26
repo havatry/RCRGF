@@ -37,6 +37,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
+import edu.uci.ics.jung.graph.util.EdgeType;
 import vnreal.algorithms.argf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
@@ -149,7 +150,7 @@ public class SubstrateNetwork extends
 	}
 
 	public SubstrateNetwork getCopy(boolean autoUnregister, boolean deepCopy) {
-		SubstrateNetwork result = new SubstrateNetwork(autoUnregister);
+		SubstrateNetwork result = new SubstrateNetwork(autoUnregister, Constants.DIRECTED);
 		getCopy(deepCopy, result);
 		return result;
 	}
@@ -176,15 +177,19 @@ public class SubstrateNetwork extends
 		for (Iterator<SubstrateLink> tempItSubLink = originalLinks.iterator(); tempItSubLink
 				.hasNext();) {
 			tmpSLink = tempItSubLink.next();
-			tmpSNode = getSource(tmpSLink);
-			tmpDNode = getDest(tmpSLink);
-
-			if (deepCopy) {
-				result.addEdge(tmpSLink.getCopy(deepCopy),
-						map.get(tmpSNode.getName()),
-						map.get(tmpDNode.getName()));
+			if (Constants.DIRECTED) {
+				tmpSNode = getSource(tmpSLink);
+				tmpDNode = getDest(tmpSLink);
+				if (deepCopy) {
+					result.addEdge(tmpSLink.getCopy(deepCopy),
+							map.get(tmpSNode.getName()),
+							map.get(tmpDNode.getName()));
+				} else {
+					result.addEdge(tmpSLink, tmpSNode, tmpDNode);
+				}
 			} else {
-				result.addEdge(tmpSLink, tmpSNode, tmpDNode);
+				// ÎÞÏòÍ¼
+				result.addEdge(tmpSLink, getEndpoints(tmpSLink).getFirst(), getEndpoints(tmpSLink).getSecond());
 			}
 		}
 
