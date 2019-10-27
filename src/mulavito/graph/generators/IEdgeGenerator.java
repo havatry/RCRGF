@@ -28,9 +28,13 @@
  * ***** END LICENSE BLOCK ***** */
 package mulavito.graph.generators;
 
+import java.awt.geom.Point2D;
+import java.util.HashMap;
+
 import mulavito.graph.IEdge;
 import mulavito.graph.ILayer;
 import mulavito.graph.IVertex;
+import vnreal.network.substrate.SubstrateNode;
 
 /**
  * A common interface for generating different kinds of graphs.
@@ -45,4 +49,9 @@ public interface IEdgeGenerator<V extends IVertex, E extends IEdge> {
 	 *            The graph.
 	 */
 	public void generate(ILayer<V, E> g);
+	
+	// add for addition
+	default public HashMap<V, Point2D> getPositions() {
+		return null;
+	} // ±£≥÷ºÊ»›–‘
 }

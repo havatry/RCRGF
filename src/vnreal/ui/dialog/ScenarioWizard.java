@@ -57,6 +57,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
+import mulavito.graph.generators.IEdgeGenerator;
+import mulavito.graph.generators.ReachabilityEnsuringEdgeGeneratorWrapper;
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.ui.dialogs.AbstractButtonDialog;
 import vnreal.algorithms.argf.config.Constants;
@@ -341,6 +343,7 @@ public class ScenarioWizard extends AbstractButtonDialog {
 	 *            An array containing the beta parameter for each virtual
 	 *            network. vnsBeta[i] is the beta value for layer i + 1.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static NetworkStack generateTopology(int snNodes, double snAlpha,
 			double snBeta, int vnNumber, int[] vnsNodes, double[] vnsAlpha,
 			double[] vnsBeta) {
@@ -354,8 +357,14 @@ public class ScenarioWizard extends AbstractButtonDialog {
 		while (snNodes-- > 0)
 			substrate.addVertex(new SubstrateNode());
 
-		WaxmanGraphGenerator<SubstrateNode, SubstrateLink> sgg = new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
-				snAlpha, snBeta, false);
+		IEdgeGenerator<SubstrateNode, SubstrateLink> sgg;
+		if (Constants.REACH_ASSURE) {
+			sgg = new ReachabilityEnsuringEdgeGeneratorWrapper(new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
+					snAlpha, snBeta, false)); 
+		} else {
+			sgg = new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
+					snAlpha, snBeta, false);
+		}
 		sgg.generate(substrate);
 
 		HashMap<SubstrateNode, Point2D> spos = sgg.getPositions();

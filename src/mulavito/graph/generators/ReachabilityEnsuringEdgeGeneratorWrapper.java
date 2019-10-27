@@ -28,7 +28,9 @@
  * ***** END LICENSE BLOCK ***** */
 package mulavito.graph.generators;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import mulavito.graph.IEdge;
@@ -105,5 +107,11 @@ public final class ReachabilityEnsuringEdgeGeneratorWrapper<V extends IVertex, E
 				removeUnreachables.clear();
 			}
 		}
+	}
+	
+	@Override
+	public HashMap<V, Point2D> getPositions() {
+		//Created method stubs
+		return generator.getPositions();
 	}
 }

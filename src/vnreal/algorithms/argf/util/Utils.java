@@ -83,6 +83,7 @@ public class Utils {
 	
 	public static void initMapVirtualNode(Collection<VirtualNode> virtualNodes) {
 		int index = 0;
+		mapVirtualNode.clear();
 		for (VirtualNode vn : virtualNodes) {
 			mapVirtualNode.put(vn.getId(), index++);
 		}
@@ -90,6 +91,7 @@ public class Utils {
 	
 	public static void initMapSubstrateNode(Collection<SubstrateNode> substrateNodes) {
 		int index = 0;
+		mapSubstrateNode.clear();
 		for (SubstrateNode sn : substrateNodes) {
 			mapSubstrateNode.put(sn.getId(), index++);
 		}
@@ -112,13 +114,14 @@ public class Utils {
 		}
 	}
 	
-	public static List<SubstrateNode> filter(List<SubstrateNode> list, SubstrateNode spec, double cpuConstraint, double bandwithConstraint) {
+	public static List<SubstrateNode> filter(List<SubstrateNode> list, SubstrateNode spec, double bandwithConstraint) {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
 		for (SubstrateNode sn : list) {
-			if (small(Utils.getCpu(sn), cpuConstraint)) {
-				// 候选节点不满足cpu需求
-				continue;
-			}
+//			if (small(Utils.getCpu(sn), cpuConstraint)) {
+//				// 候选节点不满足cpu需求
+//				continue;
+//			}
+//			sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)] = actualBandwith(sn, spec); // 更新成最新的值
 			if (small(sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)], bandwithConstraint)) {
 				// 候选节点不满足bandwith需求
 				continue;
@@ -152,7 +155,7 @@ public class Utils {
 		}
 	}
 
-	public static void vlm(VirtualLink vl, List<SubstrateLink> spath) {
+	public static boolean vlm(VirtualLink vl, List<SubstrateLink> spath) {
 		for (SubstrateLink sl : spath)
 			// ... a resource to each link demand must be assigned.
 			for (AbstractDemand dem : vl) {
@@ -169,8 +172,10 @@ public class Utils {
 					}
 
 				if (!fulfilled)
-					throw new AssertionError("But we checked before!");
+//					throw new AssertionError("But we checked before!");
+					return false;
 			}
+		return true;
 	}
 	
 	public static void processBTL(SubstrateNode sn, int length) {
@@ -178,5 +183,38 @@ public class Utils {
 			// 初始化
 			sn.getDtoSubstrate().setBTL(new double[length]);
 		}
+	}
+	
+	public static List<SubstrateLink> findPath(SubstrateNode current, SubstrateNode target) {
+		List<SubstrateLink> links = new LinkedList<SubstrateLink>();
+		while (current != target) {
+			// 找到上游链路
+			SubstrateLink upLink = current.getDtoSubstrate().getBestUpLink().get(target);
+			links.add(upLink);
+			current = current.getDtoSubstrate().getBestUpStream().get(target);
+		}
+		return links;
+	}
+	
+	// 保证最新的值
+	@Deprecated
+	public static double actualBandwith(SubstrateNode current, SubstrateNode target) {
+		List<SubstrateLink> path = findPath(current, target);
+		double min = Double.MAX_VALUE;
+		for (SubstrateLink sl : path) {
+			min = Math.min(min, getBandwith(sl));
+		}
+		return min;
+	}
+	
+	public static VirtualNode common(VirtualNode u, VirtualNode v, VirtualNode l) {
+		// 找出两个节点的公共上游节点
+		VirtualNode s = u, t = v;
+		while (u != v) {
+			// 不相等
+			u = u.getDtoVirtual().getUpnode() == null ? t : u.getDtoVirtual().getUpnode();
+			v = v.getDtoVirtual().getUpnode() == null ? s : v.getDtoVirtual().getUpnode();
+		}
+		return u;
 	}
 }

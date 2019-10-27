@@ -87,8 +87,10 @@ public class RemoveEdge {
 		for (VirtualLink r : remaining) {
 			VirtualNode s = virtualNetwork.getEndpoints(r).getFirst();
 			VirtualNode t = virtualNetwork.getEndpoints(r).getSecond();
-			update(s, root, Utils.getBandwith(r));
-			update(t, root, Utils.getBandwith(r));
+			// 找到公共节点
+			VirtualNode common = Utils.common(s, t, root);
+			update(s, common, Utils.getBandwith(r));
+			update(t, common, Utils.getBandwith(r));
 			// 将边删除
 			virtualNetwork.removeEdge(r);
 		}
@@ -126,16 +128,16 @@ public class RemoveEdge {
 			visited.add(l);
 			if (s == root) {
 				// 那么t是下游
-				s.getDtoVirtual().setDownnode(t);
+//				s.getDtoVirtual().setDownnode(t);
 				t.getDtoVirtual().setUpnode(s);
-				s.getDtoVirtual().setDownlink(l);
+//				s.getDtoVirtual().setDownlink(l);
 				t.getDtoVirtual().setUplink(l);
 				build(t, added, visited);
 			} else {
 				// 那么下游是s
-				t.getDtoVirtual().setDownnode(s);
+//				t.getDtoVirtual().setDownnode(s);
 				s.getDtoVirtual().setUpnode(t);
-				t.getDtoVirtual().setDownlink(l);
+//				t.getDtoVirtual().setDownlink(l);
 				s.getDtoVirtual().setUplink(l);
 				build(s, added, visited);
 			}
