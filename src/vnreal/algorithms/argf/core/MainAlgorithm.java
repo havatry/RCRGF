@@ -34,7 +34,7 @@ public class MainAlgorithm {
 		Set<VirtualNode> HMS = new HashSet<>(); // 已经映射的点
 		Set<SubstrateNode> outter = new HashSet<>();
 		while (HMS.size() < virtualNetwork.getVertexCount()) { 
-			System.out.println("Retry");
+//			System.out.println("Retry");
 			int sz = HMS.size();
 			// 1. 选择虚拟网络的根节点
 			// 2. 找到底层网络中适合的匹配点 作为核心节点
@@ -66,6 +66,7 @@ public class MainAlgorithm {
 			MSE.addAll(virtualNetwork.getOutEdges(root));
 			HMS.add(root);
 			while (bfsTravel.hasNext()) {
+//				System.out.println("while loop");
 				Set<VirtualNode> additional = new HashSet<>();
 				Set<VirtualLink> attachLink = new HashSet<>();
 				bfsTravel.next(hasMappedSubstrateNode, outter); // layer data,
@@ -73,6 +74,7 @@ public class MainAlgorithm {
 				Map<SubstrateNode, List<SubstrateNode>> HMBT = bfsTravel.getHMBTL();
 				boolean next_round = false;
 				for (VirtualLink vl : MSE) {
+//					System.out.println("mse loop");
 					VirtualNode s = virtualNetwork.getEndpoints(vl).getFirst();
 					VirtualNode t = virtualNetwork.getEndpoints(vl).getSecond();
 					VirtualNode actual = s;

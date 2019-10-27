@@ -57,6 +57,7 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 
 	@Override
 	protected boolean preRun() {
+		long start = System.currentTimeMillis();
 		//Created method stubs
 		for (VirtualNetwork vn : ns.getVirtuals()) {
 			RemoveEdge removeEdge = new RemoveEdge(vn);
@@ -64,6 +65,7 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 				return false;
 			}
 		}
+		System.out.println("additional time: " + (System.currentTimeMillis() - start) + "ms");
 		return true;
 	}
 

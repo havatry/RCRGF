@@ -18,11 +18,11 @@ import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
 
 public class GenerateTopology {
-	private int snodes = 600; // 从600 700 800 900 1000
+	private int snodes = 100; // 从100 120 140 160 180
 	private final double nodes_ration = 0.1;
 	private final int virtualNetworks = 1; // 虚拟网络数
-	private final double ration = 0.01; // 资源比例 从0.01 0.02 0.03
-	private double alhpa = 0.6; // 从0.3 0.6 1.0
+	private double ration = 0.01; // 资源比例 从0.01 0.02 0.03
+	private double alhpa = 1.0; // 从0.3 0.6
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
@@ -38,8 +38,8 @@ public class GenerateTopology {
 		int[] array = new int[virtualNetworks];
 		int max = (int)(snodes * nodes_ration);
 		for (int i = 0; i < virtualNetworks; i++) {
-			// 至少两个节点，至多是nodes_ration * snodes
-			array[i] = 2 + (int)(Math.random() * (max - 1));
+			// 至少三个个节点，至多是nodes_ration * snodes
+			array[i] = 3 + (int)(Math.random() * (max - 2));
 		}
 		return array;
 	}
@@ -101,7 +101,6 @@ public class GenerateTopology {
 		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
 		out.println(toString());
 		out.close();
-		System.out.println("write finish");
 	}
 
 	@Override
@@ -114,5 +113,17 @@ public class GenerateTopology {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		GenerateTopology generateTopology = new GenerateTopology();
 		generateTopology.write();
+	}
+
+	public void setSnodes(int snodes) {
+		this.snodes = snodes;
+	}
+
+	public void setRation(double ration) {
+		this.ration = ration;
+	}
+
+	public void setAlhpa(double alhpa) {
+		this.alhpa = alhpa;
 	}
 }

@@ -353,7 +353,7 @@ public class XMLImporter {
 				currentSNet = null;
 				currentVNets = null;
 				//DEBUG
-				System.out.println(idmap);
+//				System.out.println(idmap);
 				idmap = null;
 			}
 			

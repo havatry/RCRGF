@@ -34,8 +34,10 @@ package vnreal.algorithms.isomorphism;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import vnreal.algorithms.argf.config.Constants;
@@ -398,7 +400,16 @@ public class SubgraphIsomorphismAlgorithm extends
 		NodeLinkMapping result = vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
 				sNetwork, omega, epsilon);
 		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
-			System.out.println(result);
+//			System.out.println(result);
+			Map<VirtualNode, SubstrateNode> nodemapping = new HashMap<VirtualNode, SubstrateNode>();
+			for (SubstrateNode sn : result.getNodeMappings().keySet()) {
+				nodemapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
+			}
+			Map<VirtualLink, List<SubstrateLink>> linkmapping = new HashMap<>();
+			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
+				linkmapping.put(result.getLinkMappings().get(links).iterator().next(), links);
+			}
+			System.out.println(vnreal.algorithms.argf.util.Utils.revenueToCostRation(nodemapping, linkmapping));
 		}
 		return result;
 	}

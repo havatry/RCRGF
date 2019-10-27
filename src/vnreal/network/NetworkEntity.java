@@ -90,14 +90,14 @@ public abstract class NetworkEntity<T extends AbstractConstraint> implements
 	 */
 	public final boolean add(T t) {
 		if (preAddCheck(t)) {
-			if (t.getOwner() == this) {
+//			if (t.getOwner() == this) {
 				constraints.put(t.getClass(), t);
 				return true;
-			} else {
-				System.err.println("Cannot add constraint " + t.getClass().getSimpleName() + " to entity "
-						+ this + " because owner != " + this);
-				return false;
-			}
+//			} else {
+//				System.err.println("Cannot add constraint " + t.getClass().getSimpleName() + " to entity "
+//						+ this + " because owner != " + this);
+//				return false;
+//			}
 		}
 		return false;
 	}

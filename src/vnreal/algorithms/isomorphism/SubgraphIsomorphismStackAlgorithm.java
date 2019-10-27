@@ -37,6 +37,8 @@ import java.util.List;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
+import vnreal.algorithms.argf.util.Statistics;
+import vnreal.algorithms.argf.util.Utils;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
@@ -109,12 +111,13 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	protected void evaluate() {
 		boolean result = false;
 		// Mapping previousResult = new Mapping();
-
+		Statistics statistics = new Statistics();
+		statistics.setStartTime(System.currentTimeMillis());
 		while (hasNext()) {
 			VirtualNetwork vNetwork = getNext();
 
 			result = algorithm.mapNetwork(ns.getSubstrate(), vNetwork);
-
+			
 			// if (result == null) {
 			// previousResult.freeAllResources();
 			// break;
@@ -125,14 +128,16 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 		}
 
 		if (result) {
-			if (debug) {
-				System.out.println("result found!");
-			}
+//			if (debug) {
+				System.out.println("mapping success!");
+//			}
 		} else {
-			if (debug) {
-				System.out.println("no result found!");
-			}
+//			if (debug) {
+				System.out.println("mapping not success!");
+//			}
 		}
+		statistics.setEndTime(System.currentTimeMillis());
+		System.out.println(statistics);
 	}
 
 	@Override

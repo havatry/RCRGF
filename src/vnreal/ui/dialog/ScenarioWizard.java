@@ -57,11 +57,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
-import mulavito.graph.generators.IEdgeGenerator;
-import mulavito.graph.generators.ReachabilityEnsuringEdgeGeneratorWrapper;
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.ui.dialogs.AbstractButtonDialog;
 import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.argf.util.Utils;
 import vnreal.core.Scenario;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateLink;
@@ -357,14 +356,14 @@ public class ScenarioWizard extends AbstractButtonDialog {
 		while (snNodes-- > 0)
 			substrate.addVertex(new SubstrateNode());
 
-		IEdgeGenerator<SubstrateNode, SubstrateLink> sgg;
-		if (Constants.REACH_ASSURE) {
-			sgg = new ReachabilityEnsuringEdgeGeneratorWrapper(new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
-					snAlpha, snBeta, false)); 
-		} else {
-			sgg = new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
+//		IEdgeGenerator<SubstrateNode, SubstrateLink> sgg;
+//		if (Constants.REACH_ASSURE) {
+//			sgg = new ReachabilityEnsuringEdgeGeneratorWrapper(new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
+//					snAlpha, snBeta, false)); 
+//		} else {
+		WaxmanGraphGenerator sgg = new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
 					snAlpha, snBeta, false);
-		}
+//		}
 		sgg.generate(substrate);
 
 		HashMap<SubstrateNode, Point2D> spos = sgg.getPositions();
@@ -394,7 +393,8 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			WaxmanGraphGenerator<VirtualNode, VirtualLink> vgg = new WaxmanGraphGenerator<VirtualNode, VirtualLink>(
 					virtualAlpha, virtualBeta, false);
 			vgg.generate(vn);
-
+			Utils.ensureConnect(vn);
+			
 			HashMap<VirtualNode, Point2D> vpos = vgg.getPositions();
 			for (VirtualNode v : vn.getVertices()) {
 				v.setCoordinateX(100.0 * vpos.get(v).getX());

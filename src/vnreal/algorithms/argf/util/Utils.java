@@ -2,10 +2,13 @@ package vnreal.algorithms.argf.util;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import edu.uci.ics.jung.graph.util.EdgeType;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
@@ -18,6 +21,7 @@ import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
+import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 public class Utils {
@@ -230,5 +234,36 @@ public class Utils {
 			result_s += getBandwith(vl) * linkmapping.get(vl).size();
 		}
 		return result_v / result_s;
+	}
+	
+	public static boolean complete(VirtualNode root, VirtualNetwork virtualNetwork) {
+		// 判断树是否只有一个连通分量
+		Set<VirtualNode> connect = new HashSet<>();
+		dfs(root, connect, virtualNetwork);
+		return connect.size() == virtualNetwork.getVertexCount();
+	}
+	
+	private static void dfs (VirtualNode root, Set<VirtualNode> visited, VirtualNetwork virtualNetwork) {
+		for (VirtualNode child : virtualNetwork.getNeighbors(root)) {
+			if (visited.contains(child)) {
+				continue;
+			}
+			visited.add(child);
+			dfs(child, visited, virtualNetwork);
+		}
+	}
+	
+	public static void ensureConnect(Network network) {
+		// 为其中一个节点，添加到其余所有节点的边
+		Node node = (Node) network.getVertices().iterator().next();
+		for (Object n : network.getVertices()) {
+			if (n == node) {
+				continue;
+			}
+			if (network.findEdge(n, node) == null) {
+				// 加边
+				network.addEdge(n, node, EdgeType.UNDIRECTED);
+			}
+		}
 	}
 }

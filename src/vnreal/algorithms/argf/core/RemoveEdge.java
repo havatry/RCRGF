@@ -87,6 +87,13 @@ public class RemoveEdge {
 		for (VirtualLink r : remaining) {
 			VirtualNode s = virtualNetwork.getEndpoints(r).getFirst();
 			VirtualNode t = virtualNetwork.getEndpoints(r).getSecond();
+			if (s.getDtoVirtual().getUpnode() == null && s != root) {
+				// 说明在其他分支上
+				return false;
+			}
+			if (t.getDtoVirtual().getUpnode() == null && s != root) {
+				return false;
+			}
 			// 找到公共节点
 			VirtualNode common = Utils.common(s, t, root);
 			update(s, common, Utils.getBandwith(r));
@@ -95,8 +102,9 @@ public class RemoveEdge {
 			virtualNetwork.removeEdge(r);
 		}
 		
+		// 判断是否是一个连通分量
 		return true;
-	}
+	}	
 	
 	private int mapRelation(long id) {
 		return map.get(id);

@@ -10,12 +10,11 @@ import vnreal.io.XMLImporter;
 import vnreal.network.NetworkStack;
 
 public class TestARGF {
-	private NetworkStack networkStack;
+	private static NetworkStack networkStack;
 	
 	@Before
 	public void start() {
-		// 从文件中读取网络栈
-		String filename = "topology_600_1_0.01_0.3.xml";
+		String filename = "topology_150_1_0.03_0.3.xml";
 		Scenario scenario = XMLImporter.importScenario(Constants.WRITE_RESOURCE + filename);
 		networkStack = scenario.getNetworkStack();
 	}
