@@ -125,7 +125,7 @@ public class MainAlgorithm {
 					MSE.remove(remove);
 				}
 				if (MSE.isEmpty()) {
-//					print();
+					print();
 					// 完成映射
 					return true;
 				}
@@ -139,15 +139,12 @@ public class MainAlgorithm {
 				}
 			}
 		}
-//		print();
+		print();
 		return true;
 	}
 	
 	private void print() {
-		System.out.println("节点映射");
-		System.out.println("\t" + nodeMapping);
-		System.out.println("链路映射");
-		System.out.println("\t" + linkMapping);
+		System.out.println("revenue / cost = " + Utils.revenueToCostRation(nodeMapping, linkMapping));
 	}
 	
 	private void update(List<SubstrateLink> path, BFSTravel bfsTravel, SubstrateNode target) {

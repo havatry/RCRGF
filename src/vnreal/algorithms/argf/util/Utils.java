@@ -217,4 +217,18 @@ public class Utils {
 		}
 		return u;
 	}
+	
+	public static double revenueToCostRation(Map<VirtualNode, SubstrateNode> nodemapping, Map<VirtualLink, List<SubstrateLink>> linkmapping) {
+		double result_v = 0.0;
+		double result_s = 0.0;
+		for (VirtualNode vn : nodemapping.keySet()) {
+			result_v += getCpu(vn);
+		}
+		result_s = result_v;
+		for (VirtualLink vl : linkmapping.keySet()) {
+			result_v += getBandwith(vl);
+			result_s += getBandwith(vl) * linkmapping.get(vl).size();
+		}
+		return result_v / result_s;
+	}
 }

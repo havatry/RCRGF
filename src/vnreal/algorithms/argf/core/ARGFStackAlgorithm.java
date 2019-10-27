@@ -75,7 +75,7 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 			VirtualNetwork virtualNetwork = getNext();
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
 			if (!result) {
-				// 撤销全部资源
+				// 未映射成功
 				System.out.println("Mapped Not Success");
 			} else {
 				// 映射成功
