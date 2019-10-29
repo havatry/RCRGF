@@ -1,6 +1,6 @@
-package vnreal.algorithms.argf.core;
+package vnreal.algorithms.rcrgf.core;
 
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
 

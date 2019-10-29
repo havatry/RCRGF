@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.core;
+package vnreal.algorithms.rcrgf.core;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import vnreal.algorithms.argf.auxi.SelectCoreNode;
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.auxi.SelectCoreNode;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.Link;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateLink;

@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.test;
+package vnreal.algorithms.rcrgf.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;
 import vnreal.constraints.resources.CpuResource;
 import vnreal.io.XMLExporter;
 import vnreal.network.NetworkStack;
+import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
 
@@ -62,8 +65,15 @@ public class GenerateTopology {
 	
 	public void generateTopology(String filename, String logname) throws FileNotFoundException, IOException {
 		// 生成底层网络
-		NetworkStack networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
-				virtualAlphaArray(), virtualBetaArray());
+		NetworkStack networkStack = null;
+		while (true) {
+			networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
+					virtualAlphaArray(), virtualBetaArray());
+			if (Utils.complete((VirtualNode)networkStack.getLayer(1).getVertices().iterator().next(), 
+					(VirtualNetwork)networkStack.getLayer(1))) {
+				break;
+			}
+		}
 		// 为底层网络生成约束
 		List<Class<?>> resClassesToGenerate = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerate = new LinkedList<String[]>();

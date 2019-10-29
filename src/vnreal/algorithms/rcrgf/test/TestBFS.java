@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.test;
+package vnreal.algorithms.rcrgf.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import vnreal.algorithms.argf.config.Constants;
-import vnreal.algorithms.argf.core.RemoveEdge;
+import vnreal.algorithms.rcrgf.config.Constants;
+import vnreal.algorithms.rcrgf.core.RemoveEdge;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;

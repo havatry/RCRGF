@@ -51,7 +51,7 @@ import javax.swing.event.ChangeListener;
 import mulavito.ui.Ui;
 import mulavito.ui.components.selectionpanel.SelectionPanel;
 import mulavito.utils.Resources;
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.core.Scenario;
 import vnreal.ui.mapping.MappingPanel;
 import vnreal.ui.menu.AlgorithmsMenu;

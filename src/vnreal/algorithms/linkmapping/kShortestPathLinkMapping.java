@@ -40,7 +40,7 @@ import mulavito.algorithms.shortestpath.ksp.Eppstein;
 import mulavito.algorithms.shortestpath.ksp.KShortestPathAlgorithm;
 import mulavito.algorithms.shortestpath.ksp.Yen;
 import vnreal.algorithms.AbstractLinkMapping;
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.utils.LinkWeight;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;

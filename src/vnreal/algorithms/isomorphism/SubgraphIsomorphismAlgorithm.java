@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.singlenetworkmapping.SingleNetworkMappingAlgorithm;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.algorithms.utils.SubgraphBasicVN.ResourceDemandEntry;
@@ -409,7 +409,7 @@ public class SubgraphIsomorphismAlgorithm extends
 			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
 				linkmapping.put(result.getLinkMappings().get(links).iterator().next(), links);
 			}
-			System.out.println(vnreal.algorithms.argf.util.Utils.revenueToCostRation(nodemapping, linkmapping));
+			System.out.println(vnreal.algorithms.rcrgf.util.Utils.revenueToCostRation(nodemapping, linkmapping));
 		}
 		return result;
 	}

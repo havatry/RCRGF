@@ -31,7 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.virtual;
 
-import vnreal.algorithms.argf.util.DTOVirtual;
+import vnreal.algorithms.rcrgf.util.DTOVirtual;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.network.Node;
 

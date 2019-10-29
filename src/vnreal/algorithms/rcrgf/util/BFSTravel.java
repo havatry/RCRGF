@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.util;
+package vnreal.algorithms.rcrgf.util;
 
 import java.util.Comparator;
 import java.util.HashMap;

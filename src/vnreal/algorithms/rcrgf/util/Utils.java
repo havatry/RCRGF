@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.util;
+package vnreal.algorithms.rcrgf.util;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -262,7 +262,7 @@ public class Utils {
 			}
 			if (network.findEdge(n, node) == null) {
 				// ¼Ó±ß
-				network.addEdge(n, node, EdgeType.UNDIRECTED);
+				network.addEdge(network.getEdgeFactory().create(), n, node);
 			}
 		}
 	}

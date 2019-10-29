@@ -40,7 +40,7 @@ import java.util.Map;
 
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;

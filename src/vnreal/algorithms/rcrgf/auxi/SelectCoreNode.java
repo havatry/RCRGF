@@ -1,11 +1,11 @@
-package vnreal.algorithms.argf.auxi;
+package vnreal.algorithms.rcrgf.auxi;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.Node;
 

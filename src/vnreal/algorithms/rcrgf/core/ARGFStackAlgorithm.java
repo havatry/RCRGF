@@ -1,11 +1,11 @@
-package vnreal.algorithms.argf.core;
+package vnreal.algorithms.rcrgf.core;
 
 import java.util.Iterator;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
-import vnreal.algorithms.argf.util.Statistics;
+import vnreal.algorithms.rcrgf.util.Statistics;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateNetwork;

@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.core;
+package vnreal.algorithms.rcrgf.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import vnreal.algorithms.argf.util.DSU;
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.util.DSU;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
@@ -91,7 +91,7 @@ public class RemoveEdge {
 				// 说明在其他分支上
 				return false;
 			}
-			if (t.getDtoVirtual().getUpnode() == null && s != root) {
+			if (t.getDtoVirtual().getUpnode() == null && t != root) { // 一个小的错误 纠正一个多小时 s != root 改成 t != root
 				return false;
 			}
 			// 找到公共节点

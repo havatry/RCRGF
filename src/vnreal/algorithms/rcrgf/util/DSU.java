@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.util;
+package vnreal.algorithms.rcrgf.util;
 
 public class DSU{
     int[] parent;

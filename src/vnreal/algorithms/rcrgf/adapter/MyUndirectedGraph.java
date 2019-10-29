@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.adapter;
+package vnreal.algorithms.rcrgf.adapter;
 
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
 

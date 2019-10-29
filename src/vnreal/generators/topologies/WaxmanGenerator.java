@@ -19,7 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
-import vnreal.algorithms.argf.config.Constants;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.network.Link;
 import vnreal.network.Network;
 import vnreal.network.Node;

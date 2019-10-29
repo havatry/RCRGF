@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.core;
+package vnreal.algorithms.rcrgf.core;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.argf.auxi.SelectCoreNode;
-import vnreal.algorithms.argf.util.BFSTravel;
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.auxi.SelectCoreNode;
+import vnreal.algorithms.rcrgf.util.BFSTravel;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;

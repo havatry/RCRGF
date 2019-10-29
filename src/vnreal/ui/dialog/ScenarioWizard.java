@@ -59,8 +59,8 @@ import javax.swing.table.TableColumn;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.ui.dialogs.AbstractButtonDialog;
-import vnreal.algorithms.argf.config.Constants;
-import vnreal.algorithms.argf.util.Utils;
+import vnreal.algorithms.rcrgf.config.Constants;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.core.Scenario;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateLink;
@@ -393,7 +393,6 @@ public class ScenarioWizard extends AbstractButtonDialog {
 			WaxmanGraphGenerator<VirtualNode, VirtualLink> vgg = new WaxmanGraphGenerator<VirtualNode, VirtualLink>(
 					virtualAlpha, virtualBeta, false);
 			vgg.generate(vn);
-			Utils.ensureConnect(vn);
 			
 			HashMap<VirtualNode, Point2D> vpos = vgg.getPositions();
 			for (VirtualNode v : vn.getVertices()) {

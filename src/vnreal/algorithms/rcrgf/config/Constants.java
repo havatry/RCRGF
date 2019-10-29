@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.config;
+package vnreal.algorithms.rcrgf.config;
 
 public class Constants {
 	public static boolean DIRECTED = false; // 设置图形界面显示无向图还是有向图
@@ -11,5 +11,5 @@ public class Constants {
 	public static boolean SUBGRAPHISOMORPHISM_NORMAL = true; // 打印子图同构时候的正常输出结果
 	public static boolean SKIP_XML_VALIDATE = true; // 跳过xml文件的校验
 	public static boolean REACH_ASSURE = true; // 保证图的连通性
-	public static String WRITE_RESOURCE = "./results/resources3/";
+	public static String WRITE_RESOURCE = "./results/resources4/";
 }

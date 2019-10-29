@@ -1,4 +1,4 @@
-package vnreal.algorithms.argf.util;
+package vnreal.algorithms.rcrgf.util;
 
 public class Statistics {
 	private long startTime;
