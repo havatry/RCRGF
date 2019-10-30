@@ -11,5 +11,5 @@ public class Constants {
 	public static boolean SUBGRAPHISOMORPHISM_NORMAL = true; // 打印子图同构时候的正常输出结果
 	public static boolean SKIP_XML_VALIDATE = true; // 跳过xml文件的校验
 	public static boolean REACH_ASSURE = true; // 保证图的连通性
-	public static String WRITE_RESOURCE = "./results/resources4/";
+	public static String WRITE_RESOURCE = "./results/resources5/";
 }

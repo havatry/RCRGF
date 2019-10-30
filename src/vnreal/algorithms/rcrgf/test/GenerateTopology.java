@@ -115,8 +115,9 @@ public class GenerateTopology {
 
 	@Override
 	public String toString() {
-		return "GenerateTopology [snodes=" + snodes + ", nodes_ration=" + nodes_ration + ", virtualNetworks="
-				+ virtualNetworks + ", ration=" + ration + ", alhpa=" + alhpa + ", cpu_resource=" + cpu_resource
+		return "GenerateTopology [snodes=" + snodes + ", nodes_ration=" + String.format(".2f", nodes_ration) + ", virtualNetworks="
+				+ virtualNetworks + ", ration=" + String.format(".1f", ration) + ", alhpa=" + String.format(".1f", alhpa)
+				+ ", cpu_resource=" + cpu_resource
 				+ ", bandwith_resource=" + bandwith_resource + "]";
 	}
 	
