@@ -61,7 +61,7 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 
 	@Override
 	protected boolean preRun() {
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 		//Created method stubs
 		for (VirtualNetwork vn : ns.getVirtuals()) {
 			RemoveEdge removeEdge = new RemoveEdge(vn);
