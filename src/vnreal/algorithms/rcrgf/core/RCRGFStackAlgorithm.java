@@ -1,14 +1,18 @@
 package vnreal.algorithms.rcrgf.core;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.Statistics;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
-import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
 
 public class RCRGFStackAlgorithm extends AbstractAlgorithm{
@@ -65,7 +69,7 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 				return false;
 			}
 		}
-		System.out.println("additional time: " + (System.currentTimeMillis() - start) + "ms");
+//		System.out.println("additional time: " + (System.currentTimeMillis() - start) + "ms");
 		return true;
 	}
 
@@ -78,12 +82,15 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
 			if (!result) {
 				// 未映射成功
-				System.out.println("Mapped Not Success");
+				statistics.setSuccVns(0);
 			} else {
 				// 映射成功
-				System.out.println("Mapped Success");
+				statistics.setSuccVns(1);
 			}
 		}
+		statistics.setRevenToCost(
+				Utils.revenueToCostRation(algorithm.getNodeMapping(), 
+						algorithm.getLinkMapping()));
 		statistics.setEndTime(System.currentTimeMillis());
 	}
 
@@ -91,7 +98,14 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 	protected void postRun() {
 		//Created method stubs
 		// 打印statics
-		System.out.println(statistics);
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			out.print(statistics);
+			out.print(",");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

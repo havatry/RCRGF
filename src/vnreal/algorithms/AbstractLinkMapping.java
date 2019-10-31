@@ -101,4 +101,8 @@ public abstract class AbstractLinkMapping {
 	protected void setHhMappings(List<IHiddenHopMapping> hhMappings) {
 		this.hhMappings = hhMappings;
 	}
+	
+	public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+		return linkMapping;
+	}
 }

@@ -162,4 +162,12 @@ public class MainAlgorithm {
 			}
 		}
 	}
+	
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+		return nodeMapping;
+	}
+	
+	public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+		return linkMapping;
+	}
 }
