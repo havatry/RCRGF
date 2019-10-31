@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import vnreal.algorithms.rcrgf.auxi.SelectCoreNode;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.BFSTravel;
 import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.substrate.SubstrateLink;
@@ -88,7 +89,7 @@ public class MainAlgorithm {
 					// 这样就找到了可到达被映射的点其余点集合
 					if (ls == null) {
 						// 找不到可达到的点
-						System.out.println("To Think");
+//						System.out.println("To Think");
 						return false;
 					}
 					// 过滤集合
@@ -133,7 +134,7 @@ public class MainAlgorithm {
 				}
 				if (HMS.size() == sz) {
 					// 没有发生变化, 认为不可行
-					System.out.println("not add node to exit");
+//					System.out.println("not add node to exit");
 					return false;
 				}
 				if (next_round) {
@@ -147,6 +148,8 @@ public class MainAlgorithm {
 	
 	private void print() {
 		System.out.println("revenue / cost = " + Utils.revenueToCostRation(nodeMapping, linkMapping));
+		Constants.out.print(Utils.revenueToCostRation(nodeMapping, linkMapping));
+		Constants.out.print(",");
 	}
 	
 	private void update(List<SubstrateLink> path, BFSTravel bfsTravel, SubstrateNode target) {

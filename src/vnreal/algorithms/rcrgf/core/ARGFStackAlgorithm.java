@@ -1,10 +1,13 @@
 package vnreal.algorithms.rcrgf.core;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.Statistics;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
@@ -57,7 +60,7 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 
 	@Override
 	protected boolean preRun() {
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 		//Created method stubs
 		for (VirtualNetwork vn : ns.getVirtuals()) {
 			RemoveEdge removeEdge = new RemoveEdge(vn);
@@ -65,7 +68,7 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 				return false;
 			}
 		}
-		System.out.println("additional time: " + (System.currentTimeMillis() - start) + "ms");
+//		System.out.println("additional time: " + (System.currentTimeMillis() - start) + "ms");
 		return true;
 	}
 
@@ -73,17 +76,23 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 	protected void evaluate() {
 		//Created method stubs
 		statistics.setStartTime(System.currentTimeMillis());
+		long start = System.currentTimeMillis();
 		while (hasNext()) {
 			VirtualNetwork virtualNetwork = getNext();
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
 			if (!result) {
 				// 未映射成功
 				System.out.println("Mapped Not Success");
+				Constants.out.print(0);
+				Constants.out.print(",");
 			} else {
 				// 映射成功
 				System.out.println("Mapped Success");
+				Constants.out.print(1);
+				Constants.out.print(",");
 			}
 		}
+		Constants.out.println(System.currentTimeMillis() - start);
 		statistics.setEndTime(System.currentTimeMillis());
 	}
 

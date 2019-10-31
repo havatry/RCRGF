@@ -1,5 +1,7 @@
 package vnreal.algorithms.rcrgf.config;
 
+import java.io.PrintWriter;
+
 public class Constants {
 	public static boolean DIRECTED = false; // 设置图形界面显示无向图还是有向图
 	public static boolean ADAPTE_UNDIRECTEDGRAPH = true; // 定制无向图类, 实现起点和终点的获取
@@ -12,4 +14,5 @@ public class Constants {
 	public static boolean SKIP_XML_VALIDATE = true; // 跳过xml文件的校验
 	public static boolean REACH_ASSURE = true; // 保证图的连通性
 	public static String WRITE_RESOURCE = "./results/resources4/";
+	public static PrintWriter out;
 }
