@@ -1,6 +1,7 @@
 package vnreal.algorithms.rcrgf.core;
 
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
@@ -9,20 +10,20 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.Statistics;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
-import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
 
-public class ARGFStackAlgorithm extends AbstractAlgorithm{
-	private ARGFAlgorithm algorithm;
+public class RCRGFStackAlgorithm extends AbstractAlgorithm{
+	private RCRGFAlgorithm algorithm;
 	private Iterator<VirtualNetwork> curIt = null;
 	private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
 	private Statistics statistics = new Statistics();
 	
-	public ARGFStackAlgorithm(NetworkStack networkStack) {
+	public RCRGFStackAlgorithm(NetworkStack networkStack) {
 		//Created constructor stubs
-		this.algorithm = new ARGFAlgorithm();
+		this.algorithm = new RCRGFAlgorithm();
 		this.ns = networkStack;
 	}
 	
@@ -82,17 +83,15 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
 			if (!result) {
 				// 未映射成功
-				System.out.println("Mapped Not Success");
-				Constants.out.print(0);
-				Constants.out.print(",");
+				statistics.setSuccVns(0);
 			} else {
 				// 映射成功
-				System.out.println("Mapped Success");
-				Constants.out.print(1);
-				Constants.out.print(",");
+				statistics.setSuccVns(1);
 			}
 		}
-		Constants.out.println(System.currentTimeMillis() - start);
+		statistics.setRevenToCost(
+				Utils.revenueToCostRation(algorithm.getNodeMapping(), 
+						algorithm.getLinkMapping()));
 		statistics.setEndTime(System.currentTimeMillis());
 	}
 
@@ -100,7 +99,14 @@ public class ARGFStackAlgorithm extends AbstractAlgorithm{
 	protected void postRun() {
 		//Created method stubs
 		// 打印statics
-		System.out.println(statistics);
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			out.print(statistics);
+			out.print(",");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

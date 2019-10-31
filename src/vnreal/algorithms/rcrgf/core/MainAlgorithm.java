@@ -147,9 +147,7 @@ public class MainAlgorithm {
 	}
 	
 	private void print() {
-		System.out.println("revenue / cost = " + Utils.revenueToCostRation(nodeMapping, linkMapping));
-		Constants.out.print(Utils.revenueToCostRation(nodeMapping, linkMapping));
-		Constants.out.print(",");
+//		System.out.println("revenue / cost = " + Utils.revenueToCostRation(nodeMapping, linkMapping));
 	}
 	
 	private void update(List<SubstrateLink> path, BFSTravel bfsTravel, SubstrateNode target) {
@@ -164,5 +162,13 @@ public class MainAlgorithm {
 				bfsTravel.construct(s, t, sl);
 			}
 		}
+	}
+	
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+		return nodeMapping;
+	}
+	
+	public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+		return linkMapping;
 	}
 }

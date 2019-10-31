@@ -31,6 +31,9 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms.isomorphism;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +41,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.Statistics;
 import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
@@ -58,12 +62,13 @@ import vnreal.network.virtual.VirtualNode;
  */
 public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	public static final boolean debug = false;
-
+	
 	protected SubgraphIsomorphismAlgorithm algorithm;
 
 	private Iterator<VirtualNetwork> curIt = null;
 	private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
-
+	private Statistics statistics = new Statistics();
+	
 	public SubgraphIsomorphismStackAlgorithm(AlgorithmParameter params) {
 		if (params.getBoolean("Advanced", true)) {
 			this.algorithm = new AdvancedSubgraphIsomorphismAlgorithm();
@@ -111,37 +116,32 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	protected void evaluate() {
 		boolean result = false;
 		// Mapping previousResult = new Mapping();
-		Statistics statistics = new Statistics();
 		statistics.setStartTime(System.currentTimeMillis());
 		while (hasNext()) {
 			VirtualNetwork vNetwork = getNext();
-
 			result = algorithm.mapNetwork(ns.getSubstrate(), vNetwork);
-			
-			// if (result == null) {
-			// previousResult.freeAllResources();
-			// break;
-			// } else {
-			// previousResult = result;
-			// }
-
+			statistics.setRevenToCost(
+					Utils.revenueToCostRation(algorithm.getNodeMapping(), 
+							algorithm.getLinkMapping()));
 		}
-
 		if (result) {
-//			if (debug) {
-				System.out.println("mapping success!");
-//			}
+			statistics.setSuccVns(1);
 		} else {
-//			if (debug) {
-				System.out.println("mapping not success!");
-//			}
+			statistics.setSuccVns(0);
 		}
 		statistics.setEndTime(System.currentTimeMillis());
-		System.out.println(statistics);
 	}
 
 	@Override
 	protected void postRun() {
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			out.print(statistics);
+			out.print(",");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -31,11 +31,17 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
+import vnreal.algorithms.rcrgf.config.Constants;
+import vnreal.algorithms.rcrgf.util.Statistics;
+import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
@@ -64,6 +70,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
 	protected double startTime, runningTime;
+	private Statistics statistics = new Statistics();
 
 	/**
 	 * The constructor initializes the variable and introduce to the virtual
@@ -157,7 +164,15 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected void postRun() {
-		runningTime = (System.currentTimeMillis() - startTime) / 1000;
+//		runningTime = (System.currentTimeMillis() - startTime) / 1000;
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			out.print(statistics);
+			out.println();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -203,6 +218,7 @@ public abstract class GenericMappingAlgorithm extends
 	@Override
 	protected boolean process(VirtualNetwork p) {
 		// Node mapping stage
+		statistics.setStartTime(System.currentTimeMillis());
 		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
 			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
 				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
@@ -223,7 +239,10 @@ public abstract class GenericMappingAlgorithm extends
 		} else {
 			mappedLinks += linkMappingAlgorithm.getMappedLinks();
 		}
+		statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
+		statistics.setSuccVns(1);
 		processedLinks += linkMappingAlgorithm.getProcessedLinks();
+		statistics.setEndTime(System.currentTimeMillis());
 		return true;
 	}
 

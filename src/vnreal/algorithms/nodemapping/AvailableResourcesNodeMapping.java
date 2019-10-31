@@ -31,6 +31,8 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms.nodemapping;
 
+import java.util.HashMap;
+
 /**
  * This class implements the node mapping based on a greedy algorithm, 
  * taking into account the available resources of a node.
@@ -50,6 +52,7 @@ package vnreal.algorithms.nodemapping;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import vnreal.algorithms.AbstractNodeMapping;
 import vnreal.algorithms.utils.NodeLinkAssignation;
@@ -61,12 +64,12 @@ import vnreal.constraints.resources.CpuResource;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 public class AvailableResourcesNodeMapping extends AbstractNodeMapping {
 	int distance;
-
 	/**
 	 * Constructor of the algorithm
 	 * 
@@ -156,7 +159,6 @@ public class AvailableResourcesNodeMapping extends AbstractNodeMapping {
 				}
 			}
 		}
-		System.out.println(nodeMapping); // 输出到控制台关于节点的映射情况
 		return true;
 	}
 

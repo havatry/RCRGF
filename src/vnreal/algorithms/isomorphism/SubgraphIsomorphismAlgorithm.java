@@ -74,7 +74,8 @@ public class SubgraphIsomorphismAlgorithm extends
 	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // 由变量控制
 
 	private int numberOfTries;
-
+	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // 节点映射
+	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // 链路映射
 	/**
 	 * 
 	 * @param useEnergyResource
@@ -400,16 +401,12 @@ public class SubgraphIsomorphismAlgorithm extends
 		NodeLinkMapping result = vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
 				sNetwork, omega, epsilon);
 		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
-//			System.out.println(result);
-			Map<VirtualNode, SubstrateNode> nodemapping = new HashMap<VirtualNode, SubstrateNode>();
 			for (SubstrateNode sn : result.getNodeMappings().keySet()) {
-				nodemapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
+				nodeMapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
 			}
-			Map<VirtualLink, List<SubstrateLink>> linkmapping = new HashMap<>();
 			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
-				linkmapping.put(result.getLinkMappings().get(links).iterator().next(), links);
+				linkMapping.put(result.getLinkMappings().get(links).iterator().next(), links);
 			}
-			System.out.println(vnreal.algorithms.rcrgf.util.Utils.revenueToCostRation(nodemapping, linkmapping));
 		}
 		return result;
 	}
@@ -435,4 +432,11 @@ public class SubgraphIsomorphismAlgorithm extends
 		}
 	}
 
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+		return nodeMapping;
+	}
+	
+	public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+		return linkMapping;
+	}
 }

@@ -3,10 +3,8 @@ package vnreal.algorithms.rcrgf.util;
 public class Statistics {
 	private long startTime;
 	private long endTime;
-	private int totalVns;
 	private int succVns;
 	private double RevenToCost;
-	private double AverageRevenToCost;
 	public long getStartTime() {
 		return startTime;
 	}
@@ -18,12 +16,6 @@ public class Statistics {
 	}
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
-	}
-	public int getTotalVns() {
-		return totalVns;
-	}
-	public void setTotalVns(int totalVns) {
-		this.totalVns = totalVns;
 	}
 	public int getSuccVns() {
 		return succVns;
@@ -37,16 +29,10 @@ public class Statistics {
 	public void setRevenToCost(double revenToCost) {
 		RevenToCost = revenToCost;
 	}
-	public double getAverageRevenToCost() {
-		return AverageRevenToCost;
-	}
-	public void setAverageRevenToCost(double averageRevenToCost) {
-		AverageRevenToCost = averageRevenToCost;
-	}
 	
 	@Override
 	public String toString() {
 		//Created method stubs
-		return "Process time is " + (endTime - startTime) + "ms";
+		return (endTime - startTime) + "," + succVns + "," + RevenToCost;
 	}
 }
