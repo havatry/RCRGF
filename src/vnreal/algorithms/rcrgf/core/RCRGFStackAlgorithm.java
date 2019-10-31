@@ -11,15 +11,15 @@ import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
 
-public class ARGFStackAlgorithm extends AbstractAlgorithm{
-	private ARGFAlgorithm algorithm;
+public class RCRGFStackAlgorithm extends AbstractAlgorithm{
+	private RCRGFAlgorithm algorithm;
 	private Iterator<VirtualNetwork> curIt = null;
 	private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
 	private Statistics statistics = new Statistics();
 	
-	public ARGFStackAlgorithm(NetworkStack networkStack) {
+	public RCRGFStackAlgorithm(NetworkStack networkStack) {
 		//Created constructor stubs
-		this.algorithm = new ARGFAlgorithm();
+		this.algorithm = new RCRGFAlgorithm();
 		this.ns = networkStack;
 	}
 	

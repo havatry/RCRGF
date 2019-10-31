@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import vnreal.algorithms.rcrgf.config.Constants;
-import vnreal.algorithms.rcrgf.core.ARGFStackAlgorithm;
+import vnreal.algorithms.rcrgf.core.RCRGFStackAlgorithm;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 import vnreal.network.NetworkStack;
@@ -21,7 +21,7 @@ public class TestARGF {
 	
 	@Test // ≤‚ ‘À„∑®π¶ƒ‹
 	public void test01() {
-		ARGFStackAlgorithm argfStackAlgorithm = new ARGFStackAlgorithm(networkStack);
+		RCRGFStackAlgorithm argfStackAlgorithm = new RCRGFStackAlgorithm(networkStack);
 		argfStackAlgorithm.performEvaluation();
 	}
 }
