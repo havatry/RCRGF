@@ -42,7 +42,7 @@ public class GenerateTopology {
 		int max = (int)(snodes * nodes_ration);
 		for (int i = 0; i < virtualNetworks; i++) {
 			// 至少三个个节点，至多是nodes_ration * snodes
-			array[i] = 3 + (int)(Math.random() * (max - 2));
+			array[i] = Math.max(3, max);
 		}
 		return array;
 	}

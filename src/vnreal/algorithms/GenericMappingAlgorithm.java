@@ -224,12 +224,16 @@ public abstract class GenericMappingAlgorithm extends
 				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
 					ns.clearVnrMappings(p);
 					processedLinks += p.getEdges().size();
+					statistics.setSuccVns(0);
+					statistics.setEndTime(System.currentTimeMillis());
 					return true;
 				}
 			}
 		} else {
 			ns.clearVnrMappings(p);
 			processedLinks += p.getEdges().size();
+			statistics.setSuccVns(0);
+			statistics.setEndTime(System.currentTimeMillis());
 			return true;
 		}
 		// Link Mapping stage
