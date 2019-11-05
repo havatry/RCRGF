@@ -31,7 +31,7 @@ public class GenerateTopology {
 	
 	
 	public void write() throws FileNotFoundException, IOException {
-		String filename = "topology_" + snodes + "_" + virtualNetworks + "_" + ration + "_" + alhpa + ".xml";
+		String filename = "topology_" + snodes + "_" + vnodes + "_" + virtualNetworks + "_" + ration + ".xml";
 		String logname = filename.substring(0, filename.lastIndexOf(".")) + ".log";
 		generateTopology(filename, logname);
 	}

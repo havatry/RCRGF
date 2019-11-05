@@ -77,7 +77,6 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 	protected void evaluate() {
 		//Created method stubs
 		statistics.setStartTime(System.currentTimeMillis());
-		long start = System.currentTimeMillis();
 		while (hasNext()) {
 			VirtualNetwork virtualNetwork = getNext();
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
@@ -100,7 +99,7 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 		//Created method stubs
 		// ¥Ú”°statics
 		try {
-			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
 			out.print(statistics);
 			out.print(",");
 			out.close();

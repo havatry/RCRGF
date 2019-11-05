@@ -135,7 +135,7 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	@Override
 	protected void postRun() {
 		try {
-			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
 			out.print(statistics);
 			out.print(",");
 			out.close();

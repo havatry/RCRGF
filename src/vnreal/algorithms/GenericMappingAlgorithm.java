@@ -166,7 +166,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected void postRun() {
 //		runningTime = (System.currentTimeMillis() - startTime) / 1000;
 		try {
-			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
+			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
 			out.print(statistics);
 			out.println();
 			out.close();
