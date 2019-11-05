@@ -2,7 +2,6 @@ package vnreal.algorithms.rcrgf.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,12 +19,13 @@ import vnreal.network.virtual.VirtualNode;
 import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
 
+
 public class GenerateTopology {
-	private int snodes = 100; // 从100 120 140 160 180
-	private final double nodes_ration = 0.1;
-	private final int virtualNetworks = 1; // 虚拟网络数
-	private double ration = 0.01; // 资源比例 从0.01 0.02 0.03
-	private double alhpa = 1.0; // 从0.3 0.6
+	private int snodes = 100; // 100 120 140 160 180 200 - 300
+	private int vnodes = 3; // 3 5 7 9 11 13 15 17 19 21
+	private final int virtualNetworks = 1;
+	private double ration = 0.01; // 0.01 0.02 0.03 - 0.1
+	private final double alhpa = 1.0;
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
@@ -33,16 +33,13 @@ public class GenerateTopology {
 	public void write() throws FileNotFoundException, IOException {
 		String filename = "topology_" + snodes + "_" + virtualNetworks + "_" + ration + "_" + alhpa + ".xml";
 		String logname = filename.substring(0, filename.lastIndexOf(".")) + ".log";
-		// 生成底层网络
 		generateTopology(filename, logname);
 	}
 	
 	private int[] virtualNodesArray() {
 		int[] array = new int[virtualNetworks];
-		int max = (int)(snodes * nodes_ration);
 		for (int i = 0; i < virtualNetworks; i++) {
-			// 至少三个个节点，至多是nodes_ration * snodes
-			array[i] = Math.max(3, max);
+			array[i] = vnodes;
 		}
 		return array;
 	}
@@ -64,7 +61,6 @@ public class GenerateTopology {
 	}
 	
 	public void generateTopology(String filename, String logname) throws FileNotFoundException, IOException {
-		// 生成底层网络
 		NetworkStack networkStack = null;
 		while (true) {
 			networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
@@ -74,11 +70,9 @@ public class GenerateTopology {
 				break;
 			}
 		}
-		// 为底层网络生成约束
 		List<Class<?>> resClassesToGenerate = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerate = new LinkedList<String[]>();
 		List<String[]> resMaxValues = new ArrayList<String[]>();
-		// 添加cpu属性 带宽属性
 		resClassesToGenerate.add(CpuResource.class);
 		resClassesToGenerate.add(BandwidthResource.class);
 		resParamNamesToGenerate.add(new String[]{"cycles"});
@@ -86,7 +80,6 @@ public class GenerateTopology {
 		resMaxValues.add(new String[]{"" + cpu_resource});
 		resMaxValues.add(new String[]{"" + bandwith_resource});
 		ConstraintsGeneratorDialog.generateConstraintsSubstrate(resClassesToGenerate, resParamNamesToGenerate, resMaxValues, networkStack);
-		// 为虚拟网络生成约束
 		List<List<Class<?>>> resClassesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resParamNamesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resMaxValues_vn_all = new ArrayList<>();
@@ -94,7 +87,6 @@ public class GenerateTopology {
 			List<Class<?>> resClassesToGenerate_vn = new LinkedList<>();
 			List<String[]> resParamNamesToGenerate_vn = new LinkedList<>();
 			List<String[]> resMaxValues_vn = new ArrayList<>();
-			// 添加cpu需求 带宽需求
 			resClassesToGenerate_vn.add(CpuDemand.class);
 			resClassesToGenerate_vn.add(BandwidthDemand.class);
 			resParamNamesToGenerate_vn.add(new String[]{"demandedCycles"});
@@ -108,15 +100,15 @@ public class GenerateTopology {
 		ConstraintsGeneratorDialog.generateConstraintsVirtual(resClassesToGenerate_vn_all,
 				resParamNamesToGenerate_vn_all, resMaxValues_vn_all, networkStack);
 		XMLExporter.exportStack(Constants.WRITE_RESOURCE + filename, networkStack);
-		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
-		out.println(toString());
-		out.close();
+//		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
+//		out.println(toString());
+//		out.close();
 	}
 
 	@Override
 	public String toString() {
-		return "GenerateTopology [snodes=" + snodes + ", nodes_ration=" + String.format("%.2f", nodes_ration) + ", virtualNetworks="
-				+ virtualNetworks + ", ration=" + String.format("%.1f", ration) + ", alhpa=" + String.format("%.1f", alhpa)
+		return "GenerateTopology [snodes=" + snodes + ", vnodes=" + vnodes + ", virtualNetworks="
+				+ virtualNetworks + ", ration=" + String.format("%.2f", ration) + ", alhpa=" + String.format("%.1f", alhpa)
 				+ ", cpu_resource=" + cpu_resource
 				+ ", bandwith_resource=" + bandwith_resource + "]";
 	}
@@ -134,7 +126,7 @@ public class GenerateTopology {
 		this.ration = ration;
 	}
 
-	public void setAlhpa(double alhpa) {
-		this.alhpa = alhpa;
+	public void setVnodes(int vnodes) {
+		this.vnodes = vnodes;
 	}
 }
