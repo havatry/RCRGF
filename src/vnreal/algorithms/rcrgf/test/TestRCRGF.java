@@ -9,7 +9,7 @@ import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 import vnreal.network.NetworkStack;
 
-public class TestARGF {
+public class TestRCRGF {
 	private static NetworkStack networkStack;
 	
 	@Before

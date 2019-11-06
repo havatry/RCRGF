@@ -59,7 +59,7 @@ public class Process {
 			for (int snodes = snodes_min; snodes < snodes_max; snodes += snodes_step) {
 				for (int vnodes = vnodes_min; vnodes < vnodes_max; vnodes += vnodes_step) {
 					for (double ratio = ratio_min; ratio < ratio_max; ratio += ratio_step) {
-						String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_1_" + vnodes + "_" +
+						String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_" + vnodes + "_1_" +
 								(Utils.equal(ratio, 0.1) ? "0.1" : decimalFormat.format(ratio)) + ".xml";
 						System.out.println("Process: " + filename);
 						process.doRCRGF(filename);
