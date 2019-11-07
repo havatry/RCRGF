@@ -134,6 +134,10 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	@Override
 	protected void postRun() {
+		if (Constants.PRINT) {
+			System.out.println(statistics);
+			return;
+		}
 		try {
 			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
 			out.print(statistics);

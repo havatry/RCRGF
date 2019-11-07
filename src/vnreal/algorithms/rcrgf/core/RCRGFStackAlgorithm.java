@@ -83,19 +83,24 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 			if (!result) {
 				// 未映射成功
 				statistics.setSuccVns(0);
+				statistics.setRevenToCost(0.0);
 			} else {
 				// 映射成功
 				statistics.setSuccVns(1);
+				statistics.setRevenToCost(
+						Utils.revenueToCostRation(algorithm.getNodeMapping(), 
+								algorithm.getLinkMapping()));
 			}
 		}
-		statistics.setRevenToCost(
-				Utils.revenueToCostRation(algorithm.getNodeMapping(), 
-						algorithm.getLinkMapping()));
 		statistics.setEndTime(System.currentTimeMillis());
 	}
 
 	@Override
 	protected void postRun() {
+		if (Constants.PRINT) {
+			System.out.println(statistics);
+			return;
+		}
 		//Created method stubs
 		// 打印statics
 		try {

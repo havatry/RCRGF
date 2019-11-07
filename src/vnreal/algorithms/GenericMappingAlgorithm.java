@@ -165,6 +165,10 @@ public abstract class GenericMappingAlgorithm extends
 	@Override
 	protected void postRun() {
 //		runningTime = (System.currentTimeMillis() - startTime) / 1000;
+		if (Constants.PRINT) {
+			System.out.println(statistics);
+			return;
+		}
 		try {
 			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
 			out.print(statistics);

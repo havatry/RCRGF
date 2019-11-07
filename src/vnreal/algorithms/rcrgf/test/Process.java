@@ -3,7 +3,6 @@ package vnreal.algorithms.rcrgf.test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.Properties;
 
 import vnreal.algorithms.AlgorithmParameter;
@@ -12,7 +11,6 @@ import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.core.RCRGFStackAlgorithm;
-import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 
@@ -29,10 +27,10 @@ public class Process {
 		int snodes_min = Integer.parseInt(snodesInfo[0]);
 		int snodes_step = Integer.parseInt(snodesInfo[1]);
 		int snodes_max = Integer.parseInt(snodesInfo[2]);
-		String[] ratioInfo = properties.getProperty("ratio").split("-");
-		double ratio_min = Double.parseDouble(ratioInfo[0]);
-		double ratio_step = Double.parseDouble(ratioInfo[1]);
-		double ratio_max = Double.parseDouble(ratioInfo[2]);
+//		String[] ratioInfo = properties.getProperty("ratio").split("-");
+//		double ratio_min = Double.parseDouble(ratioInfo[0]);
+//		double ratio_step = Double.parseDouble(ratioInfo[1]);
+//		double ratio_max = Double.parseDouble(ratioInfo[2]);
 		String[] vnodesInfo = properties.getProperty("vnodes").split("-");
 		int vnodes_min = Integer.parseInt(vnodesInfo[0]);
 		int vnodes_step = Integer.parseInt(vnodesInfo[1]);
@@ -41,31 +39,24 @@ public class Process {
 		
 		if (properties.getProperty("action").contains("produce")) {
 			GenerateTopology generateTopology = new GenerateTopology();
-			for (int snodes = snodes_min; snodes < snodes_max; snodes += snodes_step) {
-				for (int vnodes = vnodes_min; vnodes < vnodes_max; vnodes += vnodes_step) {
-					for (double ratio = ratio_min; ratio < ratio_max; ratio += ratio_step) {
-						generateTopology.setSnodes(snodes);
-						generateTopology.setVnodes(vnodes);
-						generateTopology.setRation(ratio);
-						generateTopology.write();
-						System.out.println("write: " + generateTopology);
-					}
+			for (int snodes = snodes_min; snodes <= snodes_max; snodes += snodes_step) {
+				for (int vnodes = vnodes_min; vnodes <= vnodes_max; vnodes += vnodes_step) {
+					generateTopology.setSnodes(snodes);
+					generateTopology.setVnodes(vnodes);
+					generateTopology.write();
+					System.out.println("write: " + generateTopology);
 				}
 			}
 		}
 		if (properties.getProperty("action").contains("compute")) {
 			Process process = new Process();
-			DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-			for (int snodes = snodes_min; snodes < snodes_max; snodes += snodes_step) {
-				for (int vnodes = vnodes_min; vnodes < vnodes_max; vnodes += vnodes_step) {
-					for (double ratio = ratio_min; ratio < ratio_max; ratio += ratio_step) {
-						String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_" + vnodes + "_1_" +
-								(Utils.equal(ratio, 0.1) ? "0.1" : decimalFormat.format(ratio)) + ".xml";
-						System.out.println("Process: " + filename);
-						process.doRCRGF(filename);
-						process.doSubgraph(filename);
-						process.doGreedy(filename, ksp);
-					}
+			for (int snodes = snodes_min; snodes <= snodes_max; snodes += snodes_step) {
+				for (int vnodes = vnodes_min; vnodes <= vnodes_max; vnodes += vnodes_step) {
+					String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_" + vnodes + ".xml";
+					System.out.println("Process: " + filename);
+					process.doRCRGF(filename);
+					process.doSubgraph(filename);
+					process.doGreedy(filename, ksp);
 				}
 			}
 		}

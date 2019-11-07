@@ -24,14 +24,14 @@ public class GenerateTopology {
 	private int snodes = 100; // 100 120 140 160 180 200 - 300
 	private int vnodes = 3; // 3 5 7 9 11 13 15 17 19 21
 	private final int virtualNetworks = 1;
-	private double ration = 0.01; // 0.01 0.02 0.03 - 0.1
+	private final double ration = 0.1;
 	private final double alhpa = 1.0;
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
 	
 	public void write() throws FileNotFoundException, IOException {
-		String filename = "topology_" + snodes + "_" + vnodes + "_" + virtualNetworks + "_" + ration + ".xml";
+		String filename = "topology_" + snodes + "_" + vnodes + ".xml";
 		String logname = filename.substring(0, filename.lastIndexOf(".")) + ".log";
 		generateTopology(filename, logname);
 	}
@@ -120,10 +120,6 @@ public class GenerateTopology {
 
 	public void setSnodes(int snodes) {
 		this.snodes = snodes;
-	}
-
-	public void setRation(double ration) {
-		this.ration = ration;
 	}
 
 	public void setVnodes(int vnodes) {

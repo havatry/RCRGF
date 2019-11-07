@@ -58,6 +58,7 @@ public class MainAlgorithm {
 				}
 				core = nodeMapping.get(root);
 			}
+			hasMappedSubstrateNode.add(core);
 			outter.add(core);
 			// ³õÊ¼»¯coreµÄBTL
 			Utils.processBTL(core, substrateNetwork.getVertexCount());
