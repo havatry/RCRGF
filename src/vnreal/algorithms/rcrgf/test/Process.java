@@ -31,16 +31,21 @@ public class Process {
 //		double ratio_min = Double.parseDouble(ratioInfo[0]);
 //		double ratio_step = Double.parseDouble(ratioInfo[1]);
 //		double ratio_max = Double.parseDouble(ratioInfo[2]);
-		String[] vnodesInfo = properties.getProperty("vnodes").split("-");
-		int vnodes_min = Integer.parseInt(vnodesInfo[0]);
-		int vnodes_step = Integer.parseInt(vnodesInfo[1]);
-		int vnodes_max = Integer.parseInt(vnodesInfo[2]);
+		String[] vrationInfo = properties.getProperty("vratio").split("-");
+		double vration_min = Double.parseDouble(vrationInfo[0]);
+		double vration_step = Double.parseDouble(vrationInfo[1]);
+		double vration_max = Double.parseDouble(vrationInfo[2]);
+		double ration = Double.parseDouble(properties.getProperty("ration"));
+		double alpha = Double.parseDouble(properties.getProperty("alpha"));
 		String ksp = properties.getProperty("ksp", "1");
 		
 		if (properties.getProperty("action").contains("produce")) {
 			GenerateTopology generateTopology = new GenerateTopology();
+			generateTopology.setAlhpa(alpha);
+			generateTopology.setRation(ration);
 			for (int snodes = snodes_min; snodes <= snodes_max; snodes += snodes_step) {
-				for (int vnodes = vnodes_min; vnodes <= vnodes_max; vnodes += vnodes_step) {
+				for (double vration = vration_min; vration < vration_max; vration += vration_step) {
+					int vnodes = (int)Math.round(vration * snodes);
 					generateTopology.setSnodes(snodes);
 					generateTopology.setVnodes(vnodes);
 					generateTopology.write();
@@ -51,7 +56,8 @@ public class Process {
 		if (properties.getProperty("action").contains("compute")) {
 			Process process = new Process();
 			for (int snodes = snodes_min; snodes <= snodes_max; snodes += snodes_step) {
-				for (int vnodes = vnodes_min; vnodes <= vnodes_max; vnodes += vnodes_step) {
+				for (double vration = vration_min; vration < vration_max; vration += vration_step) {
+					int vnodes = (int)Math.round(vration * snodes);
 					String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_" + vnodes + ".xml";
 					System.out.println("Process: " + filename);
 					process.doRCRGF(filename);

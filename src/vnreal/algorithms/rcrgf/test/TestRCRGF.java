@@ -14,7 +14,7 @@ public class TestRCRGF {
 	
 	@Before
 	public void start() {
-		String filename = "topology_10_5_1_0.1.xml";
+		String filename = "topology_100_15.xml";
 		Scenario scenario = XMLImporter.importScenario(Constants.WRITE_RESOURCE + filename);
 		networkStack = scenario.getNetworkStack();
 	}

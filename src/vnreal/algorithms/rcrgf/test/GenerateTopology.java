@@ -21,11 +21,11 @@ import vnreal.ui.dialog.ScenarioWizard;
 
 
 public class GenerateTopology {
-	private int snodes = 100; // 100 120 140 160 180 200 - 300
+	private int snodes = 100; // 100 150 200 250 300 350 400 450 500 550
 	private int vnodes = 3; // 3 5 7 9 11 13 15 17 19 21
 	private final int virtualNetworks = 1;
-	private final double ration = 0.1;
-	private final double alhpa = 1.0;
+	private double ration = 0.01;
+	private double alhpa = 0.1;
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
@@ -124,5 +124,13 @@ public class GenerateTopology {
 
 	public void setVnodes(int vnodes) {
 		this.vnodes = vnodes;
+	}
+	
+	public void setAlhpa(double alhpa) {
+		this.alhpa = alhpa;
+	}
+	
+	public void setRation(double ration) {
+		this.ration = ration;
 	}
 }
