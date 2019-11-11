@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm;
@@ -15,6 +18,8 @@ import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 
 public class Process {
+	private static Logger logger = LoggerFactory.getLogger(Process.class);
+	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// ªÒ»°Map
 		Properties properties = new Properties();
@@ -59,6 +64,7 @@ public class Process {
 				for (double vration = vration_min; vration < vration_max; vration += vration_step) {
 					int vnodes = (int)Math.round(vration * snodes);
 					String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_" + vnodes + ".xml";
+					logger.debug("Process: " + filename);
 					System.out.println("Process: " + filename);
 					process.doRCRGF(filename);
 					process.doSubgraph(filename);

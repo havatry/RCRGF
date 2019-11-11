@@ -1,5 +1,6 @@
 package vnreal.algorithms.rcrgf.util;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -40,5 +41,10 @@ public class DTOSubstrate {
 	}
 	public void setBestUpLink(Map<SubstrateNode, SubstrateLink> bestUpLink) {
 		this.bestUpLink = bestUpLink;
+	}
+	@Override
+	public String toString() {
+		return "DTOSubstrate [BTL=" + Arrays.toString(BTL) + ", EBTL=" + EBTL + ", bestUpStream=" + bestUpStream
+				+ ", bestUpLink=" + bestUpLink + "]";
 	}
 }

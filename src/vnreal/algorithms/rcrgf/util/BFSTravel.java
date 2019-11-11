@@ -1,5 +1,6 @@
 package vnreal.algorithms.rcrgf.util;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
@@ -23,6 +27,7 @@ public class BFSTravel {
 	private List<SubstrateNode> outter = new LinkedList<>();
 	private SubstrateNetwork substrateNetwork; // 底层网络
 	private Map<SubstrateNode, List<SubstrateNode>> HMBTL = new HashMap<SubstrateNode, List<SubstrateNode>>(); // 每层可以映射的节点集合
+	private final Logger logger = LoggerFactory.getLogger(BFSTravel.class);
 	
 	public BFSTravel(SubstrateNode root, SubstrateNetwork substrateNetwork) {
 		//Created constructor stubs
@@ -46,6 +51,7 @@ public class BFSTravel {
 				if (visitedNodes.contains(neighbor)) {
 					continue; // 已经访问过了
 				} else {
+					logger.debug("process link s1 = {} and its opposite substrate node = {}", sl, sn);
 					construct(sn, neighbor, sl);
 					temp.add(neighbor); // 更正
 				}
@@ -55,14 +61,15 @@ public class BFSTravel {
 	}
 	
 	public void construct(SubstrateNode sn, SubstrateNode neighbor, SubstrateLink sl) {
+		logger.debug("before construct, sn Dto = {}, neighbor Dto = {}", sn.getDtoSubstrate(), neighbor.getDtoSubstrate());
 		// 初始化BTL
 		Utils.processBTL(neighbor, substrateNetwork.getVertexCount());
 		// 继承上游的EBTL
-		Map<SubstrateNode, PriorityQueue<SubstrateNode>> upEBRL = sn.getDtoSubstrate().getEBTL();
+		Map<SubstrateNode, PriorityQueue<SubstrateNode>> upEBTL = sn.getDtoSubstrate().getEBTL();
 		neighbor.getDtoSubstrate().getEBTL().clear();
 		Map<SubstrateNode, PriorityQueue<SubstrateNode>> currentEBTL = neighbor.getDtoSubstrate().getEBTL();
 		// upEBTL是其他节点到sn的路径集合, 因此可以顺势延伸到当前EBTL中
-		for (SubstrateNode other : upEBRL.keySet()) {
+		for (SubstrateNode other : upEBTL.keySet()) {
 			addElement(other, sn, neighbor, currentEBTL);
 		}
 		// 增加新加的这个
@@ -85,6 +92,7 @@ public class BFSTravel {
 			neighbor.getDtoSubstrate().getBestUpStream().put(other2, uvn);
 			neighbor.getDtoSubstrate().getBestUpLink().put(other2, usl);
 		}
+		logger.debug("after construct, sn Dto = {}, neighbor Dto = {}", sn.getDtoSubstrate(), neighbor.getDtoSubstrate());
 	}
 	
 	private void addElement(SubstrateNode other, SubstrateNode sn, SubstrateNode neighbor, 
