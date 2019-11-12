@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.uci.ics.jung.graph.util.EdgeType;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.BandwidthDemand;
@@ -265,5 +268,13 @@ public class Utils {
 				network.addEdge(network.getEdgeFactory().create(), n, node);
 			}
 		}
+	}
+	
+	public static Map<Long, Integer> getMapsubstratenode() {
+		return mapSubstrateNode;
+	}
+	
+	public static Map<Long, Integer> getMapvirtualnode() {
+		return mapVirtualNode;
 	}
 }

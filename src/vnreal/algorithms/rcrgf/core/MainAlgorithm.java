@@ -36,9 +36,12 @@ public class MainAlgorithm {
 	}
 	
 	public boolean work() {
+		logger.debug("About mapping relation, substrate node mapping = {}, virtual node mapping = {}", Utils.getMapsubstratenode(),
+				Utils.getMapvirtualnode());
 		Set<VirtualLink> MSE = new HashSet<>(); // 待映射的点
 		Set<VirtualNode> HMS = new HashSet<>(); // 已经映射的点
 		Set<SubstrateNode> outter = new HashSet<>();
+		logger.info("we start to complete whole process");
 		while (HMS.size() < virtualNetwork.getVertexCount()) { 
 //			System.out.println("Retry");
 			int sz = HMS.size();
@@ -77,6 +80,7 @@ public class MainAlgorithm {
 			MSE.addAll(virtualNetwork.getOutEdges(root));
 			HMS.add(root);
 			logger.debug("init case: MSE add the neighbors = {} of root = {}", virtualNetwork.getOutEdges(root), root);
+			logger.info("we start to finsih virtual network mapping by bfs stragey");
 			while (bfsTravel.hasNext()) {
 //				System.out.println("while loop");
 				Set<VirtualNode> additional = new HashSet<>();
@@ -88,6 +92,7 @@ public class MainAlgorithm {
 				boolean next_round = false;
 				for (VirtualLink vl : MSE) {
 //					System.out.println("mse loop");
+					logger.info("we start to finish a virtual node mapping");
 					VirtualNode s = virtualNetwork.getEndpoints(vl).getFirst();
 					VirtualNode t = virtualNetwork.getEndpoints(vl).getSecond();
 					VirtualNode actual = s;
@@ -98,7 +103,7 @@ public class MainAlgorithm {
 						actual = t;
 					}
 					List<SubstrateNode> ls = HMBT.get(s_s); // t肯定被映射了
-					logger.debug("for vl = {}, we use the unmapped substrate node = {} to get the candidate set = {}", vl, s_s, ls);
+					logger.debug("for vl = {}, we use the mapped susbtrate node = {} to get the candidate set = {}", vl, s_s, ls);
 					// 这样就找到了可到达被映射的点其余点集合
 					if (ls == null) {
 						// 找不到可达到的点
@@ -119,6 +124,7 @@ public class MainAlgorithm {
 						// 找到路径
 						List<SubstrateLink> links = Utils.findPath(mappedSubstrateNode, s_s);
 						logger.debug("find the mappedSubstrateNode = {}, and corresponding path = {}", mappedSubstrateNode, links);
+						logger.info("we select one substrate to map. then we start to occupy corresponding link and node resource");
 						// 链路映射, 链路信息不准确
 						if (!Utils.vlm(vl, links)) {
 							next_round = true;
@@ -135,7 +141,7 @@ public class MainAlgorithm {
 							linkMapping.put(vl, links); // 完成链路映射
 							logger.debug("finish a round mapping, the node mapping = {}, the link mapping = {}. outter = {}", 
 									nodeMapping, linkMapping, outter);
-							logger.debug("update context");
+							logger.info("update context");
 							update(links, bfsTravel, s_s); // 切换上游
 						}
 					}
@@ -150,7 +156,7 @@ public class MainAlgorithm {
 				logger.debug("MSE change to {} by the addtitional = {} and attachLink = {}", MSE, additional, attachLink);
 				if (MSE.isEmpty()) {
 					print();
-					logger.debug("Program exit normally");
+					logger.info("Program exit normally");
 					// 完成映射
 					return true;
 				}
@@ -161,7 +167,7 @@ public class MainAlgorithm {
 					return false;
 				}
 				if (next_round) {
-					logger.debug("link mapping is not successful, continue to next try");
+					logger.info("link mapping is not successful, continue to next try");
 					break;
 				}
 			}
@@ -184,7 +190,7 @@ public class MainAlgorithm {
 				logger.debug("process link s1 = {} and its opposite neighbor = {}", sl, s);
 				bfsTravel.construct(t, s, sl);
 			} else {
-				logger.debug("process link s = {} and its opposite neighbor = {}", sl, t);
+				logger.debug("process link sl = {} and its opposite neighbor = {}", sl, t);
 				bfsTravel.construct(s, t, sl);
 			}
 		}

@@ -60,6 +60,12 @@ public class BFSTravel {
 		return temp;
 	}
 	
+	/**
+	 * 由sn来构造neighbor, 完成neighbor的EBTL的构建
+	 * @param sn 出发点
+	 * @param neighbor 目标点
+	 * @param sl 两点的链路
+	 */
 	public void construct(SubstrateNode sn, SubstrateNode neighbor, SubstrateLink sl) {
 		logger.debug("before construct, sn Dto = {}, neighbor Dto = {}", sn.getDtoSubstrate(), neighbor.getDtoSubstrate());
 		// 初始化BTL
