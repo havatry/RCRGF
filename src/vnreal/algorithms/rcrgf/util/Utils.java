@@ -28,7 +28,7 @@ import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 public class Utils {
-	private static final double esp = 1e-3;
+	private static final double esp = 1e-5;
 	private static final Map<Long, Integer> mapVirtualNode = new HashMap<Long, Integer>();
 	private static final Map<Long, Integer> mapSubstrateNode = new HashMap<>();
 	

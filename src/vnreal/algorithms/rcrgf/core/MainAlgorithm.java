@@ -3,6 +3,7 @@ package vnreal.algorithms.rcrgf.core;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class MainAlgorithm {
 	public boolean work() {
 		logger.debug("About mapping relation, substrate node mapping = {}, virtual node mapping = {}", Utils.getMapsubstratenode(),
 				Utils.getMapvirtualnode());
-		Set<VirtualLink> MSE = new HashSet<>(); // 待映射的点
+		Set<VirtualLink> MSE = Constants.MSE_ORDERED ? new LinkedHashSet<>() : new HashSet<>(); // 待映射的点
 		Set<VirtualNode> HMS = new HashSet<>(); // 已经映射的点
 		Set<SubstrateNode> outter = new HashSet<>();
 		logger.info("we start to complete whole process");
@@ -85,7 +86,7 @@ public class MainAlgorithm {
 //				System.out.println("while loop");
 				Set<VirtualNode> additional = new HashSet<>();
 				Set<VirtualLink> attachLink = new HashSet<>();
-				logger.debug("bfs travel");
+				logger.info("bfs travel");
 				bfsTravel.next(hasMappedSubstrateNode, outter); // layer data,
 				outter.clear();
 				Map<SubstrateNode, List<SubstrateNode>> HMBT = bfsTravel.getHMBTL();

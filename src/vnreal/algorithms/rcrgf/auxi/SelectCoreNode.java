@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.Node;
@@ -14,7 +15,7 @@ import vnreal.network.Node;
  * 2019年10月24日 下午8:46:57
  */
 public class SelectCoreNode {
-	private static double alpha = 1.0;
+	private static double alpha = Constants.ALPHA;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Deprecated

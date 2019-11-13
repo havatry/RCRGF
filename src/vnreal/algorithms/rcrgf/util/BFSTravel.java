@@ -51,7 +51,7 @@ public class BFSTravel {
 				if (visitedNodes.contains(neighbor)) {
 					continue; // 已经访问过了
 				} else {
-					logger.debug("process link s1 = {} and its opposite substrate node = {}", sl, sn);
+					logger.debug("process link s1 = {} and its opposite substrate node = {}", sl, neighbor);
 					construct(sn, neighbor, sl);
 					temp.add(neighbor); // 更正
 				}

@@ -19,4 +19,6 @@ public class Constants {
 	public static String WRITE_RESOURCE = "./results/resources5/";
 	public static PrintWriter out;
 	public static boolean PRINT = false;
+	public static double ALPHA = 10000; // 以边为主
+	public static boolean MSE_ORDERED = true; // MSE是有序的集合
 }
