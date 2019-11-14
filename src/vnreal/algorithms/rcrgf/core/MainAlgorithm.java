@@ -34,6 +34,7 @@ public class MainAlgorithm {
 		//Created constructor stubs
 		this.substrateNetwork = substrateNetwork;
 		this.virtualNetwork = virtualNetwork;
+		logger.debug("substrateNetwork = {} and virtualNetwork = {}", substrateNetwork, virtualNetwork);
 	}
 	
 	public boolean work() {
@@ -88,7 +89,7 @@ public class MainAlgorithm {
 				Set<VirtualLink> attachLink = new HashSet<>();
 				logger.info("bfs travel");
 				bfsTravel.next(hasMappedSubstrateNode, outter); // layer data,
-				outter.clear();
+				outter.clear(); // FIX
 				Map<SubstrateNode, List<SubstrateNode>> HMBT = bfsTravel.getHMBTL();
 				boolean next_round = false;
 				for (VirtualLink vl : MSE) {
@@ -109,7 +110,7 @@ public class MainAlgorithm {
 					if (ls == null) {
 						// 找不到可达到的点
 //						System.out.println("To Think");
-						logger.error("candidate set is empty");
+						logger.error("candidate set is empty"); // 这是因为outter被清空了 以至于HMBT也是空
 						return false;
 					}
 					// 过滤集合

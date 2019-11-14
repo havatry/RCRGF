@@ -41,13 +41,15 @@ public class Process {
 		double vration_step = Double.parseDouble(vrationInfo[1]);
 		double vration_max = Double.parseDouble(vrationInfo[2]);
 		double ration = Double.parseDouble(properties.getProperty("ration"));
-		double alpha = Double.parseDouble(properties.getProperty("alpha"));
+		double valpha = Double.parseDouble(properties.getProperty("valpha"));
+		double salpha = Double.parseDouble(properties.getProperty("salpha"));
 		String ksp = properties.getProperty("ksp", "1");
 		
 		if (properties.getProperty("action").contains("produce")) {
 			GenerateTopology generateTopology = new GenerateTopology();
-			generateTopology.setAlhpa(alpha);
+			generateTopology.setValpha(valpha);
 			generateTopology.setRation(ration);
+			generateTopology.setSalpha(salpha);
 			for (int snodes = snodes_min; snodes <= snodes_max; snodes += snodes_step) {
 				for (double vration = vration_min; vration < vration_max; vration += vration_step) {
 					int vnodes = (int)Math.round(vration * snodes);

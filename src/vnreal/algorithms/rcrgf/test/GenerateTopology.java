@@ -25,7 +25,8 @@ public class GenerateTopology {
 	private int vnodes = 3; // 3 5 7 9 11 13 15 17 19 21
 	private final int virtualNetworks = 1;
 	private double ration = 0.01;
-	private double alhpa = 0.1;
+	private double valpha = 0.1;
+	private double salpha = 0.5;
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
@@ -47,7 +48,7 @@ public class GenerateTopology {
 	private double[] virtualAlphaArray() {
 		double[] arrray = new double[virtualNetworks];
 		for (int i = 0; i < virtualNetworks; i++) {
-			arrray[i] = alhpa;
+			arrray[i] = valpha;
 		}
 		return arrray;
 	}
@@ -63,7 +64,7 @@ public class GenerateTopology {
 	public void generateTopology(String filename, String logname) throws FileNotFoundException, IOException {
 		NetworkStack networkStack = null;
 		while (true) {
-			networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
+			networkStack = ScenarioWizard.generateTopology(snodes, salpha, 0.5, virtualNetworks, virtualNodesArray(),
 					virtualAlphaArray(), virtualBetaArray());
 			if (Utils.complete((VirtualNode)networkStack.getLayer(1).getVertices().iterator().next(), 
 					(VirtualNetwork)networkStack.getLayer(1))) {
@@ -108,7 +109,8 @@ public class GenerateTopology {
 	@Override
 	public String toString() {
 		return "GenerateTopology [snodes=" + snodes + ", vnodes=" + vnodes + ", virtualNetworks="
-				+ virtualNetworks + ", ration=" + String.format("%.2f", ration) + ", alhpa=" + String.format("%.1f", alhpa)
+				+ virtualNetworks + ", ration=" + String.format("%.2f", ration) + ", salpha = " + String.format("%.1f", salpha) +
+				"valpha= " + String.format("%.1f", valpha)
 				+ ", cpu_resource=" + cpu_resource
 				+ ", bandwith_resource=" + bandwith_resource + "]";
 	}
@@ -126,8 +128,12 @@ public class GenerateTopology {
 		this.vnodes = vnodes;
 	}
 	
-	public void setAlhpa(double alhpa) {
-		this.alhpa = alhpa;
+	public void setValpha(double valpha) {
+		this.valpha = valpha;
+	}
+	
+	public void setSalpha(double salpha) {
+		this.salpha = salpha;
 	}
 	
 	public void setRation(double ration) {

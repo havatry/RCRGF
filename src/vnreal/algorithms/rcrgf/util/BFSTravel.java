@@ -67,7 +67,7 @@ public class BFSTravel {
 	 * @param sl 两点的链路
 	 */
 	public void construct(SubstrateNode sn, SubstrateNode neighbor, SubstrateLink sl) {
-		logger.debug("before construct, sn Dto = {}, neighbor Dto = {}", sn.getDtoSubstrate(), neighbor.getDtoSubstrate());
+		logger.debug("before construct, sn = {} -> Dto = {}, neighbor = {} -> Dto = {}", sn, sn.getDtoSubstrate(), neighbor, neighbor.getDtoSubstrate());
 		// 初始化BTL
 		Utils.processBTL(neighbor, substrateNetwork.getVertexCount());
 		// 继承上游的EBTL
