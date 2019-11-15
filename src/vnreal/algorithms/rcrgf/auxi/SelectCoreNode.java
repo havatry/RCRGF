@@ -49,6 +49,7 @@ public class SelectCoreNode {
 			double current = Utils.getReferencedResource(node, network, alpha);
 			if (current > max) {
 				ret = node;
+				max = current;
 			}
 		}
 		return ret;

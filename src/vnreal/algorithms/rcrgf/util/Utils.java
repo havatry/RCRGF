@@ -82,7 +82,10 @@ public class Utils {
 		double bandwith_total = 0.0;
 		for (Object l : network.getOutEdges(node)) {
 			Link<?> link = (Link<?>)l;
-			bandwith_total += alpha * getBandwith(link);
+			Node<?> opp = opposite(link, node, network);
+			if (network instanceof VirtualNetwork || equal(((CpuResource)opp.get().get(0)).getOccupiedCycles(), 0.0)) { // 底层网络节点没有被映射
+				bandwith_total += alpha * getBandwith(link);
+			}
 		}
 		double v1 = getCpu(node) + bandwith_total;
 		return v1;

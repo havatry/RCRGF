@@ -1,6 +1,5 @@
 package vnreal.algorithms.rcrgf.util;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,7 +97,7 @@ public class BFSTravel {
 			neighbor.getDtoSubstrate().getBestUpStream().put(other2, uvn);
 			neighbor.getDtoSubstrate().getBestUpLink().put(other2, usl);
 		}
-		logger.debug("after construct, sn Dto = {}, neighbor Dto = {}", sn.getDtoSubstrate(), neighbor.getDtoSubstrate());
+		logger.debug("after construct, sn = {} -> Dto = {}, neighbor = {} -> Dto = {}", sn, sn.getDtoSubstrate(), neighbor, neighbor.getDtoSubstrate());
 	}
 	
 	private void addElement(SubstrateNode other, SubstrateNode sn, SubstrateNode neighbor, 

@@ -110,7 +110,7 @@ public class GenerateTopology {
 	public String toString() {
 		return "GenerateTopology [snodes=" + snodes + ", vnodes=" + vnodes + ", virtualNetworks="
 				+ virtualNetworks + ", ration=" + String.format("%.2f", ration) + ", salpha = " + String.format("%.1f", salpha) +
-				"valpha= " + String.format("%.1f", valpha)
+				", valpha= " + String.format("%.1f", valpha)
 				+ ", cpu_resource=" + cpu_resource
 				+ ", bandwith_resource=" + bandwith_resource + "]";
 	}
