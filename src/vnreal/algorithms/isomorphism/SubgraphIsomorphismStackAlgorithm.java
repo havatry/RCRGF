@@ -41,9 +41,6 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
-import vnreal.algorithms.rcrgf.config.Constants;
-import vnreal.algorithms.rcrgf.util.Statistics;
-import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
@@ -67,7 +64,7 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	private Iterator<VirtualNetwork> curIt = null;
 	private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
-	private Statistics statistics = new Statistics();
+//	private Statistics statistics = new Statistics();
 	
 	public SubgraphIsomorphismStackAlgorithm(AlgorithmParameter params) {
 		if (params.getBoolean("Advanced", true)) {
@@ -116,36 +113,36 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	protected void evaluate() {
 		boolean result = false;
 		// Mapping previousResult = new Mapping();
-		statistics.setStartTime(System.currentTimeMillis());
+//		statistics.setStartTime(System.currentTimeMillis());
 		while (hasNext()) {
 			VirtualNetwork vNetwork = getNext();
 			result = algorithm.mapNetwork(ns.getSubstrate(), vNetwork);
-			statistics.setRevenToCost(
-					Utils.revenueToCostRation(algorithm.getNodeMapping(), 
-							algorithm.getLinkMapping()));
+//			statistics.setRevenToCost(
+//					Utils.revenueToCostRation(algorithm.getNodeMapping(), 
+//							algorithm.getLinkMapping()));
 		}
 		if (result) {
-			statistics.setSuccVns(1);
+//			statistics.setSuccVns(1);
 		} else {
-			statistics.setSuccVns(0);
+//			statistics.setSuccVns(0);
 		}
-		statistics.setEndTime(System.currentTimeMillis());
+//		statistics.setEndTime(System.currentTimeMillis());
 	}
 
 	@Override
 	protected void postRun() {
-		if (Constants.PRINT) {
-			System.out.println(statistics);
-			return;
-		}
-		try {
-			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
-			out.print(statistics);
-			out.print(",");
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+////		if (Constants.PRINT) {
+////			System.out.println(statistics);
+////			return;
+////		}
+//		try {
+//			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
+//			out.print(statistics);
+//			out.print(",");
+//			out.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override

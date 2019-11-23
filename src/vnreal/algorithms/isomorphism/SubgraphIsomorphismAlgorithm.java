@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.rcrgf.config.Constants;
+import vnreal.algorithms.myrcrgf.strategies.rcrgf.Constants;
 import vnreal.algorithms.singlenetworkmapping.SingleNetworkMappingAlgorithm;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.algorithms.utils.SubgraphBasicVN.ResourceDemandEntry;
@@ -69,9 +69,9 @@ import edu.uci.ics.jung.graph.util.Pair;
  */
 public class SubgraphIsomorphismAlgorithm extends
 		SingleNetworkMappingAlgorithm {
-//	public static final boolean debug = false;
+	public static final boolean debug = false;
 	
-	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // 由变量控制
+//	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // 由变量控制
 
 	private int numberOfTries;
 	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // 节点映射
@@ -400,14 +400,14 @@ public class SubgraphIsomorphismAlgorithm extends
 		numberOfTries = 0;
 		NodeLinkMapping result = vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
 				sNetwork, omega, epsilon);
-		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
-			for (SubstrateNode sn : result.getNodeMappings().keySet()) {
-				nodeMapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
-			}
-			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
-				linkMapping.put(result.getLinkMappings().get(links).iterator().next(), links);
-			}
-		}
+//		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
+//			for (SubstrateNode sn : result.getNodeMappings().keySet()) {
+//				nodeMapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
+//			}
+//			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
+//				linkMapping.put(result.getLinkMappings().get(links).iterator().next(), links);
+//			}
+//		}
 		return result;
 	}
 

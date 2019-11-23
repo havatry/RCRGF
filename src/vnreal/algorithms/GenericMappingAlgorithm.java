@@ -39,9 +39,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
-import vnreal.algorithms.rcrgf.config.Constants;
-import vnreal.algorithms.rcrgf.util.Statistics;
-import vnreal.algorithms.rcrgf.util.Utils;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
@@ -70,7 +67,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
 	protected double startTime, runningTime;
-	private Statistics statistics = new Statistics();
+//	private Statistics statistics = new Statistics();
 
 	/**
 	 * The constructor initializes the variable and introduce to the virtual
@@ -165,18 +162,18 @@ public abstract class GenericMappingAlgorithm extends
 	@Override
 	protected void postRun() {
 //		runningTime = (System.currentTimeMillis() - startTime) / 1000;
-		if (Constants.PRINT) {
-			System.out.println(statistics);
-			return;
-		}
-		try {
-			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
-			out.print(statistics);
-			out.println();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		if (Constants.PRINT) {
+//			System.out.println(statistics);
+//			return;
+//		}
+//		try {
+//			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
+//			out.print(statistics);
+//			out.println();
+//			out.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
@@ -222,35 +219,35 @@ public abstract class GenericMappingAlgorithm extends
 	@Override
 	protected boolean process(VirtualNetwork p) {
 		// Node mapping stage
-		statistics.setStartTime(System.currentTimeMillis());
-		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
-			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
-				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
-					ns.clearVnrMappings(p);
-					processedLinks += p.getEdges().size();
-					statistics.setSuccVns(0);
-					statistics.setEndTime(System.currentTimeMillis());
-					return true;
-				}
-			}
-		} else {
-			ns.clearVnrMappings(p);
-			processedLinks += p.getEdges().size();
-			statistics.setSuccVns(0);
-			statistics.setEndTime(System.currentTimeMillis());
-			return true;
-		}
-		// Link Mapping stage
-		if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
-				.getNodeMapping())) {
-			ns.clearVnrMappings(p);
-		} else {
-			mappedLinks += linkMappingAlgorithm.getMappedLinks();
-		}
-		statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
-		statistics.setSuccVns(1);
-		processedLinks += linkMappingAlgorithm.getProcessedLinks();
-		statistics.setEndTime(System.currentTimeMillis());
+//		statistics.setStartTime(System.currentTimeMillis());
+//		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
+//			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
+//				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
+//					ns.clearVnrMappings(p);
+//					processedLinks += p.getEdges().size();
+//					statistics.setSuccVns(0);
+//					statistics.setEndTime(System.currentTimeMillis());
+//					return true;
+//				}
+//			}
+//		} else {
+//			ns.clearVnrMappings(p);
+//			processedLinks += p.getEdges().size();
+//			statistics.setSuccVns(0);
+//			statistics.setEndTime(System.currentTimeMillis());
+//			return true;
+//		}
+//		// Link Mapping stage
+//		if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
+//				.getNodeMapping())) {
+//			ns.clearVnrMappings(p);
+//		} else {
+//			mappedLinks += linkMappingAlgorithm.getMappedLinks();
+//		}
+//		statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
+//		statistics.setSuccVns(1);
+//		processedLinks += linkMappingAlgorithm.getProcessedLinks();
+//		statistics.setEndTime(System.currentTimeMillis());
 		return true;
 	}
 

@@ -40,7 +40,6 @@ import mulavito.algorithms.shortestpath.ksp.Eppstein;
 import mulavito.algorithms.shortestpath.ksp.KShortestPathAlgorithm;
 import mulavito.algorithms.shortestpath.ksp.Yen;
 import vnreal.algorithms.AbstractLinkMapping;
-import vnreal.algorithms.rcrgf.config.Constants;
 import vnreal.algorithms.utils.LinkWeight;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;
@@ -181,10 +180,10 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 				// FIXME Hidden hops demand will be applied?
 			}
 		}
-		if (Constants.PRINT_LINK_MAPPING_RESULT) {
-			System.out.println();
-			System.out.println(linkMapping); // 打印链路映射的结果
-		}
+//		if (Constants.PRINT_LINK_MAPPING_RESULT) {
+//			System.out.println();
+//			System.out.println(linkMapping); // 打印链路映射的结果
+//		}
 		return true;
 	}
 }
