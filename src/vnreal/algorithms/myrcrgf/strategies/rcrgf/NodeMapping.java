@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+import vnreal.algorithms.AbstractNodeMapping;
 import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.algorithms.myrcrgf.util.Utils;
 import vnreal.network.Node;
@@ -19,18 +20,16 @@ import vnreal.network.virtual.VirtualNode;
  * 完成节点映射
  * 2019年11月23日 下午9:55:02
  */
-public class NodeMapping {
-	private SubstrateNetwork substrateNetwork;
-	private VirtualNetwork virtualNetwork;
-	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>();
+public class NodeMapping extends AbstractNodeMapping{
+	private double distanceConstraint;
 	
-	public NodeMapping(SubstrateNetwork substrateNetwork, VirtualNetwork virtualNetwork) {
+	public NodeMapping(double distanceConstraint, boolean nodesOverload) {
 		//Created constructor stubs
-		this.substrateNetwork = substrateNetwork;
-		this.virtualNetwork = virtualNetwork;
+		super(nodesOverload);
+		this.distanceConstraint = distanceConstraint;
 	}
 	
-	public boolean map() {
+	protected boolean nodeMapping(SubstrateNetwork sNet, VirtualNetwork vNet) {
 		PriorityQueue<VirtualNode> priorityQueueVirtual = new PriorityQueue<>(new Comparator<VirtualNode>() {
 
 			@Override
@@ -61,18 +60,18 @@ public class NodeMapping {
 		});
 		
 		// 1.计算虚拟网络的referenced value, 这些包含在节点中
-		for (VirtualNode vn : virtualNetwork.getVertices()) {
+		for (VirtualNode vn : vNet.getVertices()) {
 			vn.setReferencedValue(computeReferencedValue(vn));
 			priorityQueueVirtual.offer(vn);
 		}
-		for (SubstrateNode sn : substrateNetwork.getVertices()) {
+		for (SubstrateNode sn : sNet.getVertices()) {
 			sn.setReferencedValue(computeReferencedValue(sn));
 			priorityQueueSubstrate.offer(sn);
 		}
 		
 		// 依次查找
 		double distanceConstraint = Double.parseDouble(Constants.PROPERTIES.getProperty("distanceConstraint"));
-		MappingRule mappingRule = new MappingRule(substrateNetwork, virtualNetwork);
+		MappingRule mappingRule = new MappingRule(sNet, vNet);
 		
 		while (!priorityQueueVirtual.isEmpty()) {
 			// 逐个匹配

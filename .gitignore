@@ -1,0 +1,22 @@
+# just add the src folder
+bin/
+.settings/
+bin/
+doc/
+Documentation/
+ILP-LP-Models/
+lib/
+results/
+TestReport/
+tools/
+.classpath
+.project
+add.sh
+AUTHORS
+build.xml
+CHANGELOG
+COPYING
+ExperimentExample.xmltest
+IOMapper.sh
+Params.test
+README
