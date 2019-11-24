@@ -220,33 +220,33 @@ public abstract class GenericMappingAlgorithm extends
 	protected boolean process(VirtualNetwork p) {
 		// Node mapping stage
 //		statistics.setStartTime(System.currentTimeMillis());
-//		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
-//			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
-//				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
-//					ns.clearVnrMappings(p);
-//					processedLinks += p.getEdges().size();
+		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
+			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
+				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
+					ns.clearVnrMappings(p);
+					processedLinks += p.getEdges().size();
 //					statistics.setSuccVns(0);
 //					statistics.setEndTime(System.currentTimeMillis());
-//					return true;
-//				}
-//			}
-//		} else {
-//			ns.clearVnrMappings(p);
-//			processedLinks += p.getEdges().size();
+					return true;
+				}
+			}
+		} else {
+			ns.clearVnrMappings(p);
+			processedLinks += p.getEdges().size();
 //			statistics.setSuccVns(0);
 //			statistics.setEndTime(System.currentTimeMillis());
-//			return true;
-//		}
-//		// Link Mapping stage
-//		if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
-//				.getNodeMapping())) {
-//			ns.clearVnrMappings(p);
-//		} else {
-//			mappedLinks += linkMappingAlgorithm.getMappedLinks();
-//		}
+			return true;
+		}
+		// Link Mapping stage
+		if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
+				.getNodeMapping())) {
+			ns.clearVnrMappings(p);
+		} else {
+			mappedLinks += linkMappingAlgorithm.getMappedLinks();
+		}
 //		statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
 //		statistics.setSuccVns(1);
-//		processedLinks += linkMappingAlgorithm.getProcessedLinks();
+		processedLinks += linkMappingAlgorithm.getProcessedLinks();
 //		statistics.setEndTime(System.currentTimeMillis());
 		return true;
 	}

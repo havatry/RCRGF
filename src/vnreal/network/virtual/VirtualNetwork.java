@@ -36,11 +36,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.myrcrgf.strategies.rcrgf.Constants;
+import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;

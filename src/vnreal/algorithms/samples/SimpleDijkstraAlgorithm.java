@@ -40,7 +40,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import org.apache.commons.collections15.ListUtils;
 
 import vnreal.algorithms.AbstractSequentialAlgorithm;
-import vnreal.algorithms.myrcrgf.strategies.rcrgf.Constants;
+import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Network;
