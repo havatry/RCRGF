@@ -31,9 +31,6 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -66,7 +63,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected int processedLinks, mappedLinks;
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
-	protected double startTime, runningTime;
+//	protected double startTime, runningTime;
 //	private Statistics statistics = new Statistics();
 
 	/**
@@ -181,7 +178,7 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected boolean preRun() {
-		startTime = System.currentTimeMillis();
+//		startTime = System.currentTimeMillis();
 		return true;
 	}
 
@@ -249,9 +246,5 @@ public abstract class GenericMappingAlgorithm extends
 		processedLinks += linkMappingAlgorithm.getProcessedLinks();
 //		statistics.setEndTime(System.currentTimeMillis());
 		return true;
-	}
-
-	public double getRunningTime() {
-		return runningTime;
 	}
 }

@@ -31,7 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms.nodemapping;
 
-import java.util.HashMap;
+
 
 /**
  * This class implements the node mapping based on a greedy algorithm, 
@@ -52,8 +52,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
 import vnreal.algorithms.AbstractNodeMapping;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;
@@ -64,7 +62,6 @@ import vnreal.constraints.resources.CpuResource;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
-import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 

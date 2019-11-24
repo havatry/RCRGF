@@ -41,7 +41,7 @@ package vnreal.algorithms;
  *  
  * -  Minlan Yu, Yung Yi, Jennifer Rexford, and Mung Chiang. Rethinking
  *    virtual network embedding: Substrate support for path splitting and 
- *    migration. ACM SIGCOMM CCR, 38(2):17–29, April 2008.
+ *    migration. ACM SIGCOMM CCR, 38(2):17鈥�29, April 2008.
  *    
  * Note: It is not the main algorithm proposed in the paper, but rather
  * a baseline algorithm with a simple greedy approach.
@@ -97,9 +97,7 @@ public class AvailableResources extends GenericMappingAlgorithm {
 			boolean eppstein = param.getBoolean("eppstein", DEFAULT_EPPSTEIN);
 			this.linkMappingAlgorithm = new kShortestPathLinkMapping(k, eppstein);
 		}
-
 	}
-	
 	
 	@Override
 	public void setStack(NetworkStack stack) {
