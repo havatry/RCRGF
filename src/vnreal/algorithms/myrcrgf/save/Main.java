@@ -1,8 +1,6 @@
 package vnreal.algorithms.myrcrgf.save;
 
 import java.util.Arrays;
-import vnreal.algorithms.myrcrgf.control.TimeManager;
-import vnreal.algorithms.myrcrgf.control.TimeSequence;
 
 public class Main {
 	public static int time; // 仿真实验的时间点

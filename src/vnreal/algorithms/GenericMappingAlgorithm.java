@@ -63,8 +63,6 @@ public abstract class GenericMappingAlgorithm extends
 	protected int processedLinks, mappedLinks;
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
-//	protected double startTime, runningTime;
-//	private Statistics statistics = new Statistics();
 
 	/**
 	 * The constructor initializes the variable and introduce to the virtual
@@ -158,19 +156,6 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected void postRun() {
-//		runningTime = (System.currentTimeMillis() - startTime) / 1000;
-//		if (Constants.PRINT) {
-//			System.out.println(statistics);
-//			return;
-//		}
-//		try {
-//			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
-//			out.print(statistics);
-//			out.println();
-//			out.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -178,7 +163,7 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected boolean preRun() {
-//		startTime = System.currentTimeMillis();
+		// THIS_TODO 将多个非连通图转换为多个虚拟网络
 		return true;
 	}
 
@@ -216,22 +201,17 @@ public abstract class GenericMappingAlgorithm extends
 	@Override
 	protected boolean process(VirtualNetwork p) {
 		// Node mapping stage
-//		statistics.setStartTime(System.currentTimeMillis());
 		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
 			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
 				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
 					ns.clearVnrMappings(p);
 					processedLinks += p.getEdges().size();
-//					statistics.setSuccVns(0);
-//					statistics.setEndTime(System.currentTimeMillis());
 					return true;
 				}
 			}
 		} else {
 			ns.clearVnrMappings(p);
 			processedLinks += p.getEdges().size();
-//			statistics.setSuccVns(0);
-//			statistics.setEndTime(System.currentTimeMillis());
 			return true;
 		}
 		// Link Mapping stage
@@ -241,10 +221,7 @@ public abstract class GenericMappingAlgorithm extends
 		} else {
 			mappedLinks += linkMappingAlgorithm.getMappedLinks();
 		}
-//		statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
-//		statistics.setSuccVns(1);
 		processedLinks += linkMappingAlgorithm.getProcessedLinks();
-//		statistics.setEndTime(System.currentTimeMillis());
 		return true;
 	}
 }
