@@ -1,18 +1,18 @@
 package vnreal.algorithms.myrcrgf.strategies.rcrgf;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import vnreal.algorithms.AbstractNodeMapping;
-import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.algorithms.myrcrgf.util.Utils;
+import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.network.Node;
+import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
@@ -61,16 +61,15 @@ public class NodeMapping extends AbstractNodeMapping{
 		
 		// 1.计算虚拟网络的referenced value, 这些包含在节点中
 		for (VirtualNode vn : vNet.getVertices()) {
-			vn.setReferencedValue(computeReferencedValue(vn));
+			vn.setReferencedValue(computeReferencedValueForVirtual(vNet, vn));
 			priorityQueueVirtual.offer(vn);
 		}
 		for (SubstrateNode sn : sNet.getVertices()) {
-			sn.setReferencedValue(computeReferencedValue(sn));
+			sn.setReferencedValue(computeReferencedValueForSubstrate(sNet, sn));
 			priorityQueueSubstrate.offer(sn);
 		}
 		
 		// 依次查找
-		double distanceConstraint = Double.parseDouble(Constants.PROPERTIES.getProperty("distanceConstraint"));
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
 		
 		while (!priorityQueueVirtual.isEmpty()) {
@@ -91,6 +90,7 @@ public class NodeMapping extends AbstractNodeMapping{
 					}
 					// THIS_TODO 发送资源请求
 					SubstrateNode selected = distanceDiscard.iterator().next();
+					NodeLinkAssignation.vnm(currentVirtualNode, selected);
 					nodeMapping.put(currentVirtualNode, selected);
 					// 删除该节点
 					priorityQueueSubstrate.remove(selected);
@@ -100,9 +100,8 @@ public class NodeMapping extends AbstractNodeMapping{
 				if (mappingRule.rule(currentSubstrateNode, currentVirtualNode)) {
 					// 可以映射上
 					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
-						// 如果两个匹配点小于距离约束, 映射成功
+						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
-						// THIS_TODO 发送请求资源
 						continue; // 下一个计算
 					} else {
 						// 由于距离不满足
@@ -115,16 +114,30 @@ public class NodeMapping extends AbstractNodeMapping{
 		return true;
 	}
 	
-	private double computeReferencedValue(Node<?> node) {
-		return 0.0;
+	private double computeReferencedValueForVirtual(VirtualNetwork vNet, VirtualNode vn) {
+		double result = 0.0;
+		double cpuDemand = Utils.getCpu(vn);
+		
+		for (VirtualLink vl : vNet.getOutEdges(vn)) {
+			result += cpuDemand * Utils.getBandwith(vl);
+		}
+		
+		return result;
+	}
+	
+	private double computeReferencedValueForSubstrate(SubstrateNetwork sNet, SubstrateNode sn) {
+		double result = 0.0;
+		double cpuResource = Utils.getCpu(sn);
+		
+		for (SubstrateLink sl : sNet.getOutEdges(sn)) {
+			result += cpuResource * Utils.getBandwith(sl);
+		}
+		
+		return result;
 	}
 	
 	private double computeDistance(Node<?> o1, Node<?> o2) {
 		return Math.sqrt(Math.pow(o1.getCoordinateX() - o2.getCoordinateX(), 2) 
 				+ Math.pow(o1.getCoordinateY() - o2.getCoordinateY(), 2));
-	}
-	
-	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
-		return nodeMapping; // 获取节点映射
 	}
 }
