@@ -5,7 +5,6 @@ import java.util.List;
 
 import mulavito.algorithms.IAlgorithm;
 import vnreal.algorithms.myrcrgf.util.Utils;
-import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.virtual.VirtualNetwork;
 
 /**
