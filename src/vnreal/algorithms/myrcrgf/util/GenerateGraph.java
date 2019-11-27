@@ -2,18 +2,23 @@ package vnreal.algorithms.myrcrgf.util;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
+import vnreal.constraints.demands.BandwidthDemand;
+import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;
 import vnreal.constraints.resources.CpuResource;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 
 public class GenerateGraph {
@@ -70,8 +75,35 @@ public class GenerateGraph {
 		int minVNodes = Integer.parseInt((String) properties.getOrDefault("minVNodes", "5"));
 		int maxVNodes = Integer.parseInt((String) properties.getOrDefault("maxVNodes", "11"));
 		int vnNodes = minVNodes + (int)(Math.random() * (maxVNodes - minVNodes));
+		while (vnNodes-- > 0) {
+			virtualNetwork.addVertex(new VirtualNode(1));
+		}
 		double vnAlpha = Double.parseDouble((String) properties.getOrDefault("vnAlpha", "1.0"));
 		double vnBeta = Double.parseDouble((String) properties.getOrDefault("vnBeta", "0.5"));
-		return null;
+		WaxmanGraphGenerator<VirtualNode, VirtualLink> vgg =
+				new WaxmanGraphGenerator<VirtualNode, VirtualLink>(vnAlpha, vnBeta, false);
+		vgg.generate(virtualNetwork);
+		// 不需要调整坐标
+		// 接下来生成约束
+		List<Class<?>> resClassesToGenerateVN = new LinkedList<Class<?>>();
+		List<String[]> resParamNamesToGenerateVN = new LinkedList<String[]>();
+		List<String[]> resMaxValuesVN = new LinkedList<String[]>();
+		resClassesToGenerateVN.add(CpuDemand.class);
+		resClassesToGenerateVN.add(BandwidthDemand.class);
+		resParamNamesToGenerateVN.add(new String[] {"demandedCycles"});
+		resParamNamesToGenerateVN.add(new String[] {"demandedBandwith"});
+		String cpu_demand = (String)properties.getOrDefault("cpuDemand", "16");
+		String bandwith_demand = (String) properties.getOrDefault("bandwithDemand", "16");
+		resMaxValuesVN.add(new String[] {cpu_demand}); // 5 - 20
+		resMaxValuesVN.add(new String[] {bandwith_demand}); // 5 - 20
+		NetworkStack networkStack =  new NetworkStack(null, Arrays.asList(virtualNetwork)); // 临时构造
+		// 设置基准资源
+		Constants.SWITCH_BASE_RES_DEM = Boolean.parseBoolean((String) properties.getOrDefault("switch", "true"));
+		Constants.VIRTUAL_BASE_CPU_RESOURCE = Double.parseDouble((String) properties.getOrDefault("substrateBaseCpuResource", "5"));
+        Constants.VIRTUAL_BASE_BANDWITH_RESOURCE = Double.parseDouble((String) properties.getOrDefault("substrateBaseBandwithResource", "5"));
+        ConstraintsGeneratorDialog.generateConstraintsVirtual(Arrays.asList(resClassesToGenerateVN), 
+        		Arrays.asList(resParamNamesToGenerateVN), Arrays.asList(resMaxValuesVN), networkStack);
+        
+		return virtualNetwork;
 	}
 }
