@@ -66,6 +66,7 @@ import mulavito.ui.dialogs.AbstractButtonDialog;
 import mulavito.utils.ClassScanner;
 import mulavito.utils.distributions.UniformStream;
 import vnreal.ExchangeParameter;
+import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.constraints.ILinkConstraint;
 import vnreal.constraints.INodeConstraint;
 import vnreal.constraints.demands.AbstractDemand;
@@ -556,13 +557,31 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 		return null;
 	}
 
-	private static Object getRandomParamValue(Class<?> type, String max) {
+	// 增加NetworkEntity来判断是为链路增加资源还是为节点增加资源 20191124
+	@SuppressWarnings("rawtypes")
+	private static Object getRandomParamValue(NetworkEntity ne, Class<?> type, String max) {
 		if (type.equals(Integer.class)) {
 			return new Integer((int) Math.round(Double.parseDouble(max)
 					* stream.nextDouble()));
 		} else if (type.equals(Double.class)) {
+			double base;
+			if (ne instanceof SubstrateNode) {
+				base = Constants.SUBSTRATE_BASE_CPU_RESOURCE;
+			} else if (ne instanceof SubstrateLink) {
+				base = Constants.SUBSTRATE_BASE_BANDWITH_RESOURCE;
+			} else if (ne instanceof VirtualNode) {
+				base = Constants.VIRTUAL_BASE_CPU_RESOURCE;
+			} else if (ne instanceof VirtualLink) {
+				base = Constants.VIRTUAL_BASE_BANDWITH_RESOURCE;
+			} else {
+				System.err.println("ERROR: Invalid parameter type.");
+				throw new AssertionError();
+			}
+			if (!Constants.SWITCH_BASE_RES_DEM) {
+				base = 0.0;
+			}
 			// round to 3 decimals
-			return Math.rint(Double.parseDouble(max) * stream.nextDouble()
+			return Math.rint((Double.parseDouble(max) * stream.nextDouble() + base)
 					* 1000) / 1000;
 		} else {
 			System.err.println("ERROR: Invalid parameter type.");
@@ -591,8 +610,9 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 				for (int p = 0; p < paramNames.length; p++) {
 					Method setter = getSetterIgnoreCase(resClass, paramNames[p]);
 					Class<?>[] paramType = setter.getParameterTypes();
+					
 					setter.invoke(res,
-							getRandomParamValue(paramType[0], maxValues[p]));
+							getRandomParamValue(ne, paramType[0], maxValues[p]));
 				}
 				if (!ne.add((AbstractResource) res)) {
 					throw new AssertionError("Resource " + res.toString()
@@ -629,7 +649,7 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 					Method setter = getSetterIgnoreCase(demClass, paramNames[p]);
 					Class<?>[] paramType = setter.getParameterTypes();
 					setter.invoke(dem,
-							getRandomParamValue(paramType[0], maxValues[p]));
+							getRandomParamValue(ne, paramType[0], maxValues[p]));
 				}
 				if (!ne.add((AbstractDemand) dem)) {
 					throw new AssertionError("Demand " + dem.toString()
