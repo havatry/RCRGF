@@ -1,7 +1,10 @@
 package vnreal.algorithms.myrcrgf.strategies.rcrgf;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -68,6 +71,10 @@ public class NodeMapping extends AbstractNodeMapping{
 			sn.setReferencedValue(computeReferencedValueForSubstrate(sNet, sn));
 			priorityQueueSubstrate.offer(sn);
 		}
+		// 增加一个额外节点
+		SubstrateNode spec = new SubstrateNode();
+		spec.setReferencedValue(-1);
+		priorityQueueSubstrate.offer(spec);
 		
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
@@ -75,41 +82,39 @@ public class NodeMapping extends AbstractNodeMapping{
 		while (!priorityQueueVirtual.isEmpty()) {
 			// 逐个匹配
 			VirtualNode currentVirtualNode = priorityQueueVirtual.poll();
-			VirtualNode nextVirtualNode = priorityQueueVirtual.peek();
 			Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点
 			
 			while (!priorityQueueSubstrate.isEmpty()) {
 				// 到底层去找
 				SubstrateNode currentSubstrateNode = priorityQueueSubstrate.poll();
-				SubstrateNode nextSubstrateNode = priorityQueueSubstrate.peek();
-				if (Utils.small(nextSubstrateNode.getReferencedValue(), nextVirtualNode.getReferencedValue())) {
-					// 如果下一个底层资源 不能满足下一个的需求了, 保留当前的, 从由于距离因素筛选的候选集中选择一个
+				if (priorityQueueSubstrate.isEmpty() ||
+						Utils.small(currentSubstrateNode.getReferencedValue(), currentVirtualNode.getReferencedValue())) {
+					// 如果底层资源 不能满足需求了, 保留当前的, 从由于距离因素筛选的候选集中选择一个
 					if (distanceDiscard.isEmpty()) {
 						// 如果候选集中没有元素
 						return false;
 					}
-					// THIS_TODO 发送资源请求
-					SubstrateNode selected = distanceDiscard.iterator().next();
+					Iterator<SubstrateNode> iter = distanceDiscard.iterator();
+					SubstrateNode selected =iter.next(); // 选择第一个 TODO 可以考虑选择资源更多的其中一个节点
 					NodeLinkAssignation.vnm(currentVirtualNode, selected);
 					nodeMapping.put(currentVirtualNode, selected);
 					// 删除该节点
-					priorityQueueSubstrate.remove(selected);
-					distanceDiscard.clear();
-					continue; // 下一个计算
+					iter.remove();
+					break; // 下一个计算
 				}
 				if (mappingRule.rule(currentSubstrateNode, currentVirtualNode)) {
 					// 可以映射上
 					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
 						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
-						continue; // 下一个计算
+						break; // 下一个计算
 					} else {
 						// 由于距离不满足
 						distanceDiscard.add(currentSubstrateNode);
 					}
 				}
-				priorityQueueSubstrate.offer(currentSubstrateNode); // 再加入进去
 			}
+			priorityQueueSubstrate.addAll(distanceDiscard);
 		}
 		return true;
 	}

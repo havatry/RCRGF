@@ -7,7 +7,7 @@ import vnreal.algorithms.myrcrgf.strategies.rcrgf.NodeMapping;
 
 public class RCRGF2Algorithm extends GenericMappingAlgorithm{
 	// Default values
-	private static final double DEFAULT_DISTANCE_CONSTRAINT = 100.0;
+	private static final double DEFAULT_DISTANCE_CONSTRAINT = 70.0;
 	private static final boolean DEFAULT_OVERLOAD = false;
 	private static final int DEFAULT_KSP = 1;
 	private static final boolean DEFAULT_EPPSTEIN = false;

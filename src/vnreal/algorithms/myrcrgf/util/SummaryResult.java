@@ -1,5 +1,6 @@
 package vnreal.algorithms.myrcrgf.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,10 +9,19 @@ import java.util.List;
  *
  */
 public class SummaryResult {
+	//-----------// 初始化
 	private List<Long> totalTime; // 程序执行到每个时间点的总时间
 	private List<Double> vnAcceptance; // 每个时间点的请求接受率
 	private List<Double> costToRevenue; // 每个时间点的代价收益比
 	private List<Double> revenueToTime; // 每个时间点收益时间比
+	
+	public SummaryResult() {
+		// TODO Auto-generated constructor stub
+		totalTime = new ArrayList<Long>();
+		vnAcceptance = new ArrayList<Double>();
+		costToRevenue = new ArrayList<Double>();
+		revenueToTime = new ArrayList<Double>();
+	}
 	
 	public void addTotaTime(long executionTime) {
 		totalTime.add(executionTime);
@@ -44,5 +54,11 @@ public class SummaryResult {
 	
 	public List<Double> getVnAcceptance() {
 		return vnAcceptance;
+	}
+
+	@Override
+	public String toString() {
+		return "SummaryResult [totalTime=" + totalTime + ", vnAcceptance=" + vnAcceptance + ", costToRevenue="
+				+ costToRevenue + ", revenueToTime=" + revenueToTime + "]";
 	}
 }

@@ -92,7 +92,8 @@ public class GenerateGraph {
 		resClassesToGenerateVN.add(CpuDemand.class);
 		resClassesToGenerateVN.add(BandwidthDemand.class);
 		resParamNamesToGenerateVN.add(new String[] {"demandedCycles"});
-		resParamNamesToGenerateVN.add(new String[] {"demandedBandwith"});
+		// demandedBandwith -> demandedBandwidth, 否则报错无法找到set方法
+		resParamNamesToGenerateVN.add(new String[] {"demandedBandwidth"});
 		String cpu_demand = (String)properties.getOrDefault("cpuDemand", "16");
 		String bandwith_demand = (String) properties.getOrDefault("bandwithDemand", "16");
 		resMaxValuesVN.add(new String[] {cpu_demand}); // 5 - 20

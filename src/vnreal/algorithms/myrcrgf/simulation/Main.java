@@ -33,7 +33,8 @@ public class Main {
 	private static final int processed = -1; // -1表示该虚拟请求已经释放了或者没有映射成功, 无需释放
 	private List<Integer> startList;
 	private List<Integer> endList;
-	private List<VirtualNetwork> virtualNetworks; // 处理过的虚拟请求
+	//-------------// 初始化
+	private List<VirtualNetwork> virtualNetworks = new ArrayList<VirtualNetwork>(); // 处理过的虚拟请求
 	//-------------// 统计变量
 	private double hasGainRevenue; // 上次为止获取的收益
 	private int hasMappedSuccRequest; // 上次已经完成映射个数
@@ -76,6 +77,8 @@ public class Main {
 					// 需要处理
 					// 生成虚拟拓扑
 					VirtualNetwork virtualNetwork = generateGraph.generateVNet();
+					//-----------// 添加虚拟网络否则npe
+					virtualNetworks.add(virtualNetwork);
 					// 调用算法去处理
 					algorithm.setStack(new NetworkStack(substrateNetwork, Arrays.asList(virtualNetwork)));
 					algorithm.performEvaluation();
@@ -84,9 +87,12 @@ public class Main {
 					// 第一项是映射成功率 第二项是执行时间 第三项是收益
 					if (status.get(0).getRatio() == 100) {
 						hasMappedSuccRequest++;
+						hasGainRevenue += (Double)status.get(2).getValue();
+					} else {
+						// 撤销
+						startList.set(i, processed);
 					}
 					hasExecuteTime += (Long)status.get(1).getValue();
-					hasGainRevenue += (Double)status.get(2).getValue();
 				} else {
 					break; // next time
 				}

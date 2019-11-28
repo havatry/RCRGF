@@ -41,7 +41,7 @@ import vnreal.network.Node;
  * @author Vlad Singeorzan
  */
 public class SubstrateNode extends Node<AbstractResource> {
-	private Double referencedValue;
+	private double referencedValue;
 	
 	public SubstrateNode() {
 		super(0);
@@ -71,11 +71,11 @@ public class SubstrateNode extends Node<AbstractResource> {
 		return "SN(" + getId() + ")";
 	}
 	
-	public void setReferencedValue(Double referencedValue) {
+	public void setReferencedValue(double referencedValue) {
 		this.referencedValue = referencedValue;
 	}
 	
-	public Double getReferencedValue() {
+	public double getReferencedValue() {
 		return referencedValue;
 	}
 }
