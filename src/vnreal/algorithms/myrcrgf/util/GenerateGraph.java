@@ -60,7 +60,8 @@ public class GenerateGraph {
         String bandwith_resource = (String) properties.getOrDefault("bandwithResource", "51");
         resMaxValues.add(new String[]{cpu_resource});
         resMaxValues.add(new String[]{bandwith_resource});
-        NetworkStack networkStack = new NetworkStack(substrateNetwork, null); // 临时构造
+        // virtual network must not be null
+        NetworkStack networkStack = new NetworkStack(substrateNetwork, new ArrayList<VirtualNetwork>()); // 临时构造
         // 设置基准资源
         Constants.SWITCH_BASE_RES_DEM = Boolean.parseBoolean((String) properties.getOrDefault("switch", "true"));
         Constants.SUBSTRATE_BASE_CPU_RESOURCE = Double.parseDouble((String) properties.getOrDefault("substrateBaseCpuResource", "50"));

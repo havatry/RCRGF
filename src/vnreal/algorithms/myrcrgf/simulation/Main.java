@@ -1,10 +1,23 @@
 package vnreal.algorithms.myrcrgf.simulation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
-import mulavito.algorithms.IAlgorithm;
+import mulavito.algorithms.AbstractAlgorithmStatus;
+import vnreal.algorithms.AbstractAlgorithm;
+import vnreal.algorithms.AlgorithmParameter;
+import vnreal.algorithms.myrcrgf.strategies.RCRGF2Algorithm;
+import vnreal.algorithms.myrcrgf.util.GenerateGraph;
+import vnreal.algorithms.myrcrgf.util.SummaryResult;
 import vnreal.algorithms.myrcrgf.util.Utils;
+import vnreal.constraints.resources.BandwidthResource;
+import vnreal.constraints.resources.CpuResource;
+import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
+import vnreal.network.substrate.SubstrateNetwork;
+import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualNetwork;
 
 /**
@@ -21,11 +34,17 @@ public class Main {
 	private List<Integer> startList;
 	private List<Integer> endList;
 	private List<VirtualNetwork> virtualNetworks; // 处理过的虚拟请求
+	//-------------// 统计变量
+	private double hasGainRevenue; // 上次为止获取的收益
+	private int hasMappedSuccRequest; // 上次已经完成映射个数
+	private long hasExecuteTime; // 上次算法已经计算时间
+	private SummaryResult summaryResult = new SummaryResult();
 	
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.init();
-		
+		main.process(new RCRGF2Algorithm(initParam()), initProperty());
+		System.out.println(main.summaryResult);
 	}
 	
 	// 生成虚拟请求的到达时间和停留时间
@@ -43,7 +62,9 @@ public class Main {
 		endList.remove(endList.size() - 1);
 	}
 	
-	private void process(IAlgorithm algorithm) {
+	private void process(AbstractAlgorithm algorithm, Properties properties) {
+		GenerateGraph generateGraph = new GenerateGraph(properties);
+		SubstrateNetwork substrateNetwork = generateGraph.generateSNet();
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
 		for (int time = interval; time <= end; time += interval) {
@@ -53,8 +74,39 @@ public class Main {
 			for (int i = inter; i < startList.size(); i++) {
 				if (startList.get(i) <= time) {
 					// 需要处理
-					// 调用Main函数
+					// 生成虚拟拓扑
+					VirtualNetwork virtualNetwork = generateGraph.generateVNet();
+					// 调用算法去处理
+					algorithm.setStack(new NetworkStack(substrateNetwork, Arrays.asList(virtualNetwork)));
+					algorithm.performEvaluation();
+					// 获取信息
+					List<AbstractAlgorithmStatus> status = algorithm.getStati();
+					// 第一项是映射成功率 第二项是执行时间 第三项是收益
+					if (status.get(0).getRatio() == 100) {
+						hasMappedSuccRequest++;
+					}
+					hasExecuteTime += (Long)status.get(1).getValue();
+					hasGainRevenue += (Double)status.get(2).getValue();
+				} else {
+					break; // next time
 				}
+				inter++;
+				//-----------------------// 统计
+				summaryResult.addRevenueToTime(hasGainRevenue / (inter * interval));
+				summaryResult.addTotaTime(hasExecuteTime);
+				summaryResult.addVnAcceptance((double)hasMappedSuccRequest / inter);
+				// 获取底层网络代价
+				double nodeOcc = 0.0, linkOcc = 0.0;
+				for (SubstrateNode sn : substrateNetwork.getVertices()) {
+					// 占用的资源
+					nodeOcc += ((CpuResource)sn.get().get(0)).getOccupiedCycles();
+				}
+				for (SubstrateLink sl : substrateNetwork.getEdges()) {
+					// 占用的带宽
+					linkOcc += ((BandwidthResource)sl.get().get(0)).getOccupiedBandwidth();
+				}
+				double cost = nodeOcc  + linkOcc;
+				summaryResult.addCostToRevenue(hasGainRevenue / cost);
 			}
 		}
 	}
@@ -75,6 +127,18 @@ public class Main {
 				startList.set(i, processed);
 			}
 		}
+	}
+	
+	private static AlgorithmParameter initParam() {
+		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
+		//-----------//
+		return algorithmParameter;
+	}
+	
+	private static Properties initProperty() {
+		Properties properties = new Properties();
+		//---------//
+		return properties;
 	}
 	
 //	private SubstrateNetwork produceSNet() {

@@ -10,6 +10,7 @@ import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 
 public class Utils {
 	private static final double esp = 1e-5;
@@ -18,13 +19,13 @@ public class Utils {
 		if (l instanceof VirtualLink) {
 			return ((BandwidthDemand)l.get().get(0)).getDemandedBandwidth();
 		} else {
-			return ((BandwidthResource)l.get().get(0)).getBandwidth() - ((BandwidthResource)l.get().get(0)).getOccupiedBandwidth();
+			return ((BandwidthResource)l.get().get(0)).getAvailableBandwidth();
 		}
 	}
 	
 	public static double getCpu(Node<?> n) {
 		if (n instanceof SubstrateNode) {
-			return ((CpuResource)n.get().get(0)).getCycles() - ((CpuResource)n.get().get(0)).getOccupiedCycles();
+			return ((CpuResource)n.get().get(0)).getAvailableCycles();
 		} else {
 			return ((CpuDemand)n.get().get(0)).getDemandedCycles();
 		}
@@ -48,12 +49,6 @@ public class Utils {
 	
 	public static boolean smallEqual(double a, double b) {
 		return !great(a, b);
-	}
-	
-	@SuppressWarnings("rawtypes")
-	public static double getReferencedResource(Node node, Network network, double alpha) {
-		// THIS_TODO 按照需求改写
-		return 0.0;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -80,29 +75,6 @@ public class Utils {
 			}
 		}
 	}
-	
-	
-	// 泊松分布，指示每隔请求的到达时间
-//	public static int poissonDistribution(double lambda) {
-//		int x = 0;
-//		double y = Math.random();
-//		double cdf = pPDF(x, lambda);
-//		while (Utils.smallEqual(cdf, y)) {
-//			x++;
-//			cdf += pPDF(x, lambda); // 离散的叠加就行
-//		}
-//		return x;
-//	}
-	
-//	// 在x处的pdf概率
-//	private static double pPDF(int x, double lambda) {
-//		double suf = Math.exp(-lambda);
-//		double pref = 1.0;
-//		for (int i = 1; i <= x; i++) {
-//			pref *= lambda / i;
-//		}
-//		return pref * suf;
-//	}
 	
 	// 如果随机变量的cdf是F(x), u服从01均匀分布, 那么F-1(u)服从F分布, F-1为F的逆函数
 	// 指数分布，指示每个虚拟请求的停留时间

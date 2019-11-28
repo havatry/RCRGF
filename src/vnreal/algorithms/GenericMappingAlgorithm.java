@@ -36,12 +36,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
+import sun.util.logging.resources.logging;
+import vnreal.algorithms.myrcrgf.util.Utils;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 
 /**
  * This class integrates the node mapping and link mapping stages in an
@@ -61,6 +64,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected Iterator<? extends Network<?, ?, ?>> curNetIt;
 	protected Iterator<VirtualNetwork> curIt;
 	protected int processedLinks, mappedLinks;
+	private long executionTime;
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
 
@@ -110,24 +114,25 @@ public abstract class GenericMappingAlgorithm extends
 	public List<AbstractAlgorithmStatus> getStati() {
 		LinkedList<AbstractAlgorithmStatus> stati = new LinkedList<AbstractAlgorithmStatus>();
 
-		stati.add(new AbstractAlgorithmStatus("Processed VN links") {
-			private int max = -1;
-
-			@Override
-			public Integer getValue() {
-				return processedLinks;
-			}
-
-			@Override
-			public Integer getMaximum() {
-				if (max == -1) {
-					max = 0;
-					for (VirtualNetwork n : ns.getVirtuals())
-						max += n.getEdgeCount();
-				}
-				return max;
-			}
-		});
+//		stati.add(new AbstractAlgorithmStatus("Processed VN links") {
+//			private int max = -1;
+//
+//			@Override
+//			public Integer getValue() {
+//				return processedLinks;
+//			}
+//
+//			@Override
+//			public Integer getMaximum() {
+//				if (max == -1) {
+//					max = 0;
+//					for (VirtualNetwork n : ns.getVirtuals())
+//						max += n.getEdgeCount();
+//				}
+//				return max;
+//			}
+//		});
+		// 虚拟网络中成功完成映射个数, 间接计算出是否映射成功
 		stati.add(new AbstractAlgorithmStatus("Mapped VN links") {
 			private int max = -1;
 
@@ -144,6 +149,44 @@ public abstract class GenericMappingAlgorithm extends
 						max += n.getEdgeCount();
 				}
 				return max;
+			}
+		});
+		// 计算算法执行时间
+		stati.add(new AbstractAlgorithmStatus("Execution Time") {
+			
+			@Override
+			public Long getValue() {
+				// TODO Auto-generated method stub
+				return executionTime;
+			}
+			
+			@Override
+			public Long getMaximum() {
+				// TODO Auto-generated method stub
+				return 1L;
+			}
+		});
+		// 计算收益
+		stati.add(new AbstractAlgorithmStatus("Revenue") {
+			
+			@Override
+			public Double getValue() {
+				// TODO Auto-generated method stub
+				// 节点收益
+				double nodeRevenue = 0.0, linkRevenue = 0.0;
+				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
+					nodeRevenue += Utils.getCpu(vn);
+				}
+				for (VirtualLink vl : ns.getVirtuals().get(0).getEdges()) {
+					linkRevenue += Utils.getBandwith(vl);
+				}
+				return nodeRevenue + linkRevenue;
+			}
+			
+			@Override
+			public Double getMaximum() {
+				// TODO Auto-generated method stub
+				return 1.0;
 			}
 		});
 
@@ -200,6 +243,7 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected boolean process(VirtualNetwork p) {
+		long start = System.currentTimeMillis();
 		// Node mapping stage
 		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
 			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
@@ -222,6 +266,7 @@ public abstract class GenericMappingAlgorithm extends
 			mappedLinks += linkMappingAlgorithm.getMappedLinks();
 		}
 		processedLinks += linkMappingAlgorithm.getProcessedLinks();
+		executionTime = System.currentTimeMillis() - start;
 		return true;
 	}
 }
