@@ -149,6 +149,7 @@ public class Main {
 	
 	private static AlgorithmParameter initParam() {
 		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
+		algorithmParameter.put("linkMapAlgorithm", "bfs");
 		//-----------//
 		return algorithmParameter;
 	}
@@ -163,8 +164,4 @@ public class Main {
 		//---------//
 		return properties;
 	}
-	
-//	private SubstrateNetwork produceSNet() {
-//		
-//	}
 }
