@@ -1,7 +1,7 @@
 ## alevin2
 
 1. summaryResult的输出结果不显示, 在测试用例中已经可以调出结果 Finish
-2. summaryResult中的数据不符合预期, 使用小规模网络进行测试 Process
+2. summaryResult中的数据不符合预期, 使用小规模网络进行测试 Finish
 	I) 为什么多次映射不会累计资源 -> 这是因为对于一个对象 其状态变量curNetIt没有重置所致使的
 	II) 为什么影视不成功 还在占用资源呢 -> 这和上面是一个原因，需要重置processedLinks和mappedLinks两个变量，因为mappedLinks这个变量受到前面没有映射成功的虚拟网络影响，这样mappedLinks这个变量会比processedLinks要小，从整体上来看
 	III) 断言出错 图中没有找到起点和终点 -> 这是因为在节点映射的时候没有加入因为规则不满足的节点(筛选后未加入)

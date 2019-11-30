@@ -76,7 +76,6 @@ public class NodeMapping extends AbstractNodeMapping{
 		
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
-		int count = 0;
 		Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点
 		Set<SubstrateNode> ruleDiscard = new HashSet<SubstrateNode>(); // 由于规则因素筛选出的节点
 		while (!priorityQueueVirtual.isEmpty()) {
@@ -99,7 +98,6 @@ public class NodeMapping extends AbstractNodeMapping{
 					SubstrateNode selected =iter.next(); // 选择第一个 TODO 可以考虑选择资源更多的其中一个节点
 					NodeLinkAssignation.vnm(currentVirtualNode, selected);
 					nodeMapping.put(currentVirtualNode, selected);
-					count++;
 					// 删除该节点
 					iter.remove();
 					break; // 下一个计算
@@ -109,7 +107,6 @@ public class NodeMapping extends AbstractNodeMapping{
 					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
 						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
-						count++;
 						break; // 下一个计算
 					} else {
 						// 由于距离不满足
