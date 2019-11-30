@@ -1,6 +1,7 @@
 package vnreal.algorithms.myrcrgf.strategies.rcrgf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,8 +10,11 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 import vnreal.algorithms.AbstractNodeMapping;
+import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.algorithms.myrcrgf.util.Utils;
 import vnreal.algorithms.utils.NodeLinkAssignation;
+import vnreal.io.XMLExporter;
+import vnreal.network.NetworkStack;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
@@ -119,9 +123,11 @@ public class NodeMapping extends AbstractNodeMapping{
 			}
 			priorityQueueSubstrate.addAll(distanceDiscard);
 		}
-//		if (count != vNet.getVertexCount()) {
-//			System.out.println("node mapping has unmapped node");
-//		}
+		if (count != vNet.getVertexCount()) {
+			System.out.println("node mapping has unmapped node");
+			NetworkStack networkStack = new NetworkStack(sNet, Arrays.asList(vNet));
+			XMLExporter.exportStack(Constants.FILE_NAME, networkStack);
+		}
 		return true;
 	}
 	

@@ -70,7 +70,8 @@ public class Main {
 		GenerateGraph generateGraph = new GenerateGraph(properties);
 //		SubstrateNetwork substrateNetwork = generateGraph.generateSNet();
 		// 固定从文件中读取
-		SubstrateNetwork substrateNetwork = FileHelper.readFromXml("results/file/substratework_20191130135939.xml");
+		NetworkStack networkStack = FileHelper.readFromXml("results/file/substratework_20191130170139.xml");
+		SubstrateNetwork substrateNetwork = networkStack.getSubstrate();
 //		FileHelper.writeToXml(Constants.FILE_NAME, new NetworkStack(substrateNetwork, null));
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
@@ -82,10 +83,10 @@ public class Main {
 				if (startList.get(i) <= time) {
 					// 需要处理
 					// 生成虚拟拓扑
-					VirtualNetwork virtualNetwork;
-					do {
-						virtualNetwork= generateGraph.generateVNet();
-					} while (!Utils.isConnected(virtualNetwork));
+					VirtualNetwork virtualNetwork = networkStack.getVirtuals().get(0);
+//					do {
+//						virtualNetwork= generateGraph.generateVNet();
+//					} while (!Utils.isConnected(virtualNetwork));
 					//-----------// 添加虚拟网络否则npe
 					virtualNetworks.add(virtualNetwork);
 					// 调用算法去处理

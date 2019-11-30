@@ -3,7 +3,6 @@ package vnreal.algorithms.myrcrgf.util;
 import vnreal.io.XMLExporter;
 import vnreal.io.XMLImporter;
 import vnreal.network.NetworkStack;
-import vnreal.network.substrate.SubstrateNetwork;
 
 /**
  * 生成的文件加以保存
@@ -15,7 +14,7 @@ public class FileHelper {
 		XMLExporter.exportStack(filename, networkStack);
 	}
 	
-	public static SubstrateNetwork readFromXml(String filename) {
-		return XMLImporter.importScenario(filename).getSubstrate();
+	public static NetworkStack readFromXml(String filename) {
+		return XMLImporter.importScenario(filename).getNetworkStack();
 	}
 }
