@@ -100,6 +100,7 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 			Map<VirtualNode, SubstrateNode> nodeMapping) {
 		this.processedLinks = 0;
 		this.mappedLinks = 0;
+//		this.linkMapping.clear(); // ÖØÖÃ add 20191130
 
 		// Search for path in filtered substrate using KShortestPaths
 		LinkWeight linkWeight = new LinkWeight();
@@ -125,11 +126,15 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 				srcVnode = p.getFirst();
 				dstVnode = p.getSecond();
 			}
-
+			
 			// Find their mapped SubstrateNodes
 			final SubstrateNode sNode = nodeMapping.get(srcVnode);
 			final SubstrateNode dNode = nodeMapping.get(dstVnode);
-
+			
+//			if (sNode == null || dNode == null) {
+//				System.out.println("nulll");
+//			}
+			
 			// Get current VirtualLink demand
 			for (AbstractDemand dem : tVLink) {
 				if (dem instanceof BandwidthDemand) {

@@ -82,7 +82,10 @@ public class Main {
 				if (startList.get(i) <= time) {
 					// 需要处理
 					// 生成虚拟拓扑
-					VirtualNetwork virtualNetwork = generateGraph.generateVNet();
+					VirtualNetwork virtualNetwork;
+					do {
+						virtualNetwork= generateGraph.generateVNet();
+					} while (!Utils.isConnected(virtualNetwork));
 					//-----------// 添加虚拟网络否则npe
 					virtualNetworks.add(virtualNetwork);
 					// 调用算法去处理
@@ -94,7 +97,7 @@ public class Main {
 					if (status.get(0).getRatio() == 100) {
 						hasMappedSuccRequest++;
 						hasGainRevenue += (Double)status.get(2).getValue();
-						System.out.println("i = " + i + ": mapped succ");
+//						System.out.println("i = " + i + ": mapped succ");
 					} else {
 						// 撤销
 						startList.set(i, processed);

@@ -278,5 +278,7 @@ public abstract class GenericMappingAlgorithm extends
 	protected void reset() {
 		// TODO Auto-generated method stub
 		curNetIt = null;
+		mappedLinks = 0;
+		processedLinks = 0;
 	}
 }

@@ -90,10 +90,10 @@ public abstract class KShortestPathAlgorithm<V, E> extends
 
 	/** Test whether the source is equal to the target */
 	private boolean check(V source, V target) {
-		if (!graph.containsVertex(source) || !graph.containsVertex(target))
+		if (!graph.containsVertex(source) || !graph.containsVertex(target)) {
 			throw new AssertionError(
 					"The source or the target node does not exist!");
-
+		}
 		return source.equals(target);
 	}
 }

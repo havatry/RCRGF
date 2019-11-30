@@ -33,6 +33,7 @@ public class NodeMapping extends AbstractNodeMapping{
 	}
 	
 	protected boolean nodeMapping(SubstrateNetwork sNet, VirtualNetwork vNet) {
+		nodeMapping.clear(); // 重置
 		PriorityQueue<VirtualNode> priorityQueueVirtual = new PriorityQueue<>(new Comparator<VirtualNode>() {
 
 			@Override
@@ -78,7 +79,7 @@ public class NodeMapping extends AbstractNodeMapping{
 		
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
-		
+		int count = 0;
 		while (!priorityQueueVirtual.isEmpty()) {
 			// 逐个匹配
 			VirtualNode currentVirtualNode = priorityQueueVirtual.poll();
@@ -98,6 +99,7 @@ public class NodeMapping extends AbstractNodeMapping{
 					SubstrateNode selected =iter.next(); // 选择第一个 TODO 可以考虑选择资源更多的其中一个节点
 					NodeLinkAssignation.vnm(currentVirtualNode, selected);
 					nodeMapping.put(currentVirtualNode, selected);
+					count++;
 					// 删除该节点
 					iter.remove();
 					break; // 下一个计算
@@ -107,6 +109,7 @@ public class NodeMapping extends AbstractNodeMapping{
 					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
 						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
+						count++;
 						break; // 下一个计算
 					} else {
 						// 由于距离不满足
@@ -116,6 +119,9 @@ public class NodeMapping extends AbstractNodeMapping{
 			}
 			priorityQueueSubstrate.addAll(distanceDiscard);
 		}
+//		if (count != vNet.getVertexCount()) {
+//			System.out.println("node mapping has unmapped node");
+//		}
 		return true;
 	}
 	
