@@ -273,4 +273,10 @@ public abstract class GenericMappingAlgorithm extends
 		executionTime = System.currentTimeMillis() - start;
 		return true;
 	}
+	
+	@Override
+	protected void reset() {
+		// TODO Auto-generated method stub
+		curNetIt = null;
+	}
 }

@@ -371,4 +371,10 @@ public final class SimpleDijkstraAlgorithm extends
 		
 		return stati;
 	}
+
+	@Override
+	protected void reset() {
+		// TODO Auto-generated method stub
+		
+	}
 }

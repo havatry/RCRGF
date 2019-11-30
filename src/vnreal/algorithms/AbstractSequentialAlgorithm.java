@@ -44,6 +44,8 @@ package vnreal.algorithms;
 public abstract class AbstractSequentialAlgorithm<P> extends AbstractAlgorithm {
 	@Override
 	protected void evaluate() {
+		// ÷ÿ÷√curItem
+		reset();
 		while (hasNext())
 			if (!process(getNext()))
 				break;
@@ -59,4 +61,6 @@ public abstract class AbstractSequentialAlgorithm<P> extends AbstractAlgorithm {
 	protected abstract boolean hasNext();
 
 	protected abstract P getNext();
+	
+	protected abstract void reset(); // ÷ÿ÷√curNetIt add 20191130
 }

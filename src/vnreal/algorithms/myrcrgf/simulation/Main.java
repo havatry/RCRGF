@@ -106,7 +106,8 @@ public class Main {
 				inter++;
 			}
 			//-----------------------// 统计
-			summaryResult.addRevenueToTime(hasGainRevenue / (inter * interval));
+//			summaryResult.addRevenueToTime(hasGainRevenue / (inter * interval));
+			summaryResult.addRevenueToTime(hasGainRevenue / time);
 			summaryResult.addTotaTime(hasExecuteTime);
 			summaryResult.addVnAcceptance((double)hasMappedSuccRequest / inter);
 			// 获取底层网络代价
@@ -120,7 +121,7 @@ public class Main {
 				linkOcc += ((BandwidthResource)sl.get().get(0)).getOccupiedBandwidth();
 			}
 			double cost = nodeOcc  + linkOcc;
-			summaryResult.addCostToRevenue(hasGainRevenue / cost);
+			summaryResult.addCostToRevenue(cost / hasGainRevenue); // 调整顺序
 		}
 	}
 	
