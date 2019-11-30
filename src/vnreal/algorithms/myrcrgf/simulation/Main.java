@@ -9,6 +9,8 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.myrcrgf.strategies.RCRGF2Algorithm;
+import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myrcrgf.util.FileHelper;
 import vnreal.algorithms.myrcrgf.util.GenerateGraph;
 import vnreal.algorithms.myrcrgf.util.SummaryResult;
 import vnreal.algorithms.myrcrgf.util.Utils;
@@ -45,6 +47,7 @@ public class Main {
 		Main main = new Main();
 		main.init();
 		main.process(new RCRGF2Algorithm(initParam()), initProperty());
+//		System.out.println("print before");
 		System.out.println(main.summaryResult);
 	}
 	
@@ -65,7 +68,10 @@ public class Main {
 	
 	private void process(AbstractAlgorithm algorithm, Properties properties) {
 		GenerateGraph generateGraph = new GenerateGraph(properties);
-		SubstrateNetwork substrateNetwork = generateGraph.generateSNet();
+//		SubstrateNetwork substrateNetwork = generateGraph.generateSNet();
+		// 固定从文件中读取
+		SubstrateNetwork substrateNetwork = FileHelper.readFromXml("results/file/substratework_20191130135939.xml");
+//		FileHelper.writeToXml(Constants.FILE_NAME, new NetworkStack(substrateNetwork, null));
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
 		for (int time = interval; time <= end; time += interval) {
@@ -88,6 +94,7 @@ public class Main {
 					if (status.get(0).getRatio() == 100) {
 						hasMappedSuccRequest++;
 						hasGainRevenue += (Double)status.get(2).getValue();
+						System.out.println("i = " + i + ": mapped succ");
 					} else {
 						// 撤销
 						startList.set(i, processed);
@@ -97,23 +104,23 @@ public class Main {
 					break; // next time
 				}
 				inter++;
-				//-----------------------// 统计
-				summaryResult.addRevenueToTime(hasGainRevenue / (inter * interval));
-				summaryResult.addTotaTime(hasExecuteTime);
-				summaryResult.addVnAcceptance((double)hasMappedSuccRequest / inter);
-				// 获取底层网络代价
-				double nodeOcc = 0.0, linkOcc = 0.0;
-				for (SubstrateNode sn : substrateNetwork.getVertices()) {
-					// 占用的资源
-					nodeOcc += ((CpuResource)sn.get().get(0)).getOccupiedCycles();
-				}
-				for (SubstrateLink sl : substrateNetwork.getEdges()) {
-					// 占用的带宽
-					linkOcc += ((BandwidthResource)sl.get().get(0)).getOccupiedBandwidth();
-				}
-				double cost = nodeOcc  + linkOcc;
-				summaryResult.addCostToRevenue(hasGainRevenue / cost);
 			}
+			//-----------------------// 统计
+			summaryResult.addRevenueToTime(hasGainRevenue / (inter * interval));
+			summaryResult.addTotaTime(hasExecuteTime);
+			summaryResult.addVnAcceptance((double)hasMappedSuccRequest / inter);
+			// 获取底层网络代价
+			double nodeOcc = 0.0, linkOcc = 0.0;
+			for (SubstrateNode sn : substrateNetwork.getVertices()) {
+				// 占用的资源
+				nodeOcc += ((CpuResource)sn.get().get(0)).getOccupiedCycles();
+			}
+			for (SubstrateLink sl : substrateNetwork.getEdges()) {
+				// 占用的带宽
+				linkOcc += ((BandwidthResource)sl.get().get(0)).getOccupiedBandwidth();
+			}
+			double cost = nodeOcc  + linkOcc;
+			summaryResult.addCostToRevenue(hasGainRevenue / cost);
 		}
 	}
 	
@@ -143,6 +150,11 @@ public class Main {
 	
 	private static Properties initProperty() {
 		Properties properties = new Properties();
+		properties.put("snNodes", "10");
+		properties.put("minVNodes", "5");
+		properties.put("maxVNodes", "6");
+		properties.put("snAlpha", "0.5");
+		properties.put("vnAlpha", "0.5");
 		//---------//
 		return properties;
 	}

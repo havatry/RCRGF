@@ -1,5 +1,8 @@
 package vnreal.algorithms.myrcrgf.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 从配置文件中读取变量 设置
  * 2019年11月23日 下午9:50:04
@@ -14,4 +17,6 @@ public class Constants {
 	public static double VIRTUAL_BASE_CPU_RESOURCE = 5.0; // 基准虚拟cpu需求
 	public static double VIRTUAL_BASE_BANDWITH_RESOURCE = 5.0; // 基准虚拟bandwith需求
 	public static boolean SWITCH_BASE_RES_DEM = true; // 是否增加基准资源去生成约束
+	public static final String FILE_NAME = "results/file/substratework_" + 
+			new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".xml";
 }
