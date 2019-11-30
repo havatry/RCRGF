@@ -1,20 +1,14 @@
 package vnreal.algorithms.myrcrgf.strategies.rcrgf;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import vnreal.algorithms.AbstractNodeMapping;
-import vnreal.algorithms.myrcrgf.util.Constants;
 import vnreal.algorithms.myrcrgf.util.Utils;
 import vnreal.algorithms.utils.NodeLinkAssignation;
-import vnreal.io.XMLExporter;
-import vnreal.network.NetworkStack;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
@@ -37,7 +31,6 @@ public class NodeMapping extends AbstractNodeMapping{
 	}
 	
 	protected boolean nodeMapping(SubstrateNetwork sNet, VirtualNetwork vNet) {
-		nodeMapping.clear(); // 重置
 		PriorityQueue<VirtualNode> priorityQueueVirtual = new PriorityQueue<>(new Comparator<VirtualNode>() {
 
 			@Override
@@ -84,10 +77,13 @@ public class NodeMapping extends AbstractNodeMapping{
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
 		int count = 0;
+		Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点
+		Set<SubstrateNode> ruleDiscard = new HashSet<SubstrateNode>(); // 由于规则因素筛选出的节点
 		while (!priorityQueueVirtual.isEmpty()) {
 			// 逐个匹配
 			VirtualNode currentVirtualNode = priorityQueueVirtual.poll();
-			Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点
+			distanceDiscard.clear();
+			ruleDiscard.clear();
 			
 			while (!priorityQueueSubstrate.isEmpty()) {
 				// 到底层去找
@@ -119,14 +115,13 @@ public class NodeMapping extends AbstractNodeMapping{
 						// 由于距离不满足
 						distanceDiscard.add(currentSubstrateNode);
 					}
+				} else {
+					// 因为规则不满足
+					ruleDiscard.add(currentSubstrateNode);
 				}
 			}
 			priorityQueueSubstrate.addAll(distanceDiscard);
-		}
-		if (count != vNet.getVertexCount()) {
-			System.out.println("node mapping has unmapped node");
-			NetworkStack networkStack = new NetworkStack(sNet, Arrays.asList(vNet));
-			XMLExporter.exportStack(Constants.FILE_NAME, networkStack);
+			priorityQueueSubstrate.addAll(ruleDiscard);
 		}
 		return true;
 	}
