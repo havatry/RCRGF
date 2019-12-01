@@ -31,20 +31,20 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms.isomorphism;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
+import vnreal.algorithms.myrcrgf.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
@@ -64,6 +64,8 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	private Iterator<VirtualNetwork> curIt = null;
 	private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
+	private long executionTime;
+	private boolean succ;
 //	private Statistics statistics = new Statistics();
 	
 	public SubgraphIsomorphismStackAlgorithm(AlgorithmParameter params) {
@@ -111,38 +113,19 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	@Override
 	protected void evaluate() {
-		boolean result = false;
+		// 重置
+		reset();
+		long start = System.currentTimeMillis();
 		// Mapping previousResult = new Mapping();
-//		statistics.setStartTime(System.currentTimeMillis());
 		while (hasNext()) {
 			VirtualNetwork vNetwork = getNext();
-			result = algorithm.mapNetwork(ns.getSubstrate(), vNetwork);
-//			statistics.setRevenToCost(
-//					Utils.revenueToCostRation(algorithm.getNodeMapping(), 
-//							algorithm.getLinkMapping()));
+			succ = algorithm.mapNetwork(ns.getSubstrate(), vNetwork);
 		}
-		if (result) {
-//			statistics.setSuccVns(1);
-		} else {
-//			statistics.setSuccVns(0);
-		}
-//		statistics.setEndTime(System.currentTimeMillis());
+		executionTime = System.currentTimeMillis() - start;
 	}
 
 	@Override
 	protected void postRun() {
-////		if (Constants.PRINT) {
-////			System.out.println(statistics);
-////			return;
-////		}
-//		try {
-//			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE, true));
-//			out.print(statistics);
-//			out.print(",");
-//			out.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	@Override
@@ -152,7 +135,60 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	@Override
 	public List<AbstractAlgorithmStatus> getStati() {
-		return null;
+		LinkedList<AbstractAlgorithmStatus> stati = new LinkedList<AbstractAlgorithmStatus>();
+		
+		// 虚拟网络中成功完成映射个数, 间接计算出是否映射成功
+		stati.add(new AbstractAlgorithmStatus("Mapped VN links") {
+			@Override
+			public Integer getValue() {
+				return succ ? 1 : 0;
+			}
+
+			@Override
+			public Integer getMaximum() {
+				return 1;
+			}
+		});
+		// 计算算法执行时间
+		stati.add(new AbstractAlgorithmStatus("Execution Time") {
+			
+			@Override
+			public Long getValue() {
+				// TODO Auto-generated method stub
+				return executionTime;
+			}
+			
+			@Override
+			public Long getMaximum() {
+				// TODO Auto-generated method stub
+				return 1L;
+			}
+		});
+		// 计算收益
+		stati.add(new AbstractAlgorithmStatus("Revenue") {
+			
+			@Override
+			public Double getValue() {
+				// TODO Auto-generated method stub
+				// 节点收益
+				double nodeRevenue = 0.0, linkRevenue = 0.0;
+				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
+					nodeRevenue += Utils.getCpu(vn);
+				}
+				for (VirtualLink vl : ns.getVirtuals().get(0).getEdges()) {
+					linkRevenue += Utils.getBandwith(vl);
+				}
+				return nodeRevenue + linkRevenue;
+			}
+			
+			@Override
+			public Double getMaximum() {
+				// TODO Auto-generated method stub
+				return 1.0;
+			}
+		});
+
+		return stati;
 	}
 
 	static class MappingState {
@@ -165,5 +201,8 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 			this.c = c;
 		}
 	}
-
+	
+	private void reset() {
+		curNetIt = null;
+	}
 }

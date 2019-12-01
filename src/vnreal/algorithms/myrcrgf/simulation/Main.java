@@ -8,7 +8,7 @@ import java.util.Properties;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
-import vnreal.algorithms.AvailableResources;
+import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myrcrgf.util.FileHelper;
 import vnreal.algorithms.myrcrgf.util.GenerateGraph;
 import vnreal.algorithms.myrcrgf.util.SummaryResult;
@@ -45,7 +45,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.init();
-		main.process(new AvailableResources(initParam()), initProperty());
+		main.process(new SubgraphIsomorphismStackAlgorithm(initParam()), initProperty());
 //		System.out.println("print before");
 		System.out.println(main.summaryResult);
 	}
@@ -150,6 +150,7 @@ public class Main {
 		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
 		algorithmParameter.put("linkMapAlgorithm", "bfs");
 		algorithmParameter.put("distance", "70");
+		algorithmParameter.put("advanced", "false");
 		//-----------//
 		return algorithmParameter;
 	}

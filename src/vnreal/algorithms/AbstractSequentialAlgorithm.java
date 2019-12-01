@@ -61,6 +61,6 @@ public abstract class AbstractSequentialAlgorithm<P> extends AbstractAlgorithm {
 	protected abstract boolean hasNext();
 
 	protected abstract P getNext();
-	
-	protected abstract void reset(); // ÷ÿ÷√curNetIt add 20191130
+
+	protected abstract void reset(); // add 20191201
 }

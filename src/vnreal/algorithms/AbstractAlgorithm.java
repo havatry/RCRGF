@@ -96,5 +96,4 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	/** This is called after {@link #process()} in {@link #run()}. */
 	protected abstract void postRun();
-
 }
