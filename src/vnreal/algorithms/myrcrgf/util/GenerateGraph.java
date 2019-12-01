@@ -84,7 +84,13 @@ public class GenerateGraph {
 		WaxmanGraphGenerator<VirtualNode, VirtualLink> vgg =
 				new WaxmanGraphGenerator<VirtualNode, VirtualLink>(vnAlpha, vnBeta, false);
 		vgg.generate(virtualNetwork);
-		// 不需要调整坐标
+		// 不需要调整坐标  在Greedy算法中需要
+		// 100 * 100
+		HashMap<VirtualNode, Point2D> spos = vgg.getPositions();
+		for (VirtualNode v : virtualNetwork.getVertices()) {
+			v.setCoordinateX(100.0 * spos.get(v).getX());
+			v.setCoordinateY(100.0 * spos.get(v).getY());
+		}
 		// 接下来生成约束
 		List<Class<?>> resClassesToGenerateVN = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerateVN = new LinkedList<String[]>();

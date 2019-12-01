@@ -245,23 +245,24 @@ public abstract class GenericMappingAlgorithm extends
 	protected boolean process(VirtualNetwork p) {
 		long start = System.currentTimeMillis();
 		// Node mapping stage
-//		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
-//			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
-//				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
-//					ns.clearVnrMappings(p);
-//					processedLinks += p.getEdges().size();
-//					return true;
-//				}
-//			}
-//		} else {
-//			ns.clearVnrMappings(p);
-//			processedLinks += p.getEdges().size();
-//			return true;
-//		}
-		if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
+		if (nodeMappingAlgorithm.isPreNodeMappingFeasible(ns.getSubstrate(), p)) {
+			if (!nodeMappingAlgorithm.isPreNodeMappingComplete()) {
+				if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
+					ns.clearVnrMappings(p);
+					processedLinks += p.getEdges().size();
+					return true;
+				}
+			}
+		} else {
 			ns.clearVnrMappings(p);
+			processedLinks += p.getEdges().size();
 			return true;
 		}
+//		if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
+//			ns.clearVnrMappings(p);
+//			processedLinks += p.getEdgeCount();
+//			return true;
+//		}
 		// Link Mapping stage
 		if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
 				.getNodeMapping())) {

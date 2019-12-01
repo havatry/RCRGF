@@ -8,8 +8,7 @@ import java.util.Properties;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
-import vnreal.algorithms.myrcrgf.strategies.RCRGF2Algorithm;
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.myrcrgf.util.FileHelper;
 import vnreal.algorithms.myrcrgf.util.GenerateGraph;
 import vnreal.algorithms.myrcrgf.util.SummaryResult;
@@ -46,7 +45,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.init();
-		main.process(new RCRGF2Algorithm(initParam()), initProperty());
+		main.process(new AvailableResources(initParam()), initProperty());
 //		System.out.println("print before");
 		System.out.println(main.summaryResult);
 	}
@@ -150,6 +149,7 @@ public class Main {
 	private static AlgorithmParameter initParam() {
 		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
 		algorithmParameter.put("linkMapAlgorithm", "bfs");
+		algorithmParameter.put("distance", "70");
 		//-----------//
 		return algorithmParameter;
 	}
