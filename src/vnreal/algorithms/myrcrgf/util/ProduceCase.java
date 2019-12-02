@@ -49,7 +49,7 @@ public class ProduceCase {
 		properties.put("snNodes", "100");
 		properties.put("minVNodes", "5");
 		properties.put("maxVNodes", "11");
-		properties.put("snAlpha", "0.5");
+		properties.put("snAlpha", "0.1");
 		properties.put("vnAlpha", "0.5");
 		//---------//
 		return properties;

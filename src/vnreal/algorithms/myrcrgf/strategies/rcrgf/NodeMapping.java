@@ -1,8 +1,11 @@
 package vnreal.algorithms.myrcrgf.strategies.rcrgf;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -104,7 +107,8 @@ public class NodeMapping extends AbstractNodeMapping{
 				}
 				if (mappingRule.rule(currentSubstrateNode, currentVirtualNode)) {
 					// 可以映射上
-					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
+					if (Utils.smallEqual(computeDistance(sNet, vNet, currentSubstrateNode, currentVirtualNode),
+							distanceConstraint)) {
 						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
 						break; // 下一个计算
@@ -145,8 +149,25 @@ public class NodeMapping extends AbstractNodeMapping{
 		return result;
 	}
 	
-	private double computeDistance(Node<?> o1, Node<?> o2) {
-		return Math.sqrt(Math.pow(o1.getCoordinateX() - o2.getCoordinateX(), 2) 
-				+ Math.pow(o1.getCoordinateY() - o2.getCoordinateY(), 2));
+	private double computeDistance(SubstrateNetwork sNet, VirtualNetwork vNet, SubstrateNode o1, VirtualNode o2) {
+		// 获取所有已经映射的虚拟邻居节点
+		Collection<VirtualNode> neighbors = vNet.getNeighbors(o2);
+		Collection<SubstrateNode> candicates = new LinkedList<SubstrateNode>();
+		for (VirtualNode vn : neighbors) {
+			if (nodeMapping.get(vn) != null) {
+				// 已经映射的底层节点
+				candicates.add(nodeMapping.get(vn));
+			}
+		}
+		if (candicates.isEmpty()) {
+			// 没有映射到底层节点 那么距离是最小的
+			return 0.0;
+		}
+		double tdistance = 0.0;
+		for (SubstrateNode sn : candicates) {
+			tdistance += Math.sqrt(Math.pow(o1.getCoordinateX() - sn.getCoordinateX(), 2) 
+					+ Math.pow(o1.getCoordinateY() - sn.getCoordinateY(), 2));
+		}
+		return tdistance / candicates.size();
 	}
 }

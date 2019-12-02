@@ -39,7 +39,7 @@ public class Run {
 	
 	public static void main(String[] args) {
 		String base = "results/file/";
-		String filename = base + "substratework_20191201151939.xml";
+		String filename = base + "substratework_20191201153422.xml";
 		AlgorithmParameter parameter = initParam();
 		new Run().process(new RCRGF2Algorithm(parameter), filename);
 		new Run().process(new AvailableResources(parameter), filename);
@@ -52,6 +52,7 @@ public class Run {
 		
 		Object[] result = FileHelper.readContext(filename);
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
+		System.out.println(substrateNetwork.getEdgeCount());
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
 		startList = (List<Integer>)result[1];
 		endList = (List<Integer>)result[2];
@@ -137,7 +138,7 @@ public class Run {
 	private static AlgorithmParameter initParam() {
 		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
 		algorithmParameter.put("linkMapAlgorithm", "bfs");
-		algorithmParameter.put("distance", "70");
+		algorithmParameter.put("distance", "30");
 		algorithmParameter.put("advanced", "false");
 		//-----------//
 		return algorithmParameter;
