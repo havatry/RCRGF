@@ -12,6 +12,7 @@
 	I) Greedy算法为什么报错npe -> 因为将节点映射部分改动了 
 	II) Greedy算法节点映射不成功 -> 由于距离因素，而虚拟节点的坐标没有设置，显得距离偏大
 	III) 子图同构算法也出现没有重组变量的问题
+	IV) 为什么修改distance会影响Greedy算法  -> 因为distance也是Greedy算法的一个参数
 5. 咨询下nodeMapping那段代码是否可以那么更改 Finish
 	I) 可以那么修改
 	

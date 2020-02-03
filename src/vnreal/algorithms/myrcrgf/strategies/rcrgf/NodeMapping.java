@@ -76,7 +76,6 @@ public class NodeMapping extends AbstractNodeMapping{
 		SubstrateNode spec = new SubstrateNode();
 		spec.setReferencedValue(-1);
 		priorityQueueSubstrate.offer(spec);
-		
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
 		Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点

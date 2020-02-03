@@ -52,11 +52,10 @@ public class Run {
 		
 		Object[] result = FileHelper.readContext(filename);
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
-		System.out.println(substrateNetwork.getEdgeCount());
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
+//		virtualNetworks = ProduceCase.getVirtuals(2);
 		startList = (List<Integer>)result[1];
 		endList = (List<Integer>)result[2];
-		
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
 		for (int time = interval; time <= end; time += interval) {
@@ -138,7 +137,7 @@ public class Run {
 	private static AlgorithmParameter initParam() {
 		AlgorithmParameter algorithmParameter = new AlgorithmParameter();
 		algorithmParameter.put("linkMapAlgorithm", "bfs");
-		algorithmParameter.put("distance", "30");
+		algorithmParameter.put("distanceConstraint", "70.0");
 		algorithmParameter.put("advanced", "false");
 		//-----------//
 		return algorithmParameter;

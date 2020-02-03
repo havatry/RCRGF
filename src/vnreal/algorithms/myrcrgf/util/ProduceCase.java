@@ -27,6 +27,7 @@ public class ProduceCase {
 		}
 		startList.remove(startList.size() - 1);
 		endList.remove(endList.size() - 1);
+		
 		// 生成拓扑
 		GenerateGraph generateGraph = new GenerateGraph(initProperty());
 		SubstrateNetwork substrateNetwork = generateGraph.generateSNet();
@@ -44,11 +45,25 @@ public class ProduceCase {
 		System.out.println("Produce Successfully");
 	}
 	
+	public static LinkedList<VirtualNetwork> getVirtuals(int n) {
+		GenerateGraph generateGraph = new GenerateGraph(initProperty());
+		// 生产虚拟网络
+		LinkedList<VirtualNetwork> vns = new LinkedList<VirtualNetwork>();
+		for (int i = 0; i < n; i++) {
+			VirtualNetwork virtualNetwork;
+			do {
+				virtualNetwork= generateGraph.generateVNet();
+			} while (!Utils.isConnected(virtualNetwork));
+			vns.add(virtualNetwork);
+		}
+		return vns;
+	}
+	
 	private static Properties initProperty() {
 		Properties properties = new Properties();
-		properties.put("snNodes", "100");
+		properties.put("snNodes", "10");
 		properties.put("minVNodes", "5");
-		properties.put("maxVNodes", "11");
+		properties.put("maxVNodes", "5");
 		properties.put("snAlpha", "0.1");
 		properties.put("vnAlpha", "0.5");
 		//---------//
