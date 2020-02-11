@@ -14,6 +14,7 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 	private static final int DEFAULT_KSP = 1;
 	private static final boolean DEFAULT_EPPSTEIN = true;
 	private static final String DEFAULT_LINKMAP_ALGORITHM = "ksp";
+	private static final boolean DEFAULT_ADVANCED = false;
 	private static final int DEFAULT_SPL = 2;
 	
 	public AEFAlgorithm(AlgorithmParameter param) {
@@ -27,8 +28,8 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 			linkMappingAlgorithm = new kShortestPathLinkMapping(k, eppstein);
 		} else {
 		    int SPL = param.getInteger("spl", DEFAULT_SPL);
-//			linkMappingAlgorithm = new LinkMapping2(SPL); // 更新算法
-            linkMappingAlgorithm = new LinkMapping(); // Baseline算法
+		    boolean advanced = param.getBoolean("AEFAdvanced", DEFAULT_ADVANCED);
+            linkMappingAlgorithm = advanced ? new LinkMapping2(SPL) : new LinkMapping(); // 更新算法或者Baseline算法
 		}
 		
 	}

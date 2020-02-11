@@ -10,6 +10,7 @@ import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.CoordinatedMapping;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
+import vnreal.algorithms.myAEF.strategies.NRMAlgorithm;
 import vnreal.algorithms.myAEF.util.FileHelper;
 import vnreal.algorithms.myAEF.util.SummaryResult;
 import vnreal.algorithms.myAEF.util.Utils;
@@ -47,7 +48,8 @@ public class Run {
 		new Run().process(new AEFAlgorithm(parameter), filename);
 		new Run().process(new AvailableResources(parameter), filename);
 		new Run().process(new SubgraphIsomorphismStackAlgorithm(parameter), filename);
-		new Run().process(new CoordinatedMapping(parameter), filename);
+//		new Run().process(new CoordinatedMapping(parameter), filename);
+		new Run().process(new NRMAlgorithm(parameter), filename);
 		System.out.println("Done");
 	}
 	
@@ -120,6 +122,8 @@ public class Run {
 			fix = "subgraph";
 		} else if (algorithm instanceof CoordinatedMapping) {
 		    fix = "ViNE";
+        } else if (algorithm instanceof NRMAlgorithm) {
+		    fix = "NRM";
         } else {
 			fix = "null";
 		}
@@ -151,6 +155,7 @@ public class Run {
 		algorithmParameter.put("distanceConstraint", "70.0");
 		algorithmParameter.put("advanced", "false");
 		algorithmParameter.put("eppstein", "false");
+		algorithmParameter.put("AEFAdvanced", "true");
 		//-----------//
 		return algorithmParameter;
 	}

@@ -69,15 +69,7 @@ public abstract class AbstractNodeMapping {
 
 	/**
 	 * The constructor of the class initializes its variables
-	 * 
-	 * @param unmappedvNodes
-	 *            is the variable that will have the virtual nodes that are not
-	 *            mapped after the prenode mapping stage.
-	 * 
-	 * @param unmappedsNodes
-	 *            is the variable that will have the substrate nodes that are
-	 *            not mapped after the prenode mapping stage.
-	 * 
+	 *
 	 */
 	protected AbstractNodeMapping(boolean subsNodeOverload) {
 		nodeMapping = new LinkedHashMap<VirtualNode, SubstrateNode>();
