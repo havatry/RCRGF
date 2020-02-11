@@ -66,7 +66,7 @@ public class AvailableResources extends GenericMappingAlgorithm {
 	private static double DEFAULT_WCPU = 1;
 	private static double DEFAULT_WBW = 1;
 	private static int DEFAULT_KSP = 1;
-	private static boolean DEFAULT_EPPSTEIN = false;
+	private static boolean DEFAULT_EPPSTEIN = true;
 	
 	/**
 	 * Constructor of the algorithm

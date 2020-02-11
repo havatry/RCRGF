@@ -7,6 +7,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
+import vnreal.algorithms.CoordinatedMapping;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
 import vnreal.algorithms.myAEF.util.FileHelper;
@@ -46,6 +47,7 @@ public class Run {
 		new Run().process(new AEFAlgorithm(parameter), filename);
 		new Run().process(new AvailableResources(parameter), filename);
 		new Run().process(new SubgraphIsomorphismStackAlgorithm(parameter), filename);
+		new Run().process(new CoordinatedMapping(parameter), filename);
 		System.out.println("Done");
 	}
 	
@@ -116,7 +118,9 @@ public class Run {
 			fix = "greedy";
 		} else if (algorithm instanceof SubgraphIsomorphismStackAlgorithm) {
 			fix = "subgraph";
-		} else {
+		} else if (algorithm instanceof CoordinatedMapping) {
+		    fix = "ViNE";
+        } else {
 			fix = "null";
 		}
 		String writeFileName = filename.replace("file", "output").substring(0, filename.lastIndexOf(".") - 1) + "_" + fix + ".txt";
@@ -146,6 +150,7 @@ public class Run {
 		algorithmParameter.put("linkMapAlgorithm", "bfs");
 		algorithmParameter.put("distanceConstraint", "70.0");
 		algorithmParameter.put("advanced", "false");
+		algorithmParameter.put("eppstein", "false");
 		//-----------//
 		return algorithmParameter;
 	}

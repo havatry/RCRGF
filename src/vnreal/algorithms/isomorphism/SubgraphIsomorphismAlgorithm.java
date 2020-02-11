@@ -78,8 +78,7 @@ public class SubgraphIsomorphismAlgorithm extends
 	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // ��·ӳ��
 	/**
 	 * 
-	 * @param useEnergyResource
-	 *            True, if EnergyResource should be considered, otherwise false
+	 *  True, if EnergyResource should be considered, otherwise false
 	 */
 	public SubgraphIsomorphismAlgorithm() {
 		super(false);
