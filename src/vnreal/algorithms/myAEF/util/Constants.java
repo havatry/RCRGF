@@ -19,4 +19,5 @@ public class Constants {
 	public static boolean SWITCH_BASE_RES_DEM = true; // 是否增加基准资源去生成约束
 	public static final String FILE_NAME = "results/file/substratework_" + 
 			new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".xml";
+	public static final Double C = 700D; // 反比例函数的系数
 }

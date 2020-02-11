@@ -4,6 +4,7 @@ import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.GenericMappingAlgorithm;
 import vnreal.algorithms.linkmapping.kShortestPathLinkMapping;
 import vnreal.algorithms.myAEF.strategies.aef.LinkMapping;
+import vnreal.algorithms.myAEF.strategies.aef.LinkMapping2;
 import vnreal.algorithms.myAEF.strategies.aef.NodeMapping;
 
 public class AEFAlgorithm extends GenericMappingAlgorithm{
@@ -13,6 +14,7 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 	private static final int DEFAULT_KSP = 1;
 	private static final boolean DEFAULT_EPPSTEIN = false;
 	private static final String DEFAULT_LINKMAP_ALGORITHM = "ksp";
+	private static final int DEFAULT_SPL = 2;
 	
 	public AEFAlgorithm(AlgorithmParameter param) {
 		double distanceConstraint = param.getDouble("distanceConstraint", DEFAULT_DISTANCE_CONSTRAINT);
@@ -24,7 +26,8 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 			boolean eppstein = param.getBoolean("eppstein", DEFAULT_EPPSTEIN);
 			linkMappingAlgorithm = new kShortestPathLinkMapping(k, eppstein);
 		} else {
-			linkMappingAlgorithm = new LinkMapping(); // 更新算法
+		    int SPL = param.getInteger("spl", DEFAULT_SPL);
+			linkMappingAlgorithm = new LinkMapping2(SPL); // 更新算法
 		}
 		
 	}
