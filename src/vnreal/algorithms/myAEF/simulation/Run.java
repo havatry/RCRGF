@@ -1,5 +1,6 @@
 package vnreal.algorithms.myAEF.simulation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mulavito.algorithms.AbstractAlgorithmStatus;
@@ -10,6 +11,7 @@ import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
 import vnreal.algorithms.myAEF.util.FileHelper;
 import vnreal.algorithms.myAEF.util.SummaryResult;
+import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.constraints.resources.BandwidthResource;
 import vnreal.constraints.resources.CpuResource;
 import vnreal.network.NetworkStack;
@@ -90,6 +92,7 @@ public class Run {
 			summaryResult.addVnAcceptance((double)hasMappedSuccRequest / inter);
 			// 获取底层网络代价
 			double nodeOcc = 0.0, linkOcc = 0.0;
+            List<Double> nums = new ArrayList<>();
 			for (SubstrateNode sn : substrateNetwork.getVertices()) {
 				// 占用的资源
 				nodeOcc += ((CpuResource)sn.get().get(0)).getOccupiedCycles();
@@ -97,9 +100,13 @@ public class Run {
 			for (SubstrateLink sl : substrateNetwork.getEdges()) {
 				// 占用的带宽
 				linkOcc += ((BandwidthResource)sl.get().get(0)).getOccupiedBandwidth();
+				// 剩余的带宽
+                nums.add(Utils.getBandwith(sl));
 			}
 			double cost = nodeOcc  + linkOcc;
 			summaryResult.addCostToRevenue(cost / hasGainRevenue); // 调整顺序
+            // 计算底层网络带宽标准差
+            summaryResult.addBandwidthStandardDiff(Utils.stanrdDiff(nums));
 		}
 		// 输出到文件
 		String fix;

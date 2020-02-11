@@ -16,6 +16,7 @@ public class SummaryResult {
 	private List<Double> vnAcceptance; // 每个时间点的请求接受率
 	private List<Double> costToRevenue; // 每个时间点的代价收益比
 	private List<Double> revenueToTime; // 每个时间点收益时间比
+    private List<Double> bandwidthStandardDiff; // 每个时间点底层网络带宽的标准差
 	
 	public SummaryResult() {
 		// TODO Auto-generated constructor stub
@@ -41,6 +42,10 @@ public class SummaryResult {
 	public void addRevenueToTime(double rtt) {
 		revenueToTime.add(rtt);
 	}
+
+	public void addBandwidthStandardDiff(double bsd) {
+	    bandwidthStandardDiff.add(bsd);
+    }
 	
 	public List<Double> getCostToRevenue() {
 		return costToRevenue;
@@ -58,13 +63,22 @@ public class SummaryResult {
 		return vnAcceptance;
 	}
 
-	@Override
-	public String toString() {
-		return "SummaryResult [totalTime=" + totalTime + ", vnAcceptance=" + vnAcceptance + ", costToRevenue="
-				+ costToRevenue + ", revenueToTime=" + revenueToTime + "]";
-	}
-	
-	public void writeToFile(String filename) {
+    public List<Double> getBandwidthStandardDiff() {
+        return bandwidthStandardDiff;
+    }
+
+    @Override
+    public String toString() {
+        return "SummaryResult{" +
+                "totalTime=" + totalTime +
+                ", vnAcceptance=" + vnAcceptance +
+                ", costToRevenue=" + costToRevenue +
+                ", revenueToTime=" + revenueToTime +
+                ", bandwidthStandardDiff=" + bandwidthStandardDiff +
+                '}';
+    }
+
+    public void writeToFile(String filename) {
 		try {
 			PrintWriter out = new PrintWriter(filename);
 			List<Long> time = getTotalTime();
@@ -90,6 +104,11 @@ public class SummaryResult {
 				out.print(d3);
 				out.print(" ");
 			}
+			List<Double> bsd = getBandwidthStandardDiff();
+			for (Double d4 : bsd) {
+			    out.print(d4);
+			    out.print(" ");
+            }
 			out.println();
 			out.close();
 		} catch (FileNotFoundException e) {

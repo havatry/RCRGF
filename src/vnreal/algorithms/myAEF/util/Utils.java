@@ -1,6 +1,7 @@
 package vnreal.algorithms.myAEF.util;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import vnreal.constraints.demands.BandwidthDemand;
@@ -10,6 +11,7 @@ import vnreal.constraints.resources.CpuResource;
 import vnreal.network.Link;
 import vnreal.network.Network;
 import vnreal.network.Node;
+import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
@@ -93,4 +95,19 @@ public class Utils {
 		}
 		return x;
 	}
+
+	// 计算数据的标准差
+	public static double stanrdDiff(List<Double> nums) {
+	    // 计算平均值
+        double sum = 0.0;
+        for (double d : nums) {
+            sum += d;
+        }
+        double average = sum / nums.size();
+        double stat_sum = 0.0;
+        for (double sd : nums) {
+            stat_sum += (sd - average) * (sd - average);
+        }
+        return Math.sqrt(stat_sum / nums.size());
+    }
 }
