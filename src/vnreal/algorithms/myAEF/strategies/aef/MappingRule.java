@@ -1,4 +1,4 @@
-package vnreal.algorithms.myAEF.strategies.rcrgf;
+package vnreal.algorithms.myAEF.strategies.aef;
 
 import java.util.Collections;
 import java.util.PriorityQueue;

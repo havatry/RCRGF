@@ -1,15 +1,16 @@
-package vnreal.algorithms.myAEF.strategies.rcrgf;
+package vnreal.algorithms.myAEF.strategies.aef;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import vnreal.algorithms.AbstractNodeMapping;
 import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.algorithms.utils.NodeLinkAssignation;
-import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
@@ -21,10 +22,10 @@ import vnreal.network.virtual.VirtualNode;
  * 完成节点映射
  * 2019年11月23日 下午9:55:02
  */
-public class NodeMapping2 extends AbstractNodeMapping{
+public class NodeMapping extends AbstractNodeMapping{
 	private double distanceConstraint;
 	
-	public NodeMapping2(double distanceConstraint, boolean nodesOverload) {
+	public NodeMapping(double distanceConstraint, boolean nodesOverload) {
 		//Created constructor stubs
 		super(nodesOverload);
 		this.distanceConstraint = distanceConstraint;
@@ -73,7 +74,6 @@ public class NodeMapping2 extends AbstractNodeMapping{
 		SubstrateNode spec = new SubstrateNode();
 		spec.setReferencedValue(-1);
 		priorityQueueSubstrate.offer(spec);
-		
 		// 依次查找
 		MappingRule mappingRule = new MappingRule(sNet, vNet);
 		Set<SubstrateNode> distanceDiscard = new HashSet<>(); // 由于距离因素筛选出的节点
@@ -103,9 +103,9 @@ public class NodeMapping2 extends AbstractNodeMapping{
 					break; // 下一个计算
 				}
 				if (mappingRule.rule(currentSubstrateNode, currentVirtualNode)) {
-					
 					// 可以映射上
-					if (Utils.smallEqual(computeDistance(currentSubstrateNode, currentVirtualNode), distanceConstraint)) {
+					if (Utils.smallEqual(computeDistance(sNet, vNet, currentSubstrateNode, currentVirtualNode),
+							distanceConstraint)) {
 						NodeLinkAssignation.vnm(currentVirtualNode, currentSubstrateNode); // 映射
 						nodeMapping.put(currentVirtualNode, currentSubstrateNode);
 						break; // 下一个计算
@@ -146,8 +146,25 @@ public class NodeMapping2 extends AbstractNodeMapping{
 		return result;
 	}
 	
-	private double computeDistance(Node<?> o1, Node<?> o2) {
-		return Math.sqrt(Math.pow(o1.getCoordinateX() - o2.getCoordinateX(), 2) 
-				+ Math.pow(o1.getCoordinateY() - o2.getCoordinateY(), 2));
+	private double computeDistance(SubstrateNetwork sNet, VirtualNetwork vNet, SubstrateNode o1, VirtualNode o2) {
+		// 获取所有已经映射的虚拟邻居节点
+		Collection<VirtualNode> neighbors = vNet.getNeighbors(o2);
+		Collection<SubstrateNode> candicates = new LinkedList<SubstrateNode>();
+		for (VirtualNode vn : neighbors) {
+			if (nodeMapping.get(vn) != null) {
+				// 已经映射的底层节点
+				candicates.add(nodeMapping.get(vn));
+			}
+		}
+		if (candicates.isEmpty()) {
+			// 没有映射到底层节点 那么距离是最小的
+			return 0.0;
+		}
+		double tdistance = 0.0;
+		for (SubstrateNode sn : candicates) {
+			tdistance += Math.sqrt(Math.pow(o1.getCoordinateX() - sn.getCoordinateX(), 2) 
+					+ Math.pow(o1.getCoordinateY() - sn.getCoordinateY(), 2));
+		}
+		return tdistance / candicates.size();
 	}
 }

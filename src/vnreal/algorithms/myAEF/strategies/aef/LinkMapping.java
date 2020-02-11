@@ -1,4 +1,4 @@
-package vnreal.algorithms.myAEF.strategies.rcrgf;
+package vnreal.algorithms.myAEF.strategies.aef;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -65,9 +65,6 @@ public class LinkMapping extends AbstractLinkMapping{
 	
 	/**
 	 * 使用BFS算法来找
-	 * @param substrateNetwork 底层网络
-	 * @param virtualLink 虚拟链路
-	 * @param nodeMapping 映射结果
 	 * @return 获取的最短路径
 	 */
 	private LinkedList<SubstrateLink> getShortestPath(SubstrateNetwork substrateNetwork, 

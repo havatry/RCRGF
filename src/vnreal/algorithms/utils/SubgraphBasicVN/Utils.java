@@ -566,8 +566,6 @@ public class Utils {
 	 * 
 	 * @param vNetwork
 	 * @param sNetwork
-	 * @param result
-	 * @param v_a
 	 */
 	public static List<SubstrateNode> mapIdDemands(VirtualNetwork vNetwork,
 			SubstrateNetwork sNetwork, vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping m) {
@@ -629,8 +627,8 @@ public class Utils {
 					NetworkEntity<?> owner = d.getOwner();
 
 					if (!vEntities.contains(owner)) {
-						vEntities.add(owner);
-					}
+                        vEntities.add(owner);
+                    }
 
 				}
 			}

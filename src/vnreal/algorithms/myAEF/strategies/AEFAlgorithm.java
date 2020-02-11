@@ -3,10 +3,10 @@ package vnreal.algorithms.myAEF.strategies;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.GenericMappingAlgorithm;
 import vnreal.algorithms.linkmapping.kShortestPathLinkMapping;
-import vnreal.algorithms.myAEF.strategies.rcrgf.LinkMapping;
-import vnreal.algorithms.myAEF.strategies.rcrgf.NodeMapping;
+import vnreal.algorithms.myAEF.strategies.aef.LinkMapping;
+import vnreal.algorithms.myAEF.strategies.aef.NodeMapping;
 
-public class RCRGF2Algorithm extends GenericMappingAlgorithm{
+public class AEFAlgorithm extends GenericMappingAlgorithm{
 	// Default values
 	private static final double DEFAULT_DISTANCE_CONSTRAINT = 70.0;
 	private static final boolean DEFAULT_OVERLOAD = false;
@@ -14,7 +14,7 @@ public class RCRGF2Algorithm extends GenericMappingAlgorithm{
 	private static final boolean DEFAULT_EPPSTEIN = false;
 	private static final String DEFAULT_LINKMAP_ALGORITHM = "ksp";
 	
-	public RCRGF2Algorithm(AlgorithmParameter param) {
+	public AEFAlgorithm(AlgorithmParameter param) {
 		double distanceConstraint = param.getDouble("distanceConstraint", DEFAULT_DISTANCE_CONSTRAINT);
 		boolean nodeOverload = param.getBoolean("overload", DEFAULT_OVERLOAD);
 		nodeMappingAlgorithm = new NodeMapping(distanceConstraint, nodeOverload);

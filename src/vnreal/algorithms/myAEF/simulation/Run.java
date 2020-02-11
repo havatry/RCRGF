@@ -7,7 +7,7 @@ import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
-import vnreal.algorithms.myAEF.strategies.RCRGF2Algorithm;
+import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
 import vnreal.algorithms.myAEF.util.FileHelper;
 import vnreal.algorithms.myAEF.util.SummaryResult;
 import vnreal.constraints.resources.BandwidthResource;
@@ -41,7 +41,7 @@ public class Run {
 		String base = "results/file/";
 		String filename = base + "substratework_20191201153422.xml";
 		AlgorithmParameter parameter = initParam();
-		new Run().process(new RCRGF2Algorithm(parameter), filename);
+		new Run().process(new AEFAlgorithm(parameter), filename);
 		new Run().process(new AvailableResources(parameter), filename);
 		new Run().process(new SubgraphIsomorphismStackAlgorithm(parameter), filename);
 		System.out.println("Done");
@@ -103,8 +103,8 @@ public class Run {
 		}
 		// 输出到文件
 		String fix;
-		if (algorithm instanceof RCRGF2Algorithm) {
-			fix = "rcrgf";
+		if (algorithm instanceof AEFAlgorithm) {
+			fix = "aef";
 		} else if (algorithm instanceof AvailableResources) {
 			fix = "greedy";
 		} else if (algorithm instanceof SubgraphIsomorphismStackAlgorithm) {

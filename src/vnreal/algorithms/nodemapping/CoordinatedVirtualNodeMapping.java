@@ -433,12 +433,7 @@ public class CoordinatedVirtualNodeMapping extends AbstractNodeMapping {
 	 * value is already mapped, the following greatest value is returned. If
 	 * there is not feasible node because they have been chosen, a greedy
 	 * available resources strategy is followed.
-	 * 
-	 * @param augmented
-	 * @param flow
-	 * @param size
-	 * @param mapped
-	 * @param virtualNode
+	 *
 	 * @return the substrate node to be mapped.
 	 */
 	private SubstrateNode greatest(Map<SubstrateNode, Double> candiNodesWeight,
@@ -499,7 +494,6 @@ public class CoordinatedVirtualNodeMapping extends AbstractNodeMapping {
 	 * is followed.
 	 * 
 	 * @param candiNodesWeight
-	 * @param candidates
 	 * @return
 	 */
 	private SubstrateNode randomizedElection(
