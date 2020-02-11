@@ -47,16 +47,16 @@ public class LinkMapping2 extends AbstractLinkMapping{
 			final SubstrateNode sNode = nodeMapping.get(srcVnode);
 			final SubstrateNode dNode = nodeMapping.get(dstVnode);
 			List<SubstrateLink> path = getShortestPath(sNet, sNode, dNode, Utils.getBandwith(tVLink));
-			List<SubstrateLink> path_load = getShortestPath2(sNet, sNode, dNode);
+			List<SubstrateLink> path_load = getShortestPath2(sNet, sNode, dNode, Utils.getBandwith(tVLink));
 			if (!sNode.equals(dNode)) {
 				if (path == null || !NodeLinkAssignation.verifyPath(tVLink, path, sNode, sNet)) {
 					// 不满足需求
 					processedLinks = vNet.getEdges().size();
 					return false;
 				} else {
-				    if (path_load.size() - path.size() <= SPL) {
-				        // 更换路径
-                        path = path_load;
+				    if (path_load != null && NodeLinkAssignation.verifyPath(tVLink, path_load, sNode, sNet)
+                            && path_load.size() - path.size() <= SPL) {
+                            path = path_load;
                     }
 					// 满足需求
 					if (!NodeLinkAssignation.vlm(tVLink, path, sNet, sNode)) {
@@ -129,9 +129,20 @@ public class LinkMapping2 extends AbstractLinkMapping{
      * @return 最短的路径
      */
 	private List<SubstrateLink> getShortestPath2(SubstrateNetwork substrateNetwork, SubstrateNode source,
-                                                       SubstrateNode target) {
-        Transformer<SubstrateLink, Double> nev = sl -> Constants.C / Utils.getBandwith(sl);
-        Yen yen = new Yen(substrateNetwork, nev);
-        return yen.getShortestPaths(source, target, 1);
+                                                       SubstrateNode target, double demand) {
+        Transformer<SubstrateLink, Double> nev = sl -> {
+            double extra_bandwidth = Utils.getBandwith(sl);
+            if (Utils.small(extra_bandwidth, demand)) {
+                return Constants.BIG_NUM;
+            } else {
+                return Constants.C / extra_bandwidth;
+            }
+        };
+        Yen<SubstrateNode, SubstrateLink> yen = new Yen(substrateNetwork, nev);
+        List<List<SubstrateLink>> path = yen.getShortestPaths(source, target, 1);
+        if (path == null || path.size() == 0) {
+            return null;
+        }
+        return path.get(0);
     }
 }

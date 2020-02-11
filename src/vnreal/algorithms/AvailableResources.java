@@ -71,7 +71,6 @@ public class AvailableResources extends GenericMappingAlgorithm {
 	/**
 	 * Constructor of the algorithm
 	 * 
-	 * @param AlgorithmParameter Accepts settings for: <br />
 	 * "distance" (int) - The maximum distance within which to search for substrate nodes
 	 * (set to a negative value to disable) <br />
 	 * "overload" (boolean) - Indicate, whether a substrate node may host more than one

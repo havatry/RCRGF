@@ -37,8 +37,7 @@ import vnreal.network.NetworkStack;
 /**
  * Basis for all algorithms.
  * 
- * Implements design pattern "template method" in method {@link #run()}.
- * 
+ *
  * @author Michael Duelli
  * @since 2010-08-24
  */
@@ -52,7 +51,6 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 * </p>
 	 * 
 	 * <p>
-	 * This is called before {@link #evaluate()} in {@link #run()}.
 	 * </p>
 	 * 
 	 * @return true on successful initialization, false otherwise.
@@ -94,6 +92,5 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	protected abstract void evaluate();
 
-	/** This is called after {@link #process()} in {@link #run()}. */
 	protected abstract void postRun();
 }

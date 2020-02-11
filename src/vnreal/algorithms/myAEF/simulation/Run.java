@@ -41,7 +41,7 @@ public class Run {
 	
 	public static void main(String[] args) {
 		String base = "results/file/";
-		String filename = base + "substratework_20191201153422.xml";
+		String filename = base + "substratework_20200211212523.xml";
 		AlgorithmParameter parameter = initParam();
 		new Run().process(new AEFAlgorithm(parameter), filename);
 		new Run().process(new AvailableResources(parameter), filename);
@@ -119,7 +119,7 @@ public class Run {
 		} else {
 			fix = "null";
 		}
-		String writeFileName = filename.replace("file", "out").substring(0, filename.lastIndexOf(".") - 1) + "_" + fix + ".txt";
+		String writeFileName = filename.replace("file", "output").substring(0, filename.lastIndexOf(".") - 1) + "_" + fix + ".txt";
 		summaryResult.writeToFile(writeFileName);
 	}
 	

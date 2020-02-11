@@ -86,7 +86,7 @@ public class TestCase {
 	
 	@Test
 	public void testReadContext() {
-		Object[] result = FileHelper.readContext("results/file/substratework_20191201124020.xml");
+		Object[] result = FileHelper.readContext("results/file/substratework_20200211205527.xml");
 		System.out.println(result[1]);
 		System.out.println(result[2]);
 	}

@@ -20,4 +20,5 @@ public class Constants {
 	public static final String FILE_NAME = "results/file/substratework_" + 
 			new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".xml";
 	public static final Double C = 700D; // 反比例函数的系数
+    public static final Double BIG_NUM = 1000_000_000D; // 设置链路不可用时候的值
 }

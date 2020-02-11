@@ -61,9 +61,9 @@ public class ProduceCase {
 	
 	private static Properties initProperty() {
 		Properties properties = new Properties();
-		properties.put("snNodes", "10");
+		properties.put("snNodes", "100");
 		properties.put("minVNodes", "5");
-		properties.put("maxVNodes", "5");
+		properties.put("maxVNodes", "10");
 		properties.put("snAlpha", "0.1");
 		properties.put("vnAlpha", "0.5");
 		//---------//

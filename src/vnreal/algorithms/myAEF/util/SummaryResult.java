@@ -24,6 +24,7 @@ public class SummaryResult {
 		vnAcceptance = new ArrayList<Double>();
 		costToRevenue = new ArrayList<Double>();
 		revenueToTime = new ArrayList<Double>();
+		bandwidthStandardDiff = new ArrayList<>();
 	}
 	
 	public void addTotaTime(long executionTime) {
@@ -104,6 +105,7 @@ public class SummaryResult {
 				out.print(d3);
 				out.print(" ");
 			}
+            out.println();
 			List<Double> bsd = getBandwidthStandardDiff();
 			for (Double d4 : bsd) {
 			    out.print(d4);
