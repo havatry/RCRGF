@@ -51,7 +51,7 @@ import javax.swing.event.ChangeListener;
 import mulavito.ui.Ui;
 import mulavito.ui.components.selectionpanel.SelectionPanel;
 import mulavito.utils.Resources;
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.core.Scenario;
 import vnreal.ui.mapping.MappingPanel;
 import vnreal.ui.menu.AlgorithmsMenu;
@@ -214,7 +214,7 @@ public final class UI extends Ui {
 
 	public void update() {
 		if (!Constants.HIDDEN_RIGHT_TAB) {
-			mappingPanel.update(); // Ã»ÓÐÒþ²Ø¶ÔÓ¦Ñ¡Ïî¿¨£¬Ôò¸üÐÂ½çÃæ
+			mappingPanel.update(); // Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½Ó¦Ñ¡ï¿½î¿¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½
 		} else {
 			// TODO
 		}

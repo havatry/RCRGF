@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.algorithms.singlenetworkmapping.SingleNetworkMappingAlgorithm;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.algorithms.utils.SubgraphBasicVN.ResourceDemandEntry;
@@ -71,11 +71,11 @@ public class SubgraphIsomorphismAlgorithm extends
 		SingleNetworkMappingAlgorithm {
 	public static final boolean debug = false;
 	
-//	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // ÓÉ±äÁ¿¿ØÖÆ
+//	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // ï¿½É±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	private int numberOfTries;
-	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // ½ÚµãÓ³Éä
-	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // Á´Â·Ó³Éä
+	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // ï¿½Úµï¿½Ó³ï¿½ï¿½
+	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // ï¿½ï¿½Â·Ó³ï¿½ï¿½
 	/**
 	 * 
 	 * @param useEnergyResource
@@ -185,7 +185,7 @@ public class SubgraphIsomorphismAlgorithm extends
 		return path;
 	}
 
-	// ¶Ô±ß½øÐÐÓ³Éä, ÎÞÏòÍ¼ÕâÀïËù×÷Ð©ÐÞ¸Ä
+	// ï¿½Ô±ß½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½Þ¸ï¿½
 	Collection<ResourceDemandEntry> mapEdges(
 			VirtualNetwork g_V, SubstrateNetwork orig_g_P,
 			MappingCandidate<VirtualNode, SubstrateNode> candidate, NodeLinkMapping m,
@@ -196,7 +196,7 @@ public class SubgraphIsomorphismAlgorithm extends
 		if (out == null) {
 			return null;
 		} else if (!Constants.DIRECTED) {
-			// ÎÞÏòÍ¼Ö±½Ó·µ»Øout
+			// ï¿½ï¿½ï¿½ï¿½Í¼Ö±ï¿½Ó·ï¿½ï¿½ï¿½out
 			return out;
 		}
 		Collection<ResourceDemandEntry> in = mapInEdges(

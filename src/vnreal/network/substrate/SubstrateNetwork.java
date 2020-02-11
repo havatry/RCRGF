@@ -37,7 +37,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.mapping.Mapping;
@@ -187,7 +187,7 @@ public class SubstrateNetwork extends
 					result.addEdge(tmpSLink, tmpSNode, tmpDNode);
 				}
 			} else {
-				// ÎÞÏòÍ¼
+				// ï¿½ï¿½ï¿½ï¿½Í¼
 				result.addEdge(tmpSLink.getCopy(deepCopy), getEndpoints(tmpSLink).getFirst(), getEndpoints(tmpSLink).getSecond());
 			}
 		}

@@ -36,8 +36,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
-import sun.util.logging.resources.logging;
-import vnreal.algorithms.myrcrgf.util.Utils;
+import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
@@ -132,7 +131,7 @@ public abstract class GenericMappingAlgorithm extends
 //				return max;
 //			}
 //		});
-		// ÐéÄâÍøÂçÖÐ³É¹¦Íê³ÉÓ³Éä¸öÊý, ¼ä½Ó¼ÆËã³öÊÇ·ñÓ³Éä³É¹¦
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³É¹ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ó³ï¿½ï¿½É¹ï¿½
 		stati.add(new AbstractAlgorithmStatus("Mapped VN links") {
 			private int max = -1;
 
@@ -151,7 +150,7 @@ public abstract class GenericMappingAlgorithm extends
 				return max;
 			}
 		});
-		// ¼ÆËãËã·¨Ö´ÐÐÊ±¼ä
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨Ö´ï¿½ï¿½Ê±ï¿½ï¿½
 		stati.add(new AbstractAlgorithmStatus("Execution Time") {
 			
 			@Override
@@ -166,13 +165,13 @@ public abstract class GenericMappingAlgorithm extends
 				return 1L;
 			}
 		});
-		// ¼ÆËãÊÕÒæ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		stati.add(new AbstractAlgorithmStatus("Revenue") {
 			
 			@Override
 			public Double getValue() {
 				// TODO Auto-generated method stub
-				// ½ÚµãÊÕÒæ
+				// ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 				double nodeRevenue = 0.0, linkRevenue = 0.0;
 				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
 					nodeRevenue += Utils.getCpu(vn);
@@ -206,7 +205,7 @@ public abstract class GenericMappingAlgorithm extends
 	 */
 	@Override
 	protected boolean preRun() {
-		// THIS_TODO ½«¶à¸ö·ÇÁ¬Í¨Í¼×ª»»Îª¶à¸öÐéÄâÍøÂç
+		// THIS_TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Í¼×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return true;
 	}
 

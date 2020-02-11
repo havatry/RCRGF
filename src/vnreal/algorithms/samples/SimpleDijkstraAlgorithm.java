@@ -40,7 +40,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import org.apache.commons.collections15.ListUtils;
 
 import vnreal.algorithms.AbstractSequentialAlgorithm;
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Network;
@@ -57,9 +57,9 @@ import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
  * Maps {@link VirtualLink}s using the Dijkstra algorithm to find a path in the
  * filtered {@link SubstrateNetwork}.
  * <br>
- * Ê×ÏÈ¶ÔĞéÄâ½Úµã½øĞĞÕÒËùÓĞÍ¬Ê±Âú×ã½Úµã¶àÖÖĞèÇóµÄºòÑ¡½Úµã£¬È»ºóÈ¡¼¯ºÏÖĞµÄµÚÒ»¸ö×÷ÎªÓ³Éä½Úµã¡£ÕâÀï»á³öÏÖÆğµãºÍÖÕµã±»Ó³Éäµ½Í¬Ò»¸ö
- * µ×²ãÍøÂç½ÚµãÖĞ£¬¶Ô´Ë½øĞĞÁËÉèÖÃ¡£ µ±Ó³Éäµ½Á½¸öµ×²ã½Úµãºó£¬¾Í¿ªÊ¼Ê¹ÓÃDijkstraËã·¨£¬ÔÚµ×²ãÍøÂçÖĞÕÒµ½Ò»Ìõ×î¶ÌÂ·¾¶¡£Èç¹û¸ÃÂ·¾¶Âú×ã
- * ĞéÄâÍøÂçµÄÁ´Â·´ø¿íĞèÇó¾Í½øĞĞÓ³Éä£¬·ñÔòÅ×³öÒì³£¡£
+ * ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½Ñ¡ï¿½Úµã£¬È»ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ÎªÓ³ï¿½ï¿½Úµã¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµã±»Ó³ï¿½äµ½Í¬Ò»ï¿½ï¿½
+ * ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ğ£ï¿½ï¿½Ô´Ë½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½ ï¿½ï¿½Ó³ï¿½äµ½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Úµï¿½ó£¬¾Í¿ï¿½Ê¼Ê¹ï¿½ï¿½Dijkstraï¿½ã·¨ï¿½ï¿½ï¿½Úµ×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½Ó³ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½
  * @author Michael Duelli
  * @since 2010-09-14
  */
@@ -168,7 +168,7 @@ public final class SimpleDijkstraAlgorithm extends
 		} else {
 			if (Constants.ASSURE_UNIQUE) {
 				if (dstCandidates.size() == 1) {
-					// ´ÓsrcÖĞÈ¡Ò»¸ö²»ÏàÍ¬µÄ
+					// ï¿½ï¿½srcï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
 					if (srcCandidates.size() == 1) {
 						if (dstCandidates.get(0) == srcCandidates.get(0)) {
 							System.out.println("Cannot find path, because the start and end are same point");

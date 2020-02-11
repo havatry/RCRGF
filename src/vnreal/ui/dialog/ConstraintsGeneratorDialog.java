@@ -66,7 +66,7 @@ import mulavito.ui.dialogs.AbstractButtonDialog;
 import mulavito.utils.ClassScanner;
 import mulavito.utils.distributions.UniformStream;
 import vnreal.ExchangeParameter;
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.constraints.ILinkConstraint;
 import vnreal.constraints.INodeConstraint;
 import vnreal.constraints.demands.AbstractDemand;
@@ -557,7 +557,7 @@ public class ConstraintsGeneratorDialog extends AbstractButtonDialog {
 		return null;
 	}
 
-	// Ôö¼ÓNetworkEntityÀ´ÅÐ¶ÏÊÇÎªÁ´Â·Ôö¼Ó×ÊÔ´»¹ÊÇÎª½ÚµãÔö¼Ó×ÊÔ´ 20191124
+	// ï¿½ï¿½ï¿½ï¿½NetworkEntityï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Îªï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Îªï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ 20191124
 	@SuppressWarnings("rawtypes")
 	private static Object getRandomParamValue(NetworkEntity ne, Class<?> type, String max) {
 		if (type.equals(Integer.class)) {

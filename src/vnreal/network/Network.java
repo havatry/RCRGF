@@ -36,8 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.graph.ILayer;
-import vnreal.algorithms.myrcrgf.util.Constants;
-import vnreal.algorithms.myrcrgf.util.MyUndirectedGraph;
+import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myAEF.util.MyUndirectedGraph;
 import vnreal.constraints.AbstractConstraint;
 import edu.uci.ics.jung.graph.DirectedOrderedSparseMultigraph;
 import edu.uci.ics.jung.graph.ObservableGraph;
@@ -56,7 +56,7 @@ public abstract class Network<T extends AbstractConstraint, V extends Node<T>, E
 		this(autoUnregisterConstraints, true);
 	}
 	
-	// ½«directed¸Ä³ÉÎÞÏò, ÊÊÅäÎÞÏòÍ¼ÆðµãºÍÖÕµãµÄ»ñÈ¡
+	// ï¿½ï¿½directedï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½Ä»ï¿½È¡
 	protected Network(boolean autoUnregisterConstraints, boolean directed) {
 		super(directed ? new DirectedOrderedSparseMultigraph<V, E>() : 
 			(Constants.ADAPTE_UNDIRECTEDGRAPH ? new MyUndirectedGraph<>() : new UndirectedOrderedSparseMultigraph<V,E>()));

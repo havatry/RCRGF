@@ -1,4 +1,4 @@
-package vnreal.algorithms.myrcrgf.simulation;
+package vnreal.algorithms.myAEF.simulation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,9 +7,9 @@ import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
-import vnreal.algorithms.myrcrgf.strategies.RCRGF2Algorithm;
-import vnreal.algorithms.myrcrgf.util.FileHelper;
-import vnreal.algorithms.myrcrgf.util.SummaryResult;
+import vnreal.algorithms.myAEF.strategies.RCRGF2Algorithm;
+import vnreal.algorithms.myAEF.util.FileHelper;
+import vnreal.algorithms.myAEF.util.SummaryResult;
 import vnreal.constraints.resources.BandwidthResource;
 import vnreal.constraints.resources.CpuResource;
 import vnreal.network.NetworkStack;

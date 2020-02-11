@@ -1,4 +1,4 @@
-package vnreal.algorithms.myrcrgf.strategies.rcrgf;
+package vnreal.algorithms.myAEF.strategies.rcrgf;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,8 +10,8 @@ import java.util.Set;
 
 import edu.uci.ics.jung.graph.util.Pair;
 import vnreal.algorithms.AbstractLinkMapping;
-import vnreal.algorithms.myrcrgf.util.Constants;
-import vnreal.algorithms.myrcrgf.util.Utils;
+import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;

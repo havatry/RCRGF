@@ -1,4 +1,4 @@
-package vnreal.algorithms.myrcrgf.util;
+package vnreal.algorithms.myAEF.util;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

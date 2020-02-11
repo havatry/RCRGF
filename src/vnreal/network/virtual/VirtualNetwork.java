@@ -38,7 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;
@@ -85,7 +85,7 @@ public class VirtualNetwork extends
 	public boolean addEdge(VirtualLink edge, VirtualNode v, VirtualNode w) {
 		if (edge.getLayer() == getLayer() && v.getLayer() == getLayer()
 				&& w.getLayer() == getLayer()) {
-//			map.put(edge, new Pair<>(v, w)); // ╫╚╠ъ╨м╫з╣Ц╤тс╕ио
+//			map.put(edge, new Pair<>(v, w)); // О©╫О©╫О©╫ъ╨м╫з╣О©╫О©╫с╕О©╫О©╫
 			return super.addEdge(edge, new Pair<VirtualNode>(v, w));
 		}
 		else

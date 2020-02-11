@@ -39,7 +39,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
-import vnreal.algorithms.myrcrgf.util.Utils;
+import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
@@ -113,7 +113,7 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	@Override
 	protected void evaluate() {
-		// ÖØÖÃ
+		// ï¿½ï¿½ï¿½ï¿½
 		reset();
 		long start = System.currentTimeMillis();
 		// Mapping previousResult = new Mapping();
@@ -137,7 +137,7 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	public List<AbstractAlgorithmStatus> getStati() {
 		LinkedList<AbstractAlgorithmStatus> stati = new LinkedList<AbstractAlgorithmStatus>();
 		
-		// ÐéÄâÍøÂçÖÐ³É¹¦Íê³ÉÓ³Éä¸öÊý, ¼ä½Ó¼ÆËã³öÊÇ·ñÓ³Éä³É¹¦
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³É¹ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ó³ï¿½ï¿½É¹ï¿½
 		stati.add(new AbstractAlgorithmStatus("Mapped VN links") {
 			@Override
 			public Integer getValue() {
@@ -149,7 +149,7 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 				return 1;
 			}
 		});
-		// ¼ÆËãËã·¨Ö´ÐÐÊ±¼ä
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨Ö´ï¿½ï¿½Ê±ï¿½ï¿½
 		stati.add(new AbstractAlgorithmStatus("Execution Time") {
 			
 			@Override
@@ -164,13 +164,13 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 				return 1L;
 			}
 		});
-		// ¼ÆËãÊÕÒæ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		stati.add(new AbstractAlgorithmStatus("Revenue") {
 			
 			@Override
 			public Double getValue() {
 				// TODO Auto-generated method stub
-				// ½ÚµãÊÕÒæ
+				// ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 				double nodeRevenue = 0.0, linkRevenue = 0.0;
 				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
 					nodeRevenue += Utils.getCpu(vn);

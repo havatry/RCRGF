@@ -19,7 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
-import vnreal.algorithms.myrcrgf.util.Constants;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.network.Link;
 import vnreal.network.Network;
 import vnreal.network.Node;
@@ -114,7 +114,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 
 			@Override
 			protected SubstrateNetwork createNetwork() {
-				return new SubstrateNetwork(autoUnregisterConstraints, Constants.DIRECTED); // µ÷ÕûÓÐÏòºÍÎÞÏòÍ¼
+				return new SubstrateNetwork(autoUnregisterConstraints, Constants.DIRECTED); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 			}
 
 			@Override
@@ -140,7 +140,7 @@ public class WaxmanGenerator implements ITopologyGenerator {
 			
 			@Override
 			protected VirtualNetwork createNetwork() {
-				return new VirtualNetwork(level, true, Constants.DIRECTED); // µ÷ÕûÓÐÏòºÍÎÞÏò
+				return new VirtualNetwork(level, true, Constants.DIRECTED); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 			
 			@Override
