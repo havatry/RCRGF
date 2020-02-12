@@ -22,3 +22,5 @@
 8. 画出节点映射和链路映射的图分析 (T2)
 9. 图形展示时候subgraph or subgraphisomorphism (T3)
 10. 实验只是一次结果 是否要多几次，还有关于acceptance ration为1的情况 (T4)
+
+## 完善alevin仿真实验

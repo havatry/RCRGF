@@ -43,12 +43,12 @@ public class Run {
 	
 	public static void main(String[] args) {
 		String base = "results/file/";
-		String filename = base + "substratework_20200211212523.xml";
+		String filename = base + "substratework_20200212000437.xml";
 		AlgorithmParameter parameter = initParam();
-		new Run().process(new AEFAlgorithm(parameter), filename);
-		new Run().process(new AvailableResources(parameter), filename);
+		new Run().process(new AEFAlgorithm(parameter, false), filename); // baseline
+        new Run().process(new AEFAlgorithm(parameter, true), filename); // advanced
 		new Run().process(new SubgraphIsomorphismStackAlgorithm(parameter), filename);
-//		new Run().process(new CoordinatedMapping(parameter), filename);
+		new Run().process(new CoordinatedMapping(parameter), filename);
 		new Run().process(new NRMAlgorithm(parameter), filename);
 		System.out.println("Done");
 	}
@@ -115,9 +115,11 @@ public class Run {
 		// 输出到文件
 		String fix;
 		if (algorithm instanceof AEFAlgorithm) {
-			fix = "aef";
-		} else if (algorithm instanceof AvailableResources) {
-			fix = "greedy";
+		    if (((AEFAlgorithm) algorithm).isAdvanced()) {
+                fix = "aefAdvance";
+            } else {
+		        fix = "aefBaseline";
+            }
 		} else if (algorithm instanceof SubgraphIsomorphismStackAlgorithm) {
 			fix = "subgraph";
 		} else if (algorithm instanceof CoordinatedMapping) {

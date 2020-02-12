@@ -13,8 +13,9 @@ public class ProduceCase {
 	public static void main(String[] args) {
 		List<Integer> startList;
 		List<Integer> endList;
-		double arive_lambda = 3.0 / 100;
-		double preserve_lambda = 1.0 / 500;
+		// 3.0 / 100 & 1.0 / 500
+		double arive_lambda = 10.0 / 100;
+		double preserve_lambda = 1.0 / 750;
 		int end = 2000;
 		startList = new ArrayList<Integer>();
 		endList = new ArrayList<>();

@@ -16,10 +16,12 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 	private static final String DEFAULT_LINKMAP_ALGORITHM = "ksp";
 	private static final boolean DEFAULT_ADVANCED = false;
 	private static final int DEFAULT_SPL = 2;
-	
-	public AEFAlgorithm(AlgorithmParameter param) {
+	private boolean advanced;
+
+	public AEFAlgorithm(AlgorithmParameter param, boolean advanced) {
 		double distanceConstraint = param.getDouble("distanceConstraint", DEFAULT_DISTANCE_CONSTRAINT);
 		boolean nodeOverload = param.getBoolean("overload", DEFAULT_OVERLOAD);
+		this.advanced = advanced;
 		nodeMappingAlgorithm = new NodeMapping(distanceConstraint, nodeOverload);
 		
 		if (param.getString("linkMapAlgorithm", DEFAULT_LINKMAP_ALGORITHM).equals("ksp")) {
@@ -28,9 +30,11 @@ public class AEFAlgorithm extends GenericMappingAlgorithm{
 			linkMappingAlgorithm = new kShortestPathLinkMapping(k, eppstein);
 		} else {
 		    int SPL = param.getInteger("spl", DEFAULT_SPL);
-		    boolean advanced = param.getBoolean("AEFAdvanced", DEFAULT_ADVANCED);
             linkMappingAlgorithm = advanced ? new LinkMapping2(SPL) : new LinkMapping(); // 更新算法或者Baseline算法
 		}
-		
 	}
+
+    public boolean isAdvanced() {
+        return advanced;
+    }
 }
