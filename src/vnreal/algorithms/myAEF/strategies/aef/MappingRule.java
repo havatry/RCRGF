@@ -3,6 +3,8 @@ package vnreal.algorithms.myAEF.strategies.aef;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
@@ -18,6 +20,7 @@ import vnreal.network.virtual.VirtualNode;
 public class MappingRule {
 	private SubstrateNetwork substrateNetwork;
 	private VirtualNetwork virtualNetwork;
+	private Logger log = LoggerFactory.getLogger(MappingRule.class);
 	
 	public MappingRule(SubstrateNetwork substrateNetwork, VirtualNetwork virtualNetwork) {
 		//Created constructor stubs

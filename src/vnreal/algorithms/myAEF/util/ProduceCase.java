@@ -14,16 +14,16 @@ public class ProduceCase {
 		List<Integer> startList;
 		List<Integer> endList;
 		// 3.0 / 100 & 1.0 / 500
-		double arive_lambda = 10.0 / 100;
-		double preserve_lambda = 1.0 / 750;
+		double arrive_lambda = 10.0 / 100;
+		double preserve_lambda = 1.0 / 1000;
 		int end = 2000;
 		startList = new ArrayList<Integer>();
 		endList = new ArrayList<>();
-		startList.add(Utils.exponentialDistribution(arive_lambda));
+		startList.add(Utils.exponentialDistribution(arrive_lambda));
 		endList.add(Utils.exponentialDistribution(preserve_lambda));
 		
 		while (startList.get(startList.size() - 1) <= end) {
-			startList.add(startList.get(startList.size() - 1) + Utils.exponentialDistribution(arive_lambda));
+			startList.add(startList.get(startList.size() - 1) + Utils.exponentialDistribution(arrive_lambda));
 			endList.add(Utils.exponentialDistribution(preserve_lambda));
 		}
 		startList.remove(startList.size() - 1);
@@ -65,8 +65,12 @@ public class ProduceCase {
 		properties.put("snNodes", "100");
 		properties.put("minVNodes", "5");
 		properties.put("maxVNodes", "10");
-		properties.put("snAlpha", "0.1");
+		properties.put("snAlpha", "0.5"); // 0.1 -> 0.5
 		properties.put("vnAlpha", "0.5");
+		properties.put("snBeta", "0.1");
+		properties.put("vnBeta", "0.25");
+        properties.put("bandwithResource", "20");
+        properties.put("substrateBaseBandwithResource", "50");
 		//---------//
 		return properties;
 	}

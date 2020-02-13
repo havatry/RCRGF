@@ -43,7 +43,7 @@ public class Run {
 	
 	public static void main(String[] args) {
 		String base = "results/file/";
-		String filename = base + "substratework_20200212000437.xml";
+		String filename = base + "substratework_20200213182601.xml";
 		AlgorithmParameter parameter = initParam();
 		new Run().process(new AEFAlgorithm(parameter, false), filename); // baseline
         new Run().process(new AEFAlgorithm(parameter, true), filename); // advanced
@@ -55,7 +55,6 @@ public class Run {
 	
 	@SuppressWarnings("unchecked")
 	private void process(AbstractAlgorithm algorithm, String filename) {
-		
 		Object[] result = FileHelper.readContext(filename);
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
@@ -129,7 +128,8 @@ public class Run {
         } else {
 			fix = "null";
 		}
-		String writeFileName = filename.replace("file", "output").substring(0, filename.lastIndexOf(".") - 1) + "_" + fix + ".txt";
+		filename = filename.replace("file", "output");
+		String writeFileName = filename.substring(0, filename.lastIndexOf(".")) + "_" + fix + ".txt";
 		summaryResult.writeToFile(writeFileName);
 	}
 	

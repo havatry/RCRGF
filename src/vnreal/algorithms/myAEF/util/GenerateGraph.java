@@ -107,8 +107,8 @@ public class GenerateGraph {
 		NetworkStack networkStack =  new NetworkStack(null, Arrays.asList(virtualNetwork)); // 临时构造
 		// 设置基准资源
 		Constants.SWITCH_BASE_RES_DEM = Boolean.parseBoolean((String) properties.getOrDefault("switch", "true"));
-		Constants.VIRTUAL_BASE_CPU_RESOURCE = Double.parseDouble((String) properties.getOrDefault("substrateBaseCpuResource", "5"));
-        Constants.VIRTUAL_BASE_BANDWITH_RESOURCE = Double.parseDouble((String) properties.getOrDefault("substrateBaseBandwithResource", "5"));
+		Constants.VIRTUAL_BASE_CPU_RESOURCE = Double.parseDouble((String) properties.getOrDefault("virtualBaseCpuResource", "5"));
+        Constants.VIRTUAL_BASE_BANDWITH_RESOURCE = Double.parseDouble((String) properties.getOrDefault("virtualBaseBandwithResource", "5"));
         ConstraintsGeneratorDialog.generateConstraintsVirtual(Arrays.asList(resClassesToGenerateVN), 
         		Arrays.asList(resParamNamesToGenerateVN), Arrays.asList(resMaxValuesVN), networkStack);
         
