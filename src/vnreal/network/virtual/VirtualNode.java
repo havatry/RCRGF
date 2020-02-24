@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.virtual;
 
+import vnreal.algorithms.rcrgf.util.DTOVirtual;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.network.Node;
 
@@ -42,6 +43,7 @@ import vnreal.network.Node;
  */
 public class VirtualNode extends Node<AbstractDemand> {
 	private double referencedValue;
+	private DTOVirtual dtoVirtual;
 	
 	public VirtualNode(int layer) {
 		super(layer);
@@ -79,4 +81,8 @@ public class VirtualNode extends Node<AbstractDemand> {
 	public void setReferencedValue(double referencedValue) {
 		this.referencedValue = referencedValue;
 	}
+
+    public DTOVirtual getDtoVirtual() {
+        return dtoVirtual;
+    }
 }

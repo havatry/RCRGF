@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.substrate;
 
+import vnreal.algorithms.rcrgf.util.DTOSubstrate;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Node;
 
@@ -42,6 +43,7 @@ import vnreal.network.Node;
  */
 public class SubstrateNode extends Node<AbstractResource> {
 	private double referencedValue;
+	private DTOSubstrate dtoSubstrate;
 	
 	public SubstrateNode() {
 		super(0);
@@ -78,4 +80,8 @@ public class SubstrateNode extends Node<AbstractResource> {
 	public double getReferencedValue() {
 		return referencedValue;
 	}
+
+    public DTOSubstrate getDtoSubstrate() {
+        return dtoSubstrate;
+    }
 }
