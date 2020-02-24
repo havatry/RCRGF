@@ -1,10 +1,10 @@
-package vnreal.algorithms.rcrgf.core;
+package vnreal.algorithms.myRCRGF.core;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vnreal.algorithms.rcrgf.util.Utils;
+import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;

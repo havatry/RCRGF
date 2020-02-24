@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf.util;
+package vnreal.algorithms.myRCRGF.util;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.uci.ics.jung.graph.util.EdgeType;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;

@@ -1,11 +1,11 @@
-package vnreal.algorithms.rcrgf.test;
+package vnreal.algorithms.myRCRGF.test;
 
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
-import vnreal.algorithms.rcrgf.config.Constants;
-import vnreal.algorithms.rcrgf.core.RCRGFStackAlgorithm;
+import vnreal.algorithms.myRCRGF.config.Constants;
+import vnreal.algorithms.myRCRGF.core.RCRGFStackAlgorithm;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 

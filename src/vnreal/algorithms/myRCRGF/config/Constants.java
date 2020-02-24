@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf.config;
+package vnreal.algorithms.myRCRGF.config;
 
 import java.io.PrintWriter;
 

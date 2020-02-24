@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf.util;
+package vnreal.algorithms.myRCRGF.util;
 
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNode;

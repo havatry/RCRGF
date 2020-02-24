@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf.core;
+package vnreal.algorithms.myRCRGF.core;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
-import vnreal.algorithms.rcrgf.config.Constants;
-import vnreal.algorithms.rcrgf.util.Statistics;
-import vnreal.algorithms.rcrgf.util.Utils;
+import vnreal.algorithms.myRCRGF.config.Constants;
+import vnreal.algorithms.myRCRGF.util.Statistics;
+import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.virtual.VirtualNetwork;

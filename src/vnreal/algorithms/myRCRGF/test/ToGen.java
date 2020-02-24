@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf.test;
+package vnreal.algorithms.myRCRGF.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

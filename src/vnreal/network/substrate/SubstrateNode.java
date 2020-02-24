@@ -31,7 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.substrate;
 
-import vnreal.algorithms.rcrgf.util.DTOSubstrate;
+import vnreal.algorithms.myRCRGF.util.DTOSubstrate;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Node;
 

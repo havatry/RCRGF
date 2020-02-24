@@ -1,15 +1,14 @@
-package vnreal.algorithms.rcrgf.core;
+package vnreal.algorithms.myRCRGF.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import vnreal.algorithms.rcrgf.util.DSU;
-import vnreal.algorithms.rcrgf.util.Utils;
+import vnreal.algorithms.myRCRGF.util.DSU;
+import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
