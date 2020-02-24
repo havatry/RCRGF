@@ -12,9 +12,9 @@ import vnreal.io.XMLImporter;
 public class Simulation {
 	public static void main(String[] args) {
 		Simulation simulation = new Simulation();
-		for (int snodes = 100; snodes <= 300; snodes += 50) {
-			for (double ration = 0.01; ration < 0.0505; ration += 0.02) {
-				for (double alpha = 0.3; alpha < 1.25; alpha += 0.4) {
+		for (int snodes = 100; snodes < 550; snodes += 50) {
+			for (double ration = 0.01; ration < 0.105; ration += 0.01) {
+				for (double alpha = 0.3; alpha < 1.25; alpha += 0.1) {
 					String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_1_" + ration + "_" + alpha + ".xml";
 					System.out.println("Process: " + filename);
 					// ¶ÁÈ¡ÎÄ¼þ
