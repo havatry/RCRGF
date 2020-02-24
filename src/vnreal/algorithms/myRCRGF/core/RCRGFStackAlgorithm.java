@@ -8,7 +8,7 @@ import java.util.List;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
-import vnreal.algorithms.myRCRGF.config.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.algorithms.myRCRGF.util.Statistics;
 import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.Network;

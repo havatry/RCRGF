@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.myRCRGF.auxi.SelectCoreNode;
 import vnreal.algorithms.myRCRGF.util.BFSTravel;
 import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.substrate.SubstrateLink;

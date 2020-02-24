@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import vnreal.algorithms.myRCRGF.config.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.algorithms.myRCRGF.core.RemoveEdge;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;

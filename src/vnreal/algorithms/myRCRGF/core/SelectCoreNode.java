@@ -1,4 +1,4 @@
-package vnreal.algorithms.myRCRGF.auxi;
+package vnreal.algorithms.myRCRGF.core;
 
 import java.util.ArrayList;
 import java.util.Collections;

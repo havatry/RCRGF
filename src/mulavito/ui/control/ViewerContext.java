@@ -35,7 +35,7 @@ import mulavito.ui.components.GraphPanel;
 import mulavito.ui.components.LayerViewer;
 
 /**
- * Abstract adapter class for connecting a {@link GraphPanel} with the data
+ * Abstract save class for connecting a {@link GraphPanel} with the data
  * layer. It is automatically added to the given owner {@link GraphPanel}.
  * 
  * @author Julian Ott

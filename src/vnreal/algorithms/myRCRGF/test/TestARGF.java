@@ -3,7 +3,7 @@ package vnreal.algorithms.myRCRGF.test;
 import org.junit.Before;
 import org.junit.Test;
 
-import vnreal.algorithms.myRCRGF.config.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.algorithms.myRCRGF.core.RCRGFStackAlgorithm;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
