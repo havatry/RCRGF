@@ -43,7 +43,7 @@ import vnreal.network.Node;
  */
 public class SubstrateNode extends Node<AbstractResource> {
 	private double referencedValue;
-	private DTOSubstrate dtoSubstrate;
+	private DTOSubstrate dtoSubstrate = new DTOSubstrate();
 	
 	public SubstrateNode() {
 		super(0);

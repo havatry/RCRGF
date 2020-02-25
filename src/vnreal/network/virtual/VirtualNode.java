@@ -43,7 +43,7 @@ import vnreal.network.Node;
  */
 public class VirtualNode extends Node<AbstractDemand> {
 	private double referencedValue;
-	private DTOVirtual dtoVirtual;
+	private DTOVirtual dtoVirtual = new DTOVirtual();
 	
 	public VirtualNode(int layer) {
 		super(layer);
