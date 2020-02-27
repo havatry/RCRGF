@@ -400,12 +400,12 @@ public class SubgraphIsomorphismAlgorithm extends
 		NodeLinkMapping result = vnmFlib(new NodeLinkMapping(), vNetwork, sNetwork,
 				sNetwork, omega, epsilon);
 //		if (Constants.SUBGRAPHISOMORPHISM_NORMAL) {
-//			for (SubstrateNode sn : result.getNodeMappings().keySet()) {
-//				nodeMapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
-//			}
-//			for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
-//				linkMapping.put(result.getLinkMappings().get(links).iterator().next(), links);
-//			}
+        for (SubstrateNode sn : result.getNodeMappings().keySet()) {
+            nodeMapping.put(result.getNodeMappings().get(sn).iterator().next(), sn);
+        }
+        for (List<SubstrateLink> links : result.getLinkMappings().keySet()) {
+            linkMapping.put(result.getLinkMappings().get(links).iterator().next(), links);
+        }
 //		}
 		return result;
 	}
