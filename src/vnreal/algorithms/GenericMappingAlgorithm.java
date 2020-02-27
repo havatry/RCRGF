@@ -67,17 +67,6 @@ public abstract class GenericMappingAlgorithm extends
 	protected AbstractNodeMapping nodeMappingAlgorithm;
 	protected AbstractLinkMapping linkMappingAlgorithm;
 
-	/**
-	 * The constructor initializes the variable and introduce to the virtual
-	 * links of every virtual network, the hidden hop demand.
-	 * 
-	 * @param stack
-	 *            of networks VNRs and Substrate
-	 * @param implemented
-	 *            nodeMappingAlgorithm
-	 * @param implemented
-	 *            linkMappingAlgorithm
-	 */
 	@Deprecated	// Should not be called directly
 	protected GenericMappingAlgorithm(NetworkStack stack,
 			AbstractNodeMapping nodeMappingAlgorithm,

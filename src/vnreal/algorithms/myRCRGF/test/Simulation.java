@@ -4,8 +4,10 @@ import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
+import vnreal.algorithms.myRCRGF.util.AvailableResourcesCompare;
 import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.algorithms.myRCRGF.core.RCRGFStackAlgorithm;
+import vnreal.algorithms.myRCRGF.util.SubgraphIsomorphismCompare;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 
@@ -40,7 +42,7 @@ public class Simulation {
 	private void doSubgraph(String filename) {
 		Scenario scenario = XMLImporter.importScenario(filename);
 		SubgraphIsomorphismStackAlgorithm algorithm =
-				new SubgraphIsomorphismStackAlgorithm(scenario.getNetworkStack(), new SubgraphIsomorphismAlgorithm());
+				new SubgraphIsomorphismCompare(scenario.getNetworkStack(), new SubgraphIsomorphismAlgorithm());
 		algorithm.performEvaluation();
 	}
 	
@@ -58,8 +60,8 @@ public class Simulation {
 		param.put("kShortestPaths", "5"); //
 		param.put("overload", "False");
 		param.put("PathSplitting", "False");
-		AvailableResources availableResources
-			= new AvailableResources(param);
+		AvailableResourcesCompare availableResources
+			= new AvailableResourcesCompare(param);
 		availableResources.setStack(scenario.getNetworkStack());
 		availableResources.performEvaluation();
 	}
