@@ -1,6 +1,8 @@
-package vnreal.algorithms.myRCRGF.util;
+package vnreal.algorithms;
 
-import vnreal.algorithms.GenericMappingAlgorithm;
+import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.myRCRGF.util.Statistics;
+import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.virtual.VirtualNetwork;
 
 import java.io.FileWriter;

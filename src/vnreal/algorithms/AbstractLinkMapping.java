@@ -82,7 +82,7 @@ public abstract class AbstractLinkMapping {
 	 *            Output of node mapping algorithm
 	 * @return boolean indicating whether the link mapping was successful
 	 */
-	public abstract boolean linkMapping(SubstrateNetwork sNet, VirtualNetwork vNet,
+	protected abstract boolean linkMapping(SubstrateNetwork sNet, VirtualNetwork vNet,
 			Map<VirtualNode, SubstrateNode> nodeMapping);
 
 	public int getProcessedLinks() {
@@ -102,7 +102,7 @@ public abstract class AbstractLinkMapping {
 		this.hhMappings = hhMappings;
 	}
 	
-	public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+	protected Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
 		return linkMapping;
 	}
 }

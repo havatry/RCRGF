@@ -153,9 +153,9 @@ public abstract class AbstractNodeMapping {
 	 * @return true if the node mapping was successfully performed and false
 	 *         otherwise.
 	 */
-	public abstract boolean nodeMapping(SubstrateNetwork sNet, VirtualNetwork vNet);
+	protected abstract boolean nodeMapping(SubstrateNetwork sNet, VirtualNetwork vNet);
 
-	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+	protected Map<VirtualNode, SubstrateNode> getNodeMapping() {
 		return nodeMapping;
 	}
 

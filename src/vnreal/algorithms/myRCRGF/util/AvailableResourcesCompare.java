@@ -1,6 +1,7 @@
 package vnreal.algorithms.myRCRGF.util;
 
 import vnreal.algorithms.AlgorithmParameter;
+import vnreal.algorithms.GenericMappingAlgorithmCompare;
 import vnreal.algorithms.linkmapping.PathSplittingVirtualLinkMapping;
 import vnreal.algorithms.linkmapping.kShortestPathLinkMapping;
 import vnreal.algorithms.nodemapping.AvailableResourcesNodeMapping;
