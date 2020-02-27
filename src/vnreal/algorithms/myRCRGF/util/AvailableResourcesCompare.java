@@ -42,7 +42,7 @@ public class AvailableResourcesCompare extends GenericMappingAlgorithmCompare {
             double weightBw = param.getDouble("weightBw", DEFAULT_WBW);
             this.linkMappingAlgorithm = new PathSplittingVirtualLinkMapping(weightCpu, weightBw);
         } else {
-            int k = param.getInteger("kShortestPath", DEFAULT_KSP);
+            int k = param.getInteger("kShortestPaths", DEFAULT_KSP);
             boolean eppstein = param.getBoolean("eppstein", DEFAULT_EPPSTEIN);
             this.linkMappingAlgorithm = new kShortestPathLinkMapping(k, eppstein);
         }

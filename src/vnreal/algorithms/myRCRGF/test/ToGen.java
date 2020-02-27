@@ -14,8 +14,8 @@ public class ToGen {
              snodes < Integer.parseInt(properties.getProperty("rcrgf.snode.max"));
              snodes += Integer.parseInt(properties.getProperty("rcrgf.snode.step"))) {
 //			for (double ration = 0.01; ration < 0.105; ration += 0.01) {
-            double ration = Double.parseDouble(properties.getProperty("rcrgf.snode.ratio")),
-                    alpha = Double.parseDouble(properties.getProperty("rcrgf.snode.alpha"));
+            double ration = Double.parseDouble(properties.getProperty("rcrgf.ratio")),
+                    alpha = Double.parseDouble(properties.getProperty("rcrgf.alpha"));
 //			for (double ration = 0.01; ration < 0.105; ration += 0.01) {
 //				for (double alpha = 0.3; alpha < 1.25; alpha += 0.1) {
             generateTopology.setSnodes(snodes);

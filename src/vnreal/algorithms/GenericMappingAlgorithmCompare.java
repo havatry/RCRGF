@@ -33,23 +33,30 @@ public class GenericMappingAlgorithmCompare extends GenericMappingAlgorithm{
                 if (!nodeMappingAlgorithm.nodeMapping(ns.getSubstrate(), p)) {
                     ns.clearVnrMappings(p);
                     processedLinks += p.getEdges().size();
+                    statistics.setSuccVns(1);
+                    statistics.setRevenToCost(0.0);
+                    statistics.setEndTime(System.currentTimeMillis());
                     return true;
                 }
             }
         } else {
             ns.clearVnrMappings(p);
             processedLinks += p.getEdges().size();
+            statistics.setSuccVns(1);
+            statistics.setRevenToCost(0.0);
+            statistics.setEndTime(System.currentTimeMillis());
             return true;
         }
         // Link Mapping stage
         if (!linkMappingAlgorithm.linkMapping(ns.getSubstrate(), p, nodeMappingAlgorithm
                 .getNodeMapping())) {
+            statistics.setSuccVns(1);
             ns.clearVnrMappings(p);
         } else {
+            statistics.setSuccVns(0);
                 mappedLinks += linkMappingAlgorithm.getMappedLinks();
         }
         statistics.setRevenToCost(Utils.revenueToCostRation(nodeMappingAlgorithm.getNodeMapping(), linkMappingAlgorithm.getLinkMapping()));
-        statistics.setSuccVns(1);
         processedLinks += linkMappingAlgorithm.getProcessedLinks();
         statistics.setEndTime(System.currentTimeMillis());
         return true;
