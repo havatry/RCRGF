@@ -1,12 +1,8 @@
-package vnreal.algorithms.myAEF.simulation;
+package vnreal.algorithms.myAdapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
-import vnreal.algorithms.AvailableResources;
 import vnreal.algorithms.CoordinatedMapping;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
@@ -22,12 +18,14 @@ import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualNetwork;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- * 按照泊松分布生成虚拟请求的开始时间，指数分布生成虚拟请求的停留时间，1.每隔一段时间统计所有请求映射的总时间
- * 2.每隔一段时间统计代价/收益比 3.每隔一段时间统计接收率。 对比三种算法
- * 2019年11月24日 下午7:46:27
+ * 提供调用接口process方法
  */
-public class Run {
+public class RunAEFAdapter {
 	private static final int interval = 50; // 实验处理间隔
 	private static final int end = 2000; // 模拟实验时间
 	private static final int processed = -1; // -1表示该虚拟请求已经释放了或者没有映射成功, 无需释放
@@ -41,20 +39,9 @@ public class Run {
 	private long hasExecuteTime; // 上次算法已经计算时间
 	private SummaryResult summaryResult = new SummaryResult();
 	
-	public static void main(String[] args) {
-		String base = "results/file/";
-		String filename = base + "substratework_20200213182601.xml";
-		AlgorithmParameter parameter = initParam();
-		new Run().process(new AEFAlgorithm(parameter, false), filename); // baseline
-        new Run().process(new AEFAlgorithm(parameter, true), filename); // advanced
-		new Run().process(new SubgraphIsomorphismStackAlgorithm(parameter), filename);
-		new Run().process(new CoordinatedMapping(parameter), filename);
-		new Run().process(new NRMAlgorithm(parameter), filename);
-		System.out.println("Done");
-	}
-	
 	@SuppressWarnings("unchecked")
-	private void process(AbstractAlgorithm algorithm, String filename) {
+	public void process(AbstractAlgorithm algorithm, String filename, int id, String type, int total) {
+	    EventProcess eventProcess = new EventProcess(algorithm, id, type);
 		Object[] result = FileHelper.readContext(filename);
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
@@ -63,7 +50,7 @@ public class Run {
 		endList = (List<Integer>)result[2];
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
-		for (int time = interval; time <= end; time += interval) {
+		for (int time = interval; time <= total; time += interval) {
 			// 处理endList
 			processEndList(time, inter);
 			// 处理新的strtList
@@ -84,7 +71,7 @@ public class Run {
 					}
 					hasExecuteTime += (Long)status.get(1).getValue();
 					// 插入事件处理
-
+                    eventProcess.process(i+1, substrateNetwork, virtualNetworks.get(i), status.get(0).getRatio() == 100);
 				} else {
 					break; // next time
 				}

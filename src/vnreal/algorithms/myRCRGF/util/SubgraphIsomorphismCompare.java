@@ -47,4 +47,8 @@ public class SubgraphIsomorphismCompare extends SubgraphIsomorphismStackAlgorith
             e.printStackTrace();
         }
     }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
 }

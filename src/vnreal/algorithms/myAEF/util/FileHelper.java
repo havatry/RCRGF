@@ -25,7 +25,7 @@ public class FileHelper {
 		return XMLImporter.importScenario(filename).getNetworkStack();
 	}
 	
-	public static void saveContext(String filename, NetworkStack networkStack, List<Integer> startList, List<Integer> endList) {
+	public static String saveContext(String filename, NetworkStack networkStack, List<Integer> startList, List<Integer> endList) {
 		// 将虚拟网络包装成networkStack
 		// 将开始时间和结束时间列表保存下来
 		writeToXml(filename, networkStack);
@@ -46,6 +46,7 @@ public class FileHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return filename_aux;
 	}
 	
 	public static Object[] readContext(String filename) {

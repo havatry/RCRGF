@@ -61,4 +61,8 @@ public class GenericMappingAlgorithmCompare extends GenericMappingAlgorithm{
         statistics.setEndTime(System.currentTimeMillis());
         return true;
     }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
 }

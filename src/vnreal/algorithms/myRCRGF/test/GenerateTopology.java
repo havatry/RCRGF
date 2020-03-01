@@ -22,7 +22,7 @@ import vnreal.ui.dialog.ScenarioWizard;
 
 public class GenerateTopology {
 	private int snodes = 100; // 从100 120 140 160 180
-	private final double nodes_ration = 0.1;
+	private double nodes_ration = 0.1;
 	private final int virtualNetworks = 1; // 虚拟网络数
 	private double ration = 0.01; // 资源比例 从0.01 0.02 0.03
 	private double alhpa = 1.0; // 从0.3 0.6
@@ -30,11 +30,12 @@ public class GenerateTopology {
 	private final double bandwith_resource = 10000;
 	
 	
-	public void write() throws FileNotFoundException, IOException {
+	public String write() throws IOException {
 		String filename = "topology_" + snodes + "_" + virtualNetworks + "_" + ration + "_" + alhpa + ".xml";
 		String logname = filename.substring(0, filename.lastIndexOf(".")) + ".log";
 		// 生成底层网络
 		generateTopology(filename, logname);
+		return filename;
 	}
 	
 	private int[] virtualNodesArray() {
@@ -108,9 +109,9 @@ public class GenerateTopology {
 		ConstraintsGeneratorDialog.generateConstraintsVirtual(resClassesToGenerate_vn_all,
 				resParamNamesToGenerate_vn_all, resMaxValues_vn_all, networkStack);
 		XMLExporter.exportStack(Constants.WRITE_RESOURCE + filename, networkStack);
-		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
-		out.println(toString());
-		out.close();
+//		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
+//		out.println(toString());
+//		out.close();
 	}
 
 	@Override
@@ -137,4 +138,8 @@ public class GenerateTopology {
 	public void setAlhpa(double alhpa) {
 		this.alhpa = alhpa;
 	}
+
+    public void setNodes_ration(double nodes_ration) {
+        this.nodes_ration = nodes_ration;
+    }
 }

@@ -34,6 +34,7 @@ package vnreal.algorithms;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.myAEF.util.Utils;
@@ -41,6 +42,8 @@ import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
+import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
@@ -270,4 +273,12 @@ public abstract class GenericMappingAlgorithm extends
 		mappedLinks = 0;
 		processedLinks = 0;
 	}
+
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+	    return nodeMappingAlgorithm.getNodeMapping();
+    }
+
+    public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+	    return linkMappingAlgorithm.getLinkMapping();
+    }
 }

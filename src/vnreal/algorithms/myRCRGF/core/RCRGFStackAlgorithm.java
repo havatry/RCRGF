@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
@@ -13,7 +14,11 @@ import vnreal.algorithms.myRCRGF.util.Statistics;
 import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
+import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 
 public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 	private RCRGFAlgorithm algorithm;
@@ -109,4 +114,15 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 		}
 	}
 
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+	    return algorithm.getNodeMapping();
+    }
+
+    public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+	    return algorithm.getLinkMapping();
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
 }

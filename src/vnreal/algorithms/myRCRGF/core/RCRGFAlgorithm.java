@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;

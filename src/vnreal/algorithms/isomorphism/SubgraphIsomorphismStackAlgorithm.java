@@ -34,6 +34,7 @@ package vnreal.algorithms.isomorphism;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
@@ -43,6 +44,7 @@ import vnreal.algorithms.myAEF.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
@@ -113,7 +115,6 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 
 	@Override
 	protected void evaluate() {
-		// ����
 		reset();
 		long start = System.currentTimeMillis();
 		// Mapping previousResult = new Mapping();
@@ -137,7 +138,6 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	public List<AbstractAlgorithmStatus> getStati() {
 		LinkedList<AbstractAlgorithmStatus> stati = new LinkedList<AbstractAlgorithmStatus>();
 		
-		// ���������гɹ����ӳ�����, ��Ӽ�����Ƿ�ӳ��ɹ�
 		stati.add(new AbstractAlgorithmStatus("Mapped VN links") {
 			@Override
 			public Integer getValue() {
@@ -149,7 +149,6 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 				return 1;
 			}
 		});
-		// �����㷨ִ��ʱ��
 		stati.add(new AbstractAlgorithmStatus("Execution Time") {
 			
 			@Override
@@ -164,13 +163,11 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 				return 1L;
 			}
 		});
-		// ��������
 		stati.add(new AbstractAlgorithmStatus("Revenue") {
 			
 			@Override
 			public Double getValue() {
 				// TODO Auto-generated method stub
-				// �ڵ�����
 				double nodeRevenue = 0.0, linkRevenue = 0.0;
 				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
 					nodeRevenue += Utils.getCpu(vn);
@@ -205,4 +202,12 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 	private void reset() {
 		curNetIt = null;
 	}
+
+	public Map<VirtualNode, SubstrateNode> getNodeMapping() {
+	    return algorithm.getNodeMapping();
+    }
+
+    public Map<VirtualLink, List<SubstrateLink>> getLinkMapping() {
+	    return algorithm.getLinkMapping();
+    }
 }
