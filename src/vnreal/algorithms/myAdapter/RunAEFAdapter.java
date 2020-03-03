@@ -7,6 +7,7 @@ import vnreal.algorithms.CoordinatedMapping;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
 import vnreal.algorithms.myAEF.strategies.AEFAlgorithm;
 import vnreal.algorithms.myAEF.strategies.NRMAlgorithm;
+import vnreal.algorithms.myAEF.util.Constants;
 import vnreal.algorithms.myAEF.util.FileHelper;
 import vnreal.algorithms.myAEF.util.SummaryResult;
 import vnreal.algorithms.myAEF.util.Utils;
@@ -18,6 +19,7 @@ import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualNetwork;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,8 +48,13 @@ public class RunAEFAdapter {
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
 //		virtualNetworks = ProduceCase.getVirtuals(2);
-		startList = (List<Integer>)result[1];
-		endList = (List<Integer>)result[2];
+        if (result.length == 3) {
+            startList = (List<Integer>) result[1];
+            endList = (List<Integer>) result[2];
+        } else {
+            startList = Arrays.asList(0);
+            endList = Arrays.asList(2 * end);
+        }
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
 		for (int time = interval; time <= total; time += interval) {
@@ -117,8 +124,9 @@ public class RunAEFAdapter {
         } else {
 			fix = "null";
 		}
-		filename = filename.replace("file", "output");
-		String writeFileName = filename.substring(0, filename.lastIndexOf(".")) + "_" + fix + ".txt";
+//		filename = filename.replace("file", "output");
+//		String writeFileName = filename.substring(0, filename.lastIndexOf(".")) + "_" + fix + ".txt";
+		String writeFileName = Constants.resultDir + File.separator + "simulation_" + fix + ".txt";
 		summaryResult.writeToFile(writeFileName);
 	}
 	

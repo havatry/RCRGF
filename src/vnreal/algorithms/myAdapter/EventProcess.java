@@ -44,7 +44,7 @@ public class EventProcess {
         this.algorithm = algorithm;
         switch (type) {
             case "手动分析":
-                format_text = convert(algorithm) + "VNE.txt";
+                format_text = convert(algorithm) + "_VNE.txt";
                 break;
             case "一阶段实验":
                 format_text = convert(algorithm) + "_%d_VNE.txt";

@@ -19,25 +19,27 @@ import java.util.Properties;
  * 对外提供一阶段实验接口
  */
 public class SimulationRCRGFAdapter {
-	public void doSubgraph(String filename, int id, String type) {
+	public boolean doSubgraph(String filename, int id, String type) {
 		Scenario scenario = XMLImporter.importScenario(filename);
 		SubgraphIsomorphismCompare algorithm =
 				new SubgraphIsomorphismCompare(scenario.getNetworkStack(), new SubgraphIsomorphismAlgorithm());
 		EventProcess eventProcess = new EventProcess(algorithm, id, type);
 		algorithm.performEvaluation();
 		eventProcess.process(1, scenario.getSubstrate(), scenario.getVirtuals().get(0),algorithm.getStatistics().getSuccVns() == 1);
+		return algorithm.getStatistics().getSuccVns() == 1;
 	}
 	
-	public void doRCRGF(String filename, int id, String type) {
+	public boolean doRCRGF(String filename, int id, String type) {
 		Scenario scenario = XMLImporter.importScenario(filename);
 		RCRGFStackAlgorithm rcrgfStackAlgorithm =
 				new RCRGFStackAlgorithm(scenario.getNetworkStack());
 		EventProcess eventProcess = new EventProcess(rcrgfStackAlgorithm, id, type);
 		rcrgfStackAlgorithm.performEvaluation();
 		eventProcess.process(1, scenario.getSubstrate(), scenario.getVirtuals().get(0), rcrgfStackAlgorithm.getStatistics().getSuccVns() == 1);
+		return rcrgfStackAlgorithm.getStatistics().getSuccVns() == 1;
 	}
 	
-	public void doGreedy(String filename, int id, String type) {
+	public boolean doGreedy(String filename, int id, String type) {
 		Scenario scenario = XMLImporter.importScenario(filename);
 		AlgorithmParameter param = new AlgorithmParameter();
 		param.put("distance", "20"); // 论文中
@@ -50,5 +52,6 @@ public class SimulationRCRGFAdapter {
 		EventProcess eventProcess = new EventProcess(availableResources, id, type);
 		availableResources.performEvaluation();
 		eventProcess.process(1, scenario.getSubstrate(), scenario.getVirtuals().get(0), availableResources.getStatistics().getSuccVns() == 1);
+		return availableResources.getStatistics().getSuccVns() == 1;
 	}
 }

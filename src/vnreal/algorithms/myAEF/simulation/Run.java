@@ -1,5 +1,6 @@
 package vnreal.algorithms.myAEF.simulation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,13 +55,17 @@ public class Run {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void process(AbstractAlgorithm algorithm, String filename) {
+	public void process(AbstractAlgorithm algorithm, String filename) {
 		Object[] result = FileHelper.readContext(filename);
 		SubstrateNetwork substrateNetwork = ((NetworkStack)result[0]).getSubstrate();
 		virtualNetworks = ((NetworkStack)result[0]).getVirtuals();
-//		virtualNetworks = ProduceCase.getVirtuals(2);
-		startList = (List<Integer>)result[1];
-		endList = (List<Integer>)result[2];
+        if (result.length == 3) {
+            startList = (List<Integer>) result[1];
+            endList = (List<Integer>) result[2];
+        } else { // 处理没有_aux的文件
+            startList = Arrays.asList(0);
+            endList = Arrays.asList(2 * end); // 避免当前请求被释放
+        }
 		// 每隔50 time unit进行处理一次
 		int inter = 0; // 下次处理的开始位置, 指示器
 		for (int time = interval; time <= end; time += interval) {
@@ -138,9 +143,9 @@ public class Run {
 	private void processEndList(int time, int inter) {
 		for (int i = 0; i < inter; i++) {
 			if (startList.get(i) == processed) {
-				// 不用处理
-				continue;
-			}
+                // 不用处理
+                continue;
+            }
 			if (startList.get(i) >= time) {
 				// 无需处理, 因为间隔时间至少是1 time unit
 				break;

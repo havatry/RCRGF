@@ -51,10 +51,14 @@ public class FileHelper {
 	
 	public static Object[] readContext(String filename) {
 		NetworkStack networkStack = readFromXml(filename);
+		File f = new File(filename.substring(0, filename.lastIndexOf(".")) + "_aux.txt");
+		if (!f.exists()) {
+            return new Object[]{networkStack};
+        }
 		List<Integer> startList = new ArrayList<Integer>();
 		List<Integer> endList = new ArrayList<Integer>();
 		try {
-			Scanner in = new Scanner(new File(filename.substring(0, filename.lastIndexOf(".")) + "_aux.txt"));
+			Scanner in = new Scanner(f);
 			String[] part = in.nextLine().split(" ");
 			for (String p : part) {
 				startList.add(Integer.parseInt(p));
