@@ -37,7 +37,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.collections15.Factory;
 
-import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.mapping.Mapping;

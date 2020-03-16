@@ -59,7 +59,7 @@ import javax.swing.table.TableColumn;
 
 import mulavito.graph.generators.WaxmanGraphGenerator;
 import mulavito.ui.dialogs.AbstractButtonDialog;
-import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.core.Scenario;
 import vnreal.network.NetworkStack;
 import vnreal.network.substrate.SubstrateLink;

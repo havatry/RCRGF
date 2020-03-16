@@ -40,7 +40,7 @@ import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
-import vnreal.algorithms.myAEF.util.Utils;
+import vnreal.algorithms.myRCRGF.util.Utils;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;

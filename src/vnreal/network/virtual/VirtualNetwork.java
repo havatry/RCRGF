@@ -31,21 +31,17 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.network.virtual;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import edu.uci.ics.jung.graph.util.Pair;
 import org.apache.commons.collections15.Factory;
-
-import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
-import edu.uci.ics.jung.graph.util.Pair;
+
+import java.util.*;
 
 /**
  * A virtual network built upon the physical substrate.

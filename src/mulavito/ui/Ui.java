@@ -47,7 +47,7 @@ import mulavito.ui.components.ConsolePanel;
 import mulavito.ui.components.FloatingTabbedPane;
 import mulavito.ui.control.MouseOverHintManager;
 import mulavito.utils.Resources;
-import vnreal.algorithms.myAEF.util.Constants;
+import vnreal.algorithms.myRCRGF.util.Constants;
 
 /**
  * Base class for a paneled GUI.
