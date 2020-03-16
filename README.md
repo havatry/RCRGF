@@ -6,7 +6,7 @@
 
    ```properties
    rcrgf.snode.min = 100 # 测试组最小底层节点数
-   rcrgf.snode.max = 125 # 测试组最大底层节点数
+   rcrgf.snode.max = 300 # 测试组最大底层节点数
    rcrgf.snode.step = 5 # 测试组之间底层节点的差，或者称为步长
    rcrgf.ratio = 0.2 # 虚拟网络需求和底层网络资源的比值， 底层网络的CPU资源和带宽资源默认都是10000。在确定最大值后，采用均匀分布U[0,10000]来分配资源和需求
    rcrgf.alpha = 0.1 # 虚拟网络waxman模型的alpha参数，该值越大，对应的边越多
