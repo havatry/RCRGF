@@ -21,6 +21,7 @@
   直接运行后，结果文件保存在results/outputRcrgf/simulation.txt中，注意多次运行会覆盖。
 
 4. 对比算法，其中filename不需要显示指定，默认即可
+
 | 算法                  | 处理                   |
 | ------------------- | -------------------- |
 | RCRGF               | doRCRGF(filename)    |
