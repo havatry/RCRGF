@@ -22,8 +22,8 @@
 
 4. 对比算法，其中filename不需要显示指定，默认即可
 
-| 算法                  | 处理                   |
-| ------------------- | -------------------- |
-| RCRGF               | doRCRGF(filename)    |
-| SubgraphIsomorphism | doSubgraph(filename) |
-| Greedy              | doGreedy(filename)   |
+  | 算法                  | 处理                   |
+  | ------------------- | -------------------- |
+  | RCRGF               | doRCRGF(filename)    |
+  | SubgraphIsomorphism | doSubgraph(filename) |
+  | Greedy              | doGreedy(filename)   |
