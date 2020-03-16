@@ -18,7 +18,7 @@
   点击运行后，生成的文件在results/fileRcrgf目录下，有多少组使用就有多少个网络拓扑文件，文件命名包含网络结构参数。
 
 3. 仿真测试，使用类vnreal.algorithms.myRCRGF.test.Simulation
-  直接运行后，结果文件保存在results/outputRcrgf/simulation.txt中，注意多次运行会覆盖。
+  直接运行后，结果文件保存在results/outputRcrgf/simulation.txt中，注意多次运行会覆盖。可以使用该目录下的python脚本plotOneStage.py可视化结果。使用命令为python plotOneStage simulation.txt ar|rt|r2c
 
 4. 对比算法，其中filename不需要显示指定，默认即可
 
