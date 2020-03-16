@@ -2,7 +2,7 @@
 虚拟网络映射一阶段算法
 
 --帮助文档
-1. 配置文件
+1. 配置文件，文件为results/conf/rcrgf.properties
 
    ```properties
    rcrgf.snode.min = 100 # 测试组最小底层节点数
@@ -22,8 +22,8 @@
 
 4. 对比算法，其中filename不需要显示指定，默认即可
 
-  | 算法                  | 处理                   |
-  | ------------------- | -------------------- |
-  | RCRGF               | doRCRGF(filename)    |
-  | SubgraphIsomorphism | doSubgraph(filename) |
-  | Greedy              | doGreedy(filename)   |
+    | 算法                  | 处理                   |
+    | ------------------- | -------------------- |
+    | RCRGF               | doRCRGF(filename)    |
+    | SubgraphIsomorphism | doSubgraph(filename) |
+    | Greedy              | doGreedy(filename)   |
