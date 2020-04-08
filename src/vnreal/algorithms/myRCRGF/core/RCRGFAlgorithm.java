@@ -14,8 +14,8 @@ import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 public class RCRGFAlgorithm {
-	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // ½ÚµãÓ³Éä
-	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // Á´Â·Ó³Éä
+	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // èŠ‚ç‚¹æ˜ å°„
+	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // é“¾è·¯æ˜ å°„
 	
 	public boolean compute(SubstrateNetwork substrateNetwork, VirtualNetwork virtualNetwork) {
 		Utils.initMapSubstrateNode(substrateNetwork.getVertices());

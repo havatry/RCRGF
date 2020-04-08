@@ -3,7 +3,7 @@
  * 
  * This work has been funded by the Federal Ministry of Education
  * and Research of the Federal Republic of Germany
- * (BMBF FÃ¶rderkennzeichen 01BP0775). It is part of the EUREKA project
+ * (BMBF Fæšrderkennzeichen 01BP0775). It is part of the EUREKA project
  * "100 Gbit/s Carrier-Grade Ethernet Transport Technologies
  * (CELTIC CP4-001)". The authors alone are responsible for this work.
  *
@@ -53,5 +53,5 @@ public interface IEdgeGenerator<V extends IVertex, E extends IEdge> {
 	// add for addition
 	default public HashMap<V, Point2D> getPositions() {
 		return null;
-	} // ±£³Ö¼æÈİĞÔ
+	} // ä¿æŒå…¼å®¹æ€§
 }

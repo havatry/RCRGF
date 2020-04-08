@@ -30,7 +30,7 @@ public class Simulation {
 //				for (double alpha = 0.3; alpha < 1.25; alpha += 0.1) {
             String filename = Constants.WRITE_RESOURCE + "topology_" + snodes + "_1_" + ration + "_" + alpha + ".xml";
             System.out.println("Process: " + filename);
-            // ¶ÁÈ¡ÎÄ¼þ
+            // è¯»å–æ–‡ä»¶
             simulation.doRCRGF(filename);
             simulation.doSubgraph(filename);
             simulation.doGreedy(filename);
@@ -56,7 +56,7 @@ public class Simulation {
 	private void doGreedy(String filename) {
 		Scenario scenario = XMLImporter.importScenario(filename);
 		AlgorithmParameter param = new AlgorithmParameter();
-		param.put("distance", "20"); // ÂÛÎÄÖÐ
+		param.put("distance", "20"); // è®ºæ–‡ä¸­
 		param.put("kShortestPaths", "1"); //
 		param.put("overload", "False");
 		param.put("PathSplitting", "False");

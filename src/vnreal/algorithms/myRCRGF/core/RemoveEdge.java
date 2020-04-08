@@ -15,12 +15,12 @@ import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 /**
- * ¼õ±ß²Ù×÷
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç4:19:24
+ * å‡è¾¹æ“ä½œ
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ4:19:24
  */
 public class RemoveEdge {
 	private VirtualNetwork virtualNetwork;
-	private Map<Long, Integer> map; // ¹ØÓÚ½ÚµãµÄ±àºÅºÍidµÄÓ³Éä¹ØÏµ
+	private Map<Long, Integer> map; // å…³äºèŠ‚ç‚¹çš„ç¼–å·å’Œidçš„æ˜ å°„å…³ç³»
 	
 	public RemoveEdge(VirtualNetwork virtualNetwork) {
 		//Created constructor stubs
@@ -36,10 +36,10 @@ public class RemoveEdge {
 		return doRemove();
 	}
 	
-	// ²ÉÓÃÉú³ÉÊ÷kurskalËã·¨£¬½«²»ÔÚÉú³ÉÊ÷ÖĞµÄ±ß±ê¼ÇÏÂ£¬×÷ÎªºòÑ¡É¾³ı¼¯ºÏ
-	// È»ºóÕÒ³ö»·Â·£¬É¾³ı»·Â·ÖĞ×îĞ¡´ø¿í£¬²¢½«¸Ã±ß¼ÓÈë½øÈ¥
+	// é‡‡ç”¨ç”Ÿæˆæ ‘kurskalç®—æ³•ï¼Œå°†ä¸åœ¨ç”Ÿæˆæ ‘ä¸­çš„è¾¹æ ‡è®°ä¸‹ï¼Œä½œä¸ºå€™é€‰åˆ é™¤é›†åˆ
+	// ç„¶åæ‰¾å‡ºç¯è·¯ï¼Œåˆ é™¤ç¯è·¯ä¸­æœ€å°å¸¦å®½ï¼Œå¹¶å°†è¯¥è¾¹åŠ å…¥è¿›å»
 	private boolean doRemove() {
-		// 1. ¶ÔËùÓĞ±ß °´ÕÕ´ø¿í´Ó´óµ½Ğ¡ÅÅĞò
+		// 1. å¯¹æ‰€æœ‰è¾¹ æŒ‰ç…§å¸¦å®½ä»å¤§åˆ°å°æ’åº
 		List<VirtualLink> links = new ArrayList<VirtualLink>(virtualNetwork.getEdges());
 		Collections.sort(links, (o1, o2) -> {
             //Created method stubs
@@ -53,7 +53,7 @@ public class RemoveEdge {
                 return 0;
             }
         });
-		// Ã¿´ÎÑ¡Ôñ×î´óµÄ´ø¿í±ß
+		// æ¯æ¬¡é€‰æ‹©æœ€å¤§çš„å¸¦å®½è¾¹
 		int nodes = virtualNetwork.getVertexCount();
 		DSU dsu = new DSU(nodes);
 		LinkedList<VirtualLink> remaining = new LinkedList<>();
@@ -64,40 +64,40 @@ public class RemoveEdge {
 			int start = mapRelation(s.getId());
 			int end = mapRelation(t.getId());
 			if (dsu.find(start) != dsu.find(end)) {
-				// ²»ÔÚÒ»¸ö¼¯ºÏÖĞ
+				// ä¸åœ¨ä¸€ä¸ªé›†åˆä¸­
 				added.add(l);
 				dsu.union(start, end);
 			} else {
-				remaining.add(l); // ÎŞ·¨¼ÓÈëµÄ±ß
+				remaining.add(l); // æ— æ³•åŠ å…¥çš„è¾¹
 			}
 		}
 		
-		// Ñ¡Ôñ¸ù½Úµã
+		// é€‰æ‹©æ ¹èŠ‚ç‚¹
 		VirtualNode root = select();
 		
-		// ¹¹ÔìÒ»¿ÃÊ÷
+		// æ„é€ ä¸€æ£µæ ‘
 		build(root, added, new LinkedList<>());
 		
-		// É¾³ıremainingÖĞµÄ±ß
+		// åˆ é™¤remainingä¸­çš„è¾¹
 		for (VirtualLink r : remaining) {
 			VirtualNode s = virtualNetwork.getEndpoints(r).getFirst();
 			VirtualNode t = virtualNetwork.getEndpoints(r).getSecond();
 			if (s.getDtoVirtual().getUpnode() == null && s != root) {
-				// ËµÃ÷ÔÚÆäËû·ÖÖ§ÉÏ
+				// è¯´æ˜åœ¨å…¶ä»–åˆ†æ”¯ä¸Š
 				return false;
 			}
-			if (t.getDtoVirtual().getUpnode() == null && t != root) { // Ò»¸öĞ¡µÄ´íÎó ¾ÀÕıÒ»¸ö¶àĞ¡Ê± s != root ¸Ä³É t != root
+			if (t.getDtoVirtual().getUpnode() == null && t != root) { // ä¸€ä¸ªå°çš„é”™è¯¯ çº æ­£ä¸€ä¸ªå¤šå°æ—¶ s != root æ”¹æˆ t != root
 				return false;
 			}
-			// ÕÒµ½¹«¹²½Úµã
+			// æ‰¾åˆ°å…¬å…±èŠ‚ç‚¹
 			VirtualNode common = Utils.common(s, t, root);
 			update(s, common, Utils.getBandwith(r));
 			update(t, common, Utils.getBandwith(r));
-			// ½«±ßÉ¾³ı
+			// å°†è¾¹åˆ é™¤
 			virtualNetwork.removeEdge(r);
 		}
 		
-		// ÅĞ¶ÏÊÇ·ñÊÇÒ»¸öÁ¬Í¨·ÖÁ¿
+		// åˆ¤æ–­æ˜¯å¦æ˜¯ä¸€ä¸ªè¿é€šåˆ†é‡
 		return true;
 	}	
 	
@@ -110,9 +110,9 @@ public class RemoveEdge {
 	}
 	
 	private void update(VirtualNode current, VirtualNode root, double addedBandwith) {
-		// ÉÏËİ¸üĞÂ´ø¿í
+		// ä¸Šæº¯æ›´æ–°å¸¦å®½
 		while (current != root) {
-			// ¹ØÁªµÄ±ß
+			// å…³è”çš„è¾¹
 			VirtualLink uplink = current.getDtoVirtual().getUplink();
 			Utils.setBandwith(uplink, Utils.getBandwith(uplink) + addedBandwith);
 			current = current.getDtoVirtual().getUpnode();
@@ -120,24 +120,24 @@ public class RemoveEdge {
 	}
 	
 	private void build(VirtualNode root, List<VirtualLink> added, LinkedList<VirtualLink> visited) {
-		// ¿¼ÂÇËùÓĞ³ö±ß 
+		// è€ƒè™‘æ‰€æœ‰å‡ºè¾¹ 
 		for (VirtualLink l : virtualNetwork.getOutEdges(root)) {
 			if (visited.contains(l) || !added.contains(l)) {
-				// ÒÑ¾­·ÃÎÊ¹ıµÄ±ß »òÕß²»ÊÇ¹Ø¼ü±ß
+				// å·²ç»è®¿é—®è¿‡çš„è¾¹ æˆ–è€…ä¸æ˜¯å…³é”®è¾¹
 				continue;
 			}
 			VirtualNode s = virtualNetwork.getEndpoints(l).getFirst();
 			VirtualNode t = virtualNetwork.getEndpoints(l).getSecond();
 			visited.add(l);
 			if (s == root) {
-				// ÄÇÃ´tÊÇÏÂÓÎ
+				// é‚£ä¹ˆtæ˜¯ä¸‹æ¸¸
 //				s.getDtoVirtual().setDownnode(t);
 				t.getDtoVirtual().setUpnode(s);
 //				s.getDtoVirtual().setDownlink(l);
 				t.getDtoVirtual().setUplink(l);
 				build(t, added, visited);
 			} else {
-				// ÄÇÃ´ÏÂÓÎÊÇs
+				// é‚£ä¹ˆä¸‹æ¸¸æ˜¯s
 //				t.getDtoVirtual().setDownnode(s);
 				s.getDtoVirtual().setUpnode(t);
 //				t.getDtoVirtual().setDownlink(l);

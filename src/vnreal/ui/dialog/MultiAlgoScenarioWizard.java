@@ -163,7 +163,7 @@ public class MultiAlgoScenarioWizard extends AbstractButtonDialog {
 	}
 
 	/**
-	 * Ä£°å·½·¨£¬ºËĞÄ´¥·¢´´½¨µÄ·½·¨
+	 * æ¨¡æ¿æ–¹æ³•ï¼Œæ ¸å¿ƒè§¦å‘åˆ›å»ºçš„æ–¹æ³•
 	 */
 	@Override
 	protected void doAction() {
@@ -179,9 +179,9 @@ public class MultiAlgoScenarioWizard extends AbstractButtonDialog {
 		SubstrateNetwork substrate = null;
 		List<VirtualNetwork> vns = new ArrayList<>(generators.length - 1);
 
-		// ³õÊ¼Ã»ÓĞaddĞĞµÄÊ±ºò£¬Ö»Éú³ÉÒ»¸öµ×²ãÍøÂçÍØÆË
-		// µ±Ìí¼Óºó£¬½«Ìí¼ÓµÄÅäÖÃ×÷ÎªĞéÄâÍøÂçÍØÆË½øĞĞÉú³É
-		// ¶¼ÊÇÊ¹ÓÃWaxmanGeneratorÀ´Éú³ÉÍøÂçµÄ
+		// åˆå§‹æ²¡æœ‰addè¡Œçš„æ—¶å€™ï¼Œåªç”Ÿæˆä¸€ä¸ªåº•å±‚ç½‘ç»œæ‹“æ‰‘
+		// å½“æ·»åŠ åï¼Œå°†æ·»åŠ çš„é…ç½®ä½œä¸ºè™šæ‹Ÿç½‘ç»œæ‹“æ‰‘è¿›è¡Œç”Ÿæˆ
+		// éƒ½æ˜¯ä½¿ç”¨WaxmanGeneratoræ¥ç”Ÿæˆç½‘ç»œçš„
 		for (int i = 0; i < generators.length; i++) {
 			if (i == 0) {
 				substrate = generators[i].generateSubstrateNetwork(false);

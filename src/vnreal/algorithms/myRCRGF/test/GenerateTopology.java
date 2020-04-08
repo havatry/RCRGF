@@ -21,11 +21,11 @@ import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
 
 public class GenerateTopology {
-	private int snodes = 100; // ´Ó100 120 140 160 180
+	private int snodes = 100; // ä»100 120 140 160 180
 	private double nodes_ration = 0.1;
-	private final int virtualNetworks = 1; // ĞéÄâÍøÂçÊı
-	private double ration = 0.01; // ×ÊÔ´±ÈÀı ´Ó0.01 0.02 0.03
-	private double alhpa = 1.0; // ´Ó0.3 0.6
+	private final int virtualNetworks = 1; // è™šæ‹Ÿç½‘ç»œæ•°
+	private double ration = 0.01; // èµ„æºæ¯”ä¾‹ ä»0.01 0.02 0.03
+	private double alhpa = 1.0; // ä»0.3 0.6
 	private final double cpu_resource = 10000;
 	private final double bandwith_resource = 10000;
 	
@@ -33,7 +33,7 @@ public class GenerateTopology {
 	public String write() throws IOException {
 		String filename = "topology_" + snodes + "_" + virtualNetworks + "_" + ration + "_" + alhpa + ".xml";
 		String logname = filename.substring(0, filename.lastIndexOf(".")) + ".log";
-		// Éú³Éµ×²ãÍøÂç
+		// ç”Ÿæˆåº•å±‚ç½‘ç»œ
 		generateTopology(filename, logname);
 		return filename;
 	}
@@ -42,7 +42,7 @@ public class GenerateTopology {
 		int[] array = new int[virtualNetworks];
 		int max = (int)(snodes * nodes_ration);
 		for (int i = 0; i < virtualNetworks; i++) {
-			// ÖÁÉÙÈı¸ö¸ö½Úµã£¬ÖÁ¶àÊÇnodes_ration * snodes
+			// è‡³å°‘ä¸‰ä¸ªä¸ªèŠ‚ç‚¹ï¼Œè‡³å¤šæ˜¯nodes_ration * snodes
 			array[i] = 3 + (int)(Math.random() * (max - 2));
 		}
 		return array;
@@ -65,7 +65,7 @@ public class GenerateTopology {
 	}
 	
 	public void generateTopology(String filename, String logname) throws FileNotFoundException, IOException {
-		// Éú³Éµ×²ãÍøÂç
+		// ç”Ÿæˆåº•å±‚ç½‘ç»œ
 		NetworkStack networkStack = null;
 		while (true) {
 			networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
@@ -75,11 +75,11 @@ public class GenerateTopology {
 				break;
 			}
 		}
-		// Îªµ×²ãÍøÂçÉú³ÉÔ¼Êø
+		// ä¸ºåº•å±‚ç½‘ç»œç”Ÿæˆçº¦æŸ
 		List<Class<?>> resClassesToGenerate = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerate = new LinkedList<String[]>();
 		List<String[]> resMaxValues = new ArrayList<String[]>();
-		// Ìí¼ÓcpuÊôĞÔ ´ø¿íÊôĞÔ
+		// æ·»åŠ cpuå±æ€§ å¸¦å®½å±æ€§
 		resClassesToGenerate.add(CpuResource.class);
 		resClassesToGenerate.add(BandwidthResource.class);
 		resParamNamesToGenerate.add(new String[]{"cycles"});
@@ -87,7 +87,7 @@ public class GenerateTopology {
 		resMaxValues.add(new String[]{"" + cpu_resource});
 		resMaxValues.add(new String[]{"" + bandwith_resource});
 		ConstraintsGeneratorDialog.generateConstraintsSubstrate(resClassesToGenerate, resParamNamesToGenerate, resMaxValues, networkStack);
-		// ÎªĞéÄâÍøÂçÉú³ÉÔ¼Êø
+		// ä¸ºè™šæ‹Ÿç½‘ç»œç”Ÿæˆçº¦æŸ
 		List<List<Class<?>>> resClassesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resParamNamesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resMaxValues_vn_all = new ArrayList<>();
@@ -95,7 +95,7 @@ public class GenerateTopology {
 			List<Class<?>> resClassesToGenerate_vn = new LinkedList<>();
 			List<String[]> resParamNamesToGenerate_vn = new LinkedList<>();
 			List<String[]> resMaxValues_vn = new ArrayList<>();
-			// Ìí¼ÓcpuĞèÇó ´ø¿íĞèÇó
+			// æ·»åŠ cpuéœ€æ±‚ å¸¦å®½éœ€æ±‚
 			resClassesToGenerate_vn.add(CpuDemand.class);
 			resClassesToGenerate_vn.add(BandwidthDemand.class);
 			resParamNamesToGenerate_vn.add(new String[]{"demandedCycles"});

@@ -121,12 +121,12 @@ public class Utils {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
 		for (SubstrateNode sn : list) {
 //			if (small(Utils.getCpu(sn), cpuConstraint)) {
-//				// ºòÑ¡½Úµã²»Âú×ãcpuĞèÇó
+//				// å€™é€‰èŠ‚ç‚¹ä¸æ»¡è¶³cpuéœ€æ±‚
 //				continue;
 //			}
-//			sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)] = actualBandwith(sn, spec); // ¸üĞÂ³É×îĞÂµÄÖµ
+//			sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)] = actualBandwith(sn, spec); // æ›´æ–°æˆæœ€æ–°çš„å€¼
 			if (small(sn.getDtoSubstrate().getBTL()[getIndexForSubstrateNode(spec)], bandwithConstraint)) {
-				// ºòÑ¡½Úµã²»Âú×ãbandwithĞèÇó
+				// å€™é€‰èŠ‚ç‚¹ä¸æ»¡è¶³bandwithéœ€æ±‚
 				continue;
 			}
 			result.add(sn);
@@ -183,7 +183,7 @@ public class Utils {
 	
 	public static void processBTL(SubstrateNode sn, int length) {
 		if (sn.getDtoSubstrate().getBTL() == null) {
-			// ³õÊ¼»¯
+			// åˆå§‹åŒ–
 			sn.getDtoSubstrate().setBTL(new double[length]);
 		}
 	}
@@ -191,7 +191,7 @@ public class Utils {
 	public static List<SubstrateLink> findPath(SubstrateNode current, SubstrateNode target) {
 		List<SubstrateLink> links = new LinkedList<SubstrateLink>();
 		while (current != target) {
-			// ÕÒµ½ÉÏÓÎÁ´Â·
+			// æ‰¾åˆ°ä¸Šæ¸¸é“¾è·¯
 			SubstrateLink upLink = current.getDtoSubstrate().getBestUpLink().get(target);
 			links.add(upLink);
 			current = current.getDtoSubstrate().getBestUpStream().get(target);
@@ -199,7 +199,7 @@ public class Utils {
 		return links;
 	}
 	
-	// ±£Ö¤×îĞÂµÄÖµ
+	// ä¿è¯æœ€æ–°çš„å€¼
 	@Deprecated
 	public static double actualBandwith(SubstrateNode current, SubstrateNode target) {
 		List<SubstrateLink> path = findPath(current, target);
@@ -211,10 +211,10 @@ public class Utils {
 	}
 	
 	public static VirtualNode common(VirtualNode u, VirtualNode v, VirtualNode l) {
-		// ÕÒ³öÁ½¸ö½ÚµãµÄ¹«¹²ÉÏÓÎ½Úµã
+		// æ‰¾å‡ºä¸¤ä¸ªèŠ‚ç‚¹çš„å…¬å…±ä¸Šæ¸¸èŠ‚ç‚¹
 		VirtualNode s = u, t = v;
 		while (u != v) {
-			// ²»ÏàµÈ
+			// ä¸ç›¸ç­‰
 			u = u.getDtoVirtual().getUpnode() == null ? t : u.getDtoVirtual().getUpnode();
 			v = v.getDtoVirtual().getUpnode() == null ? s : v.getDtoVirtual().getUpnode();
 		}
@@ -236,7 +236,7 @@ public class Utils {
 	}
 	
 	public static boolean complete(VirtualNode root, VirtualNetwork virtualNetwork) {
-		// ÅĞ¶ÏÊ÷ÊÇ·ñÖ»ÓĞÒ»¸öÁ¬Í¨·ÖÁ¿
+		// åˆ¤æ–­æ ‘æ˜¯å¦åªæœ‰ä¸€ä¸ªè¿é€šåˆ†é‡
 		Set<VirtualNode> connect = new HashSet<>();
 		dfs(root, connect, virtualNetwork);
 		return connect.size() == virtualNetwork.getVertexCount();
@@ -253,14 +253,14 @@ public class Utils {
 	}
 	
 	public static void ensureConnect(Network network) {
-		// ÎªÆäÖĞÒ»¸ö½Úµã£¬Ìí¼Óµ½ÆäÓàËùÓĞ½ÚµãµÄ±ß
+		// ä¸ºå…¶ä¸­ä¸€ä¸ªèŠ‚ç‚¹ï¼Œæ·»åŠ åˆ°å…¶ä½™æ‰€æœ‰èŠ‚ç‚¹çš„è¾¹
 		Node node = (Node) network.getVertices().iterator().next();
 		for (Object n : network.getVertices()) {
 			if (n == node) {
 				continue;
 			}
 			if (network.findEdge(n, node) == null) {
-				// ¼Ó±ß
+				// åŠ è¾¹
 				network.addEdge(network.getEdgeFactory().create(), n, node);
 			}
 		}

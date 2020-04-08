@@ -3,7 +3,7 @@
  * 
  * This work has been funded by the Federal Ministry of Education
  * and Research of the Federal Republic of Germany
- * (BMBF Förderkennzeichen 01BP0775). It is part of the EUREKA project
+ * (BMBF F枚rderkennzeichen 01BP0775). It is part of the EUREKA project
  * "100 Gbit/s Carrier-Grade Ethernet Transport Technologies
  * (CELTIC CP4-001)". The authors alone are responsible for this work.
  *
@@ -29,7 +29,7 @@
 package tests.shortestpaths.utils;
 
 /**
- * @author Thilo Müller
+ * @author Thilo M眉ller
  * @author Michael Duelli
  * @since 2010-11-29
  */

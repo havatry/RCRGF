@@ -71,11 +71,11 @@ public class SubgraphIsomorphismAlgorithm extends
 		SingleNetworkMappingAlgorithm {
 	public static final boolean debug = false;
 	
-//	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // �ɱ�������
+//	public static final boolean debug = Constants.SUBGRAPHISOMORPHISM_DEBUG; // 锟缴憋拷锟斤拷锟斤拷锟斤拷
 
 	private int numberOfTries;
-	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // �ڵ�ӳ��
-	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // ��·ӳ��
+	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // 锟节碉拷映锟斤拷
+	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // 锟斤拷路映锟斤拷
 	/**
 	 * 
 	 *  True, if EnergyResource should be considered, otherwise false
@@ -184,7 +184,7 @@ public class SubgraphIsomorphismAlgorithm extends
 		return path;
 	}
 
-	// �Ա߽���ӳ��, ����ͼ��������Щ�޸�
+	// 锟皆边斤拷锟斤拷映锟斤拷, 锟斤拷锟斤拷图锟斤拷锟斤拷锟斤拷锟斤拷些锟睫革拷
 	Collection<ResourceDemandEntry> mapEdges(
 			VirtualNetwork g_V, SubstrateNetwork orig_g_P,
 			MappingCandidate<VirtualNode, SubstrateNode> candidate, NodeLinkMapping m,
@@ -195,7 +195,7 @@ public class SubgraphIsomorphismAlgorithm extends
 		if (out == null) {
 			return null;
 		} else if (!Constants.DIRECTED) {
-			// ����ͼֱ�ӷ���out
+			// 锟斤拷锟斤拷图直锟接凤拷锟斤拷out
 			return out;
 		}
 		Collection<ResourceDemandEntry> in = mapInEdges(

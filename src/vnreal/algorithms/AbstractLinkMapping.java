@@ -70,7 +70,7 @@ public abstract class AbstractLinkMapping {
 	protected AbstractLinkMapping() {
 		this.processedLinks = 0;
 		this.mappedLinks = 0;
-		this.linkMapping = new LinkedHashMap<>(); // ÐÂ¼ÓµÄÓ³ÉäÁ´Â·½á¹û
+		this.linkMapping = new LinkedHashMap<>(); // æ–°åŠ çš„æ˜ å°„é“¾è·¯ç»“æžœ
 	}
 
 	/**

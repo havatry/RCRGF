@@ -100,7 +100,7 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 			Map<VirtualNode, SubstrateNode> nodeMapping) {
 		this.processedLinks = 0;
 		this.mappedLinks = 0;
-//		this.linkMapping.clear(); // 重置 add 20191130
+//		this.linkMapping.clear(); // 閲嶇疆 add 20191130
 
 		// Search for path in filtered substrate using KShortestPaths
 		LinkWeight linkWeight = new LinkWeight();
@@ -121,7 +121,7 @@ public class kShortestPathLinkMapping extends AbstractLinkMapping {
 			if (vNet.isDirected()) {
 				srcVnode = vNet.getSource(tVLink);
 				dstVnode = vNet.getDest(tVLink);
-			} else { // 对于无向图的处理
+			} else { // 瀵逛簬鏃犲悜鍥剧殑澶勭悊
 				Pair<VirtualNode> p = vNet.getEndpoints(tVLink);
 				srcVnode = p.getFirst();
 				dstVnode = p.getSecond();

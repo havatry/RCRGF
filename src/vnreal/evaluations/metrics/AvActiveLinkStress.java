@@ -37,8 +37,8 @@ import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 
 /**
- * ¼ÆËãÆ½¾ùÒ»¸öÁ´Â·±»Ó³Éäµ½ÆäËû×ÊÔ´µÄÊıÁ¿
- * 2019Äê10ÔÂ22ÈÕ ÏÂÎç4:07:45
+ * è®¡ç®—å¹³å‡ä¸€ä¸ªé“¾è·¯è¢«æ˜ å°„åˆ°å…¶ä»–èµ„æºçš„æ•°é‡
+ * 2019å¹´10æœˆ22æ—¥ ä¸‹åˆ4:07:45
  */
 public final class AvActiveLinkStress implements EvaluationMetric<NetworkStack> {
 	public double calculate(NetworkStack stack) {

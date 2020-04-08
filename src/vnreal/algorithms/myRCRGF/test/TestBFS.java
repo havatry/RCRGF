@@ -26,8 +26,8 @@ import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
 
 /**
- * ²âÊÔBFSµÄÒ»Ğ©¹¦ÄÜÀà
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç1:21:28
+ * æµ‹è¯•BFSçš„ä¸€äº›åŠŸèƒ½ç±»
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ1:21:28
  */
 public class TestBFS {
 	private NetworkStack networkStack;
@@ -40,13 +40,13 @@ public class TestBFS {
 			readFromFile();
 			return;
 		}
-		// Éú³Éµ×²ãÍøÂç
+		// ç”Ÿæˆåº•å±‚ç½‘ç»œ
 		NetworkStack networkStack = ScenarioWizard.generateTopology(150, 1.0, 0.5, 1, new int[]{50}, new double[]{1.0}, new double[]{0.5});
-		// Îªµ×²ãÍøÂçÉú³ÉÔ¼Êø
+		// ä¸ºåº•å±‚ç½‘ç»œç”Ÿæˆçº¦æŸ
 		List<Class<?>> resClassesToGenerate = new LinkedList<Class<?>>();
 		List<String[]> resParamNamesToGenerate = new LinkedList<String[]>();
 		List<String[]> resMaxValues = new ArrayList<String[]>();
-		// Ìí¼ÓcpuÊôĞÔ ´ø¿íÊôĞÔ
+		// æ·»åŠ cpuå±æ€§ å¸¦å®½å±æ€§
 		resClassesToGenerate.add(CpuResource.class);
 		resClassesToGenerate.add(BandwidthResource.class);
 		resParamNamesToGenerate.add(new String[]{"cycles"});
@@ -54,14 +54,14 @@ public class TestBFS {
 		resMaxValues.add(new String[]{"2000"});
 		resMaxValues.add(new String[]{"2000"});
 		ConstraintsGeneratorDialog.generateConstraintsSubstrate(resClassesToGenerate, resParamNamesToGenerate, resMaxValues, networkStack);
-		// ÎªĞéÄâÍøÂçÉú³ÉÔ¼Êø
+		// ä¸ºè™šæ‹Ÿç½‘ç»œç”Ÿæˆçº¦æŸ
 		List<List<Class<?>>> resClassesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resParamNamesToGenerate_vn_all = new LinkedList<>();
 		List<List<String[]>> resMaxValues_vn_all = new ArrayList<>();
 		List<Class<?>> resClassesToGenerate_vn = new LinkedList<>();
 		List<String[]> resParamNamesToGenerate_vn = new LinkedList<>();
 		List<String[]> resMaxValues_vn = new ArrayList<>();
-		// Ìí¼ÓcpuĞèÇó ´ø¿íĞèÇó
+		// æ·»åŠ cpuéœ€æ±‚ å¸¦å®½éœ€æ±‚
 		resClassesToGenerate_vn.add(CpuDemand.class);
 		resClassesToGenerate_vn.add(BandwidthDemand.class);
 		resParamNamesToGenerate_vn.add(new String[]{"demandedCycles"});
@@ -77,7 +77,7 @@ public class TestBFS {
 		System.out.println("write finish");
 	}
 	
-	// ²âÊÔBFSµÄËÑË÷¹¦ÄÜÓĞĞ§
+	// æµ‹è¯•BFSçš„æœç´¢åŠŸèƒ½æœ‰æ•ˆ
 	@Ignore
 	public void test01() {
 	}
@@ -102,10 +102,10 @@ public class TestBFS {
 		if (SKIP_TEST) {
 			return;
 		}
-		// ²âÊÔ¼õ±ß²Ù×÷
-		// É¾±ßÖ®Ç°µÄÍøÂç
+		// æµ‹è¯•å‡è¾¹æ“ä½œ
+		// åˆ è¾¹ä¹‹å‰çš„ç½‘ç»œ
 		System.out.println(networkStack.getLayer(1));
-		// ¿ªÊ¼É¾±ß
+		// å¼€å§‹åˆ è¾¹
 		RemoveEdge removeEdge = new RemoveEdge((VirtualNetwork) networkStack.getLayer(1));
 		removeEdge.work();
 		System.out.println(networkStack.getLayer(1));

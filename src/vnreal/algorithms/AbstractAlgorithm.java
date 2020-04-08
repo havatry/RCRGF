@@ -72,7 +72,7 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 * </p>
 	 * 
 	 * <p>
-	 * 对于一阶段算法，首先执行performEvaluation方法 -> 执行其evalute方法
+	 * 瀵逛簬涓�闃舵绠楁硶锛岄鍏堟墽琛宲erformEvaluation鏂规硶 -> 鎵ц鍏秂valute鏂规硶
 	 * </p>
 	 */
 	@Override

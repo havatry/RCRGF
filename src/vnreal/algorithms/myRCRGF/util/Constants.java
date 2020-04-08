@@ -3,16 +3,16 @@ package vnreal.algorithms.myRCRGF.util;
 import java.io.PrintWriter;
 
 public class Constants {
-	public static boolean DIRECTED = false; // ÉèÖÃÍ¼ĞÎ½çÃæÏÔÊ¾ÎŞÏòÍ¼»¹ÊÇÓĞÏòÍ¼
-	public static boolean ADAPTE_UNDIRECTEDGRAPH = true; // ¶¨ÖÆÎŞÏòÍ¼Àà, ÊµÏÖÆğµãºÍÖÕµãµÄ»ñÈ¡
-	public static boolean ASSURE_UNIQUE = true; // È·±£simpleDijkstraµÄÆğµãºÍÖÕµã²»ÏàÍ¬
-	public static boolean HIDDEN_RIGHT_TAB = true; // Òş²ØÍ¼ĞÎ½çÃæÖĞµÄÓ³ÉäºÍÑ¡ÔñµÄÑ¡Ïî¿¨
-	public static String WRITE_FILE = "./results/outputRcrgf/"; // ½«Ó³Éä½á¹ûĞ´Èëµ½ÎÄ¼şÖĞ
-	public static boolean PRINT_LINK_MAPPING_RESULT = false; // ´òÓ¡Á´Â·Ó³ÉäµÄ½á¹û
-	public static boolean SUBGRAPHISOMORPHISM_DEBUG = false; // ´òÓ¡×ÓÍ¼Í¬¹¹Ê±ºòDEBUGµÄÊä³ö
-	public static boolean SUBGRAPHISOMORPHISM_NORMAL = true; // ´òÓ¡×ÓÍ¼Í¬¹¹Ê±ºòµÄÕı³£Êä³ö½á¹û
-	public static boolean SKIP_XML_VALIDATE = true; // Ìø¹ıxmlÎÄ¼şµÄĞ£Ñé
-	public static boolean REACH_ASSURE = true; // ±£Ö¤Í¼µÄÁ¬Í¨ĞÔ
+	public static boolean DIRECTED = false; // è®¾ç½®å›¾å½¢ç•Œé¢æ˜¾ç¤ºæ— å‘å›¾è¿˜æ˜¯æœ‰å‘å›¾
+	public static boolean ADAPTE_UNDIRECTEDGRAPH = true; // å®šåˆ¶æ— å‘å›¾ç±», å®ç°èµ·ç‚¹å’Œç»ˆç‚¹çš„è·å–
+	public static boolean ASSURE_UNIQUE = true; // ç¡®ä¿simpleDijkstraçš„èµ·ç‚¹å’Œç»ˆç‚¹ä¸ç›¸åŒ
+	public static boolean HIDDEN_RIGHT_TAB = true; // éšè—å›¾å½¢ç•Œé¢ä¸­çš„æ˜ å°„å’Œé€‰æ‹©çš„é€‰é¡¹å¡
+	public static String WRITE_FILE = "./results/outputRcrgf/"; // å°†æ˜ å°„ç»“æœå†™å…¥åˆ°æ–‡ä»¶ä¸­
+	public static boolean PRINT_LINK_MAPPING_RESULT = false; // æ‰“å°é“¾è·¯æ˜ å°„çš„ç»“æœ
+	public static boolean SUBGRAPHISOMORPHISM_DEBUG = false; // æ‰“å°å­å›¾åŒæ„æ—¶å€™DEBUGçš„è¾“å‡º
+	public static boolean SUBGRAPHISOMORPHISM_NORMAL = true; // æ‰“å°å­å›¾åŒæ„æ—¶å€™çš„æ­£å¸¸è¾“å‡ºç»“æœ
+	public static boolean SKIP_XML_VALIDATE = true; // è·³è¿‡xmlæ–‡ä»¶çš„æ ¡éªŒ
+	public static boolean REACH_ASSURE = true; // ä¿è¯å›¾çš„è¿é€šæ€§
 	public static String WRITE_RESOURCE = "./results/fileRcrgf/";
 	public static PrintWriter out;
 }

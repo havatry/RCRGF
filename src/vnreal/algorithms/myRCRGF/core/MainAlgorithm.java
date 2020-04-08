@@ -18,9 +18,9 @@ import vnreal.network.virtual.VirtualNode;
 public class MainAlgorithm {
 	private SubstrateNetwork substrateNetwork;
 	private VirtualNetwork virtualNetwork;
-	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // ½ÚµãÓ³Éä
-	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // Á´Â·Ó³Éä
-	private Set<SubstrateNode> hasMappedSubstrateNode = new HashSet<>(); // ÒÑ¾­Ó³ÉäµÄµ×²ã½Úµã
+	private Map<VirtualNode, SubstrateNode> nodeMapping = new HashMap<VirtualNode, SubstrateNode>(); // èŠ‚ç‚¹æ˜ å°„
+	private Map<VirtualLink, List<SubstrateLink>> linkMapping = new HashMap<>(); // é“¾è·¯æ˜ å°„
+	private Set<SubstrateNode> hasMappedSubstrateNode = new HashSet<>(); // å·²ç»æ˜ å°„çš„åº•å±‚èŠ‚ç‚¹
 	
 	public MainAlgorithm(SubstrateNetwork substrateNetwork, VirtualNetwork virtualNetwork) {
 		//Created constructor stubs
@@ -29,14 +29,14 @@ public class MainAlgorithm {
 	}
 	
 	public boolean work() {
-		Set<VirtualLink> MSE = new HashSet<>(); // ´ıÓ³ÉäµÄµã
-		Set<VirtualNode> HMS = new HashSet<>(); // ÒÑ¾­Ó³ÉäµÄµã
+		Set<VirtualLink> MSE = new HashSet<>(); // å¾…æ˜ å°„çš„ç‚¹
+		Set<VirtualNode> HMS = new HashSet<>(); // å·²ç»æ˜ å°„çš„ç‚¹
 		Set<SubstrateNode> outter = new HashSet<>();
 		while (HMS.size() < virtualNetwork.getVertexCount()) { 
 //			System.out.println("Retry");
 			int sz = HMS.size();
-			// 1. Ñ¡ÔñĞéÄâÍøÂçµÄ¸ù½Úµã
-			// 2. ÕÒµ½µ×²ãÍøÂçÖĞÊÊºÏµÄÆ¥Åäµã ×÷ÎªºËĞÄ½Úµã
+			// 1. é€‰æ‹©è™šæ‹Ÿç½‘ç»œçš„æ ¹èŠ‚ç‚¹
+			// 2. æ‰¾åˆ°åº•å±‚ç½‘ç»œä¸­é€‚åˆçš„åŒ¹é…ç‚¹ ä½œä¸ºæ ¸å¿ƒèŠ‚ç‚¹
 			MappingRules mappingRules = new MappingRules();
 			VirtualNode root;
 			SubstrateNode core;
@@ -44,12 +44,12 @@ public class MainAlgorithm {
 				root = (VirtualNode) SelectCoreNode.selectForRoot(virtualNetwork);
 				core = mappingRules.mapTo(root, substrateNetwork.getVertices(), virtualNetwork, substrateNetwork, hasMappedSubstrateNode);
 			} else {
-				// MSEÖĞÑ¡ÔñÒ»¸öÒÑ¾­Ó³ÉäµÄµã
+				// MSEä¸­é€‰æ‹©ä¸€ä¸ªå·²ç»æ˜ å°„çš„ç‚¹
 				VirtualLink vl = MSE.iterator().next();
 				VirtualNode s = virtualNetwork.getEndpoints(vl).getFirst();
 				VirtualNode t = virtualNetwork.getEndpoints(vl).getSecond();
 				if (nodeMapping.get(s) != null) {
-					// ÒÑ¾­Ó³Éäµ½µÄµã
+					// å·²ç»æ˜ å°„åˆ°çš„ç‚¹
 					root = s;
 				} else {
 					root = t;
@@ -57,11 +57,11 @@ public class MainAlgorithm {
 				core = nodeMapping.get(root);
 			}
 			outter.add(core);
-			// ³õÊ¼»¯coreµÄBTL
+			// åˆå§‹åŒ–coreçš„BTL
 			Utils.processBTL(core, substrateNetwork.getVertexCount());
 			nodeMapping.put(root, core);
 			BFSTravel bfsTravel = new BFSTravel(core, substrateNetwork);
-			// 3. ³õÊ¼»¯Êı¾İ½á¹¹
+			// 3. åˆå§‹åŒ–æ•°æ®ç»“æ„
 			MSE.addAll(virtualNetwork.getOutEdges(root));
 			HMS.add(root);
 			while (bfsTravel.hasNext()) {
@@ -77,30 +77,30 @@ public class MainAlgorithm {
 					VirtualNode s = virtualNetwork.getEndpoints(vl).getFirst();
 					VirtualNode t = virtualNetwork.getEndpoints(vl).getSecond();
 					VirtualNode actual = s;
-					// ²éÕÒÊÇ·ñÒ»¸ö±»Ó³ÉäÁË
-					SubstrateNode s_s = nodeMapping.get(s); // ±»³É¹¦Ó³ÉäÁË
+					// æŸ¥æ‰¾æ˜¯å¦ä¸€ä¸ªè¢«æ˜ å°„äº†
+					SubstrateNode s_s = nodeMapping.get(s); // è¢«æˆåŠŸæ˜ å°„äº†
 					if (s_s == null) {
 						s_s = nodeMapping.get(t);
 						actual = t;
 					}
-					List<SubstrateNode> ls = HMBT.get(s_s); // t¿Ï¶¨±»Ó³ÉäÁË
-					// ÕâÑù¾ÍÕÒµ½ÁË¿Éµ½´ï±»Ó³ÉäµÄµãÆäÓàµã¼¯ºÏ
+					List<SubstrateNode> ls = HMBT.get(s_s); // tè‚¯å®šè¢«æ˜ å°„äº†
+					// è¿™æ ·å°±æ‰¾åˆ°äº†å¯åˆ°è¾¾è¢«æ˜ å°„çš„ç‚¹å…¶ä½™ç‚¹é›†åˆ
 					if (ls == null) {
-						// ÕÒ²»µ½¿É´ïµ½µÄµã
+						// æ‰¾ä¸åˆ°å¯è¾¾åˆ°çš„ç‚¹
 //						System.out.println("To Think");
 						return false;
 					}
-					// ¹ıÂË¼¯ºÏ
+					// è¿‡æ»¤é›†åˆ
 					List<SubstrateNode> filterList = Utils.filter(ls, s_s, Utils.getBandwith(vl));
 					SubstrateNode mappedSubstrateNode = mappingRules.mapTo((VirtualNode)Utils.opposite(vl, actual, 
 							virtualNetwork), filterList, virtualNetwork, substrateNetwork, hasMappedSubstrateNode);
 					if (mappedSubstrateNode == null) {
-						// Ó³ÉäÃ»ÓĞ³É¹¦
+						// æ˜ å°„æ²¡æœ‰æˆåŠŸ
 						continue;
 					} else {
-						// ÕÒµ½Â·¾¶
+						// æ‰¾åˆ°è·¯å¾„
 						List<SubstrateLink> links = Utils.findPath(mappedSubstrateNode, s_s);
-						// Á´Â·Ó³Éä, Á´Â·ĞÅÏ¢²»×¼È·
+						// é“¾è·¯æ˜ å°„, é“¾è·¯ä¿¡æ¯ä¸å‡†ç¡®
 						if (!Utils.vlm(vl, links)) {
 							next_round = true;
 						} else {
@@ -109,16 +109,16 @@ public class MainAlgorithm {
 							additional.add(mappedVirtualNode);
 							attachLink.add(vl);
 							outter.add(mappedSubstrateNode);
-							// ½ÚµãÓ³Éä
-							Utils.vnm(mappedVirtualNode, mappedSubstrateNode); // ²»ÄÜÖØ¸´Ó³Éäµ½Ò»¸ö½ÚµãÉÏ
+							// èŠ‚ç‚¹æ˜ å°„
+							Utils.vnm(mappedVirtualNode, mappedSubstrateNode); // ä¸èƒ½é‡å¤æ˜ å°„åˆ°ä¸€ä¸ªèŠ‚ç‚¹ä¸Š
 							hasMappedSubstrateNode.add(mappedSubstrateNode);
-							nodeMapping.put(mappedVirtualNode, mappedSubstrateNode); // Íê³É½ÚµãÓ³Éä
-							linkMapping.put(vl, links); // Íê³ÉÁ´Â·Ó³Éä
-							update(links, bfsTravel, s_s); // ÇĞ»»ÉÏÓÎ
+							nodeMapping.put(mappedVirtualNode, mappedSubstrateNode); // å®ŒæˆèŠ‚ç‚¹æ˜ å°„
+							linkMapping.put(vl, links); // å®Œæˆé“¾è·¯æ˜ å°„
+							update(links, bfsTravel, s_s); // åˆ‡æ¢ä¸Šæ¸¸
 						}
 					}
 				}
-				// ¸üĞÂMSE
+				// æ›´æ–°MSE
 				for (VirtualNode vn : additional) {
 					MSE.addAll(virtualNetwork.getOutEdges(vn));
 				}
@@ -127,11 +127,11 @@ public class MainAlgorithm {
 				}
 				if (MSE.isEmpty()) {
 					print();
-					// Íê³ÉÓ³Éä
+					// å®Œæˆæ˜ å°„
 					return true;
 				}
 				if (HMS.size() == sz) {
-					// Ã»ÓĞ·¢Éú±ä»¯, ÈÏÎª²»¿ÉĞĞ
+					// æ²¡æœ‰å‘ç”Ÿå˜åŒ–, è®¤ä¸ºä¸å¯è¡Œ
 //					System.out.println("not add node to exit");
 					return false;
 				}
@@ -151,7 +151,7 @@ public class MainAlgorithm {
 	private void update(List<SubstrateLink> path, BFSTravel bfsTravel, SubstrateNode target) {
 		for (int i = path.size() - 1; i >= 0; i--) {
 			SubstrateLink sl = path.get(i);
-			// ¸üĞÂ
+			// æ›´æ–°
 			SubstrateNode s = substrateNetwork.getEndpoints(sl).getFirst();
 			SubstrateNode t = substrateNetwork.getEndpoints(sl).getSecond();
 			if (s.getDtoSubstrate().getBestUpLink().get(target) == sl) {

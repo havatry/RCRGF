@@ -14,15 +14,15 @@ import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
 
 /**
- * ÓÃÀ´±éÀúµ×²ãÍøÂç
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç10:50:57
+ * ç”¨æ¥éå†åº•å±‚ç½‘ç»œ
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ10:50:57
  */
 public class BFSTravel {
 	private SubstrateNode root;
 	private List<SubstrateNode> visited = new LinkedList<>();
 	private List<SubstrateNode> outter = new LinkedList<>();
-	private SubstrateNetwork substrateNetwork; // µ×²ãÍøÂç
-	private Map<SubstrateNode, List<SubstrateNode>> HMBTL = new HashMap<SubstrateNode, List<SubstrateNode>>(); // Ã¿²ã¿ÉÒÔÓ³ÉäµÄ½Úµã¼¯ºÏ
+	private SubstrateNetwork substrateNetwork; // åº•å±‚ç½‘ç»œ
+	private Map<SubstrateNode, List<SubstrateNode>> HMBTL = new HashMap<SubstrateNode, List<SubstrateNode>>(); // æ¯å±‚å¯ä»¥æ˜ å°„çš„èŠ‚ç‚¹é›†åˆ
 	
 	public BFSTravel(SubstrateNode root, SubstrateNetwork substrateNetwork) {
 		//Created constructor stubs
@@ -38,16 +38,16 @@ public class BFSTravel {
 	
 	public Set<SubstrateNode> next(Set<SubstrateNode> visitedNodes, Set<SubstrateNode> outter) {
 		Set<SubstrateNode> temp = new HashSet<SubstrateNode>();
-		// Í¨¹ıoutterÀ´²úÉú
+		// é€šè¿‡outteræ¥äº§ç”Ÿ
 		HMBTL.clear();
 		for (SubstrateNode sn : outter) {
 			for (SubstrateLink sl : substrateNetwork.getOutEdges(sn)) {
 				SubstrateNode neighbor = (SubstrateNode) Utils.opposite(sl, sn, substrateNetwork);
 				if (visitedNodes.contains(neighbor)) {
-					continue; // ÒÑ¾­·ÃÎÊ¹ıÁË
+					continue; // å·²ç»è®¿é—®è¿‡äº†
 				} else {
 					construct(sn, neighbor, sl);
-					temp.add(neighbor); // ¸üÕı
+					temp.add(neighbor); // æ›´æ­£
 				}
 			}
 		}
@@ -55,19 +55,19 @@ public class BFSTravel {
 	}
 	
 	public void construct(SubstrateNode sn, SubstrateNode neighbor, SubstrateLink sl) {
-		// ³õÊ¼»¯BTL
+		// åˆå§‹åŒ–BTL
 		Utils.processBTL(neighbor, substrateNetwork.getVertexCount());
-		// ¼Ì³ĞÉÏÓÎµÄEBTL
+		// ç»§æ‰¿ä¸Šæ¸¸çš„EBTL
 		Map<SubstrateNode, PriorityQueue<SubstrateNode>> upEBRL = sn.getDtoSubstrate().getEBTL();
 		neighbor.getDtoSubstrate().getEBTL().clear();
 		Map<SubstrateNode, PriorityQueue<SubstrateNode>> currentEBTL = neighbor.getDtoSubstrate().getEBTL();
-		// upEBTLÊÇÆäËû½Úµãµ½snµÄÂ·¾¶¼¯ºÏ, Òò´Ë¿ÉÒÔË³ÊÆÑÓÉìµ½µ±Ç°EBTLÖĞ
+		// upEBTLæ˜¯å…¶ä»–èŠ‚ç‚¹åˆ°snçš„è·¯å¾„é›†åˆ, å› æ­¤å¯ä»¥é¡ºåŠ¿å»¶ä¼¸åˆ°å½“å‰EBTLä¸­
 		for (SubstrateNode other : upEBRL.keySet()) {
 			addElement(other, sn, neighbor, currentEBTL);
 		}
-		// Ôö¼ÓĞÂ¼ÓµÄÕâ¸ö
+		// å¢åŠ æ–°åŠ çš„è¿™ä¸ª
 		addElement(sn, sn, neighbor, currentEBTL);
-		// ¹¹½¨BTL
+		// æ„å»ºBTL
 		for (SubstrateNode other2 : currentEBTL.keySet()) {
 			SubstrateNode bstUpStreamToOther = neighbor.getDtoSubstrate().getEBTL().get(other2).peek();
 			neighbor.getDtoSubstrate().getBTL()[Utils.getIndexForSubstrateNode(other2)]
@@ -78,8 +78,8 @@ public class BFSTravel {
 				HMBTL.put(other2, new LinkedList<>());
 			}
 			HMBTL.get(other2).add(neighbor);
-			// ÉèÖÃ×î¼ÑÉÏÏÂÓÎ 
-			// È¥other2Ê±ºòĞèÒª×ß¹ıµÄ×î¼ÑÉÏÓÎÂ·¾¶
+			// è®¾ç½®æœ€ä½³ä¸Šä¸‹æ¸¸ 
+			// å»other2æ—¶å€™éœ€è¦èµ°è¿‡çš„æœ€ä½³ä¸Šæ¸¸è·¯å¾„
 			SubstrateNode uvn = neighbor.getDtoSubstrate().getEBTL().get(other2).peek();
 			SubstrateLink usl = substrateNetwork.findEdge(uvn, neighbor);
 			neighbor.getDtoSubstrate().getBestUpStream().put(other2, uvn);
@@ -90,7 +90,7 @@ public class BFSTravel {
 	private void addElement(SubstrateNode other, SubstrateNode sn, SubstrateNode neighbor, 
 			Map<SubstrateNode, PriorityQueue<SubstrateNode>> currentEBTL) {
 		if (currentEBTL.get(other) == null) {
-			// ËµÃ÷µ±Ç°½Úµã¶ÔÓ¦ÆäËûÎ»ÖÃÉÏ »¹Ã»ÓĞÉèÖÃ
+			// è¯´æ˜å½“å‰èŠ‚ç‚¹å¯¹åº”å…¶ä»–ä½ç½®ä¸Š è¿˜æ²¡æœ‰è®¾ç½®
 			currentEBTL.put(other, new PriorityQueue<>(new Comparator<SubstrateNode>() {
 
 				@Override
@@ -114,7 +114,7 @@ public class BFSTravel {
 				}
 			}));
 		}
-		// Ìí¼ÓÔªËØ
+		// æ·»åŠ å…ƒç´ 
 		currentEBTL.get(other).offer(sn);
 	}
 	

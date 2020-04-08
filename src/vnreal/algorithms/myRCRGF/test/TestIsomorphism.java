@@ -15,13 +15,13 @@ private NetworkStack networkStack;
 	
 	@Before
 	public void start() {
-		// ´ÓÎÄ¼şÖĞ¶ÁÈ¡ÍøÂçÕ»
+		// ä»æ–‡ä»¶ä¸­è¯»å–ç½‘ç»œæ ˆ
 		String filename = "topology_140_1_0.02_0.6.xml";
 		Scenario scenario = XMLImporter.importScenario(Constants.WRITE_RESOURCE + filename);
 		networkStack = scenario.getNetworkStack();
 	}
 	
-	@Test // ²âÊÔËã·¨¹¦ÄÜ
+	@Test // æµ‹è¯•ç®—æ³•åŠŸèƒ½
 	public void test01() {
 		SubgraphIsomorphismStackAlgorithm stackAlgorithm = new SubgraphIsomorphismStackAlgorithm(networkStack,
 				new SubgraphIsomorphismAlgorithm());

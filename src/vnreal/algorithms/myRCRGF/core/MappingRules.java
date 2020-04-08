@@ -18,12 +18,12 @@ import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 
 /**
- * Æ¥Åä¹æÔòÀà
- * ±ßÆ¥Åä¹æÔò
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç9:23:21
+ * åŒ¹é…è§„åˆ™ç±»
+ * è¾¹åŒ¹é…è§„åˆ™
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ9:23:21
  */
 public class MappingRules {
-	// ºËĞÄ·½·¨, Íê³ÉĞéÄâ½Úµãµ½µ×²ã½ÚµãµÄÓ³Éä
+	// æ ¸å¿ƒæ–¹æ³•, å®Œæˆè™šæ‹ŸèŠ‚ç‚¹åˆ°åº•å±‚èŠ‚ç‚¹çš„æ˜ å°„
 	public SubstrateNode mapTo(VirtualNode virtualNode, Collection<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork, Set<SubstrateNode> hasMapped) {
 		List<SubstrateNode> c = support(virtualNode, substrateNodeLists, virtualNetwork, substrateNetwork);
@@ -46,7 +46,7 @@ public class MappingRules {
 		return ret;
 	}
 	
-	// Ò»¸öĞéÄâ½ÚµãÓ³Éäµ½¶à¸öºòÑ¡½ÚµãÉÏ£¬¹ıÂËÒ»Ğ©²»·ûºÏ´ø¿í¹æÔòµÄ
+	// ä¸€ä¸ªè™šæ‹ŸèŠ‚ç‚¹æ˜ å°„åˆ°å¤šä¸ªå€™é€‰èŠ‚ç‚¹ä¸Šï¼Œè¿‡æ»¤ä¸€äº›ä¸ç¬¦åˆå¸¦å®½è§„åˆ™çš„
 	private List<SubstrateNode> support(VirtualNode virtualNode, Collection<SubstrateNode> substrateNodeLists, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
 		List<SubstrateNode> result = new LinkedList<SubstrateNode>();
@@ -63,7 +63,7 @@ public class MappingRules {
 	@Deprecated
 	private boolean rulesForNodesOld(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
-		// ÅĞ¶ÏĞéÄâ½ÚµãµÄÖÜÎ§ÁÚ¾Ó½ÚµãÊÇ·ñ¶¼Âú×ãµ×²ã½ÚµãµÄÖÜÎ§ÁÚ¾Ó½Úµã
+		// åˆ¤æ–­è™šæ‹ŸèŠ‚ç‚¹çš„å‘¨å›´é‚»å±…èŠ‚ç‚¹æ˜¯å¦éƒ½æ»¡è¶³åº•å±‚èŠ‚ç‚¹çš„å‘¨å›´é‚»å±…èŠ‚ç‚¹
 		Comparator<Node> c = new Comparator<Node>() {
 			@Override
 			public int compare(Node o1, Node o2) {
@@ -83,7 +83,7 @@ public class MappingRules {
 		PQN_V.addAll(virtualNetwork.getNeighbors(virtualNode));
 		PriorityQueue<SubstrateNode> PQN_S = new PriorityQueue<SubstrateNode>(c);
 		PQN_S.addAll(substrateNetwork.getNeighbors(substrateNode));
-		// ×¢Òâ²»ÄÜÓ³Éäµ½Í¬Ò»¸öµãÉÏ
+		// æ³¨æ„ä¸èƒ½æ˜ å°„åˆ°åŒä¸€ä¸ªç‚¹ä¸Š
 		while (!PQN_V.isEmpty()) {
 			VirtualNode vNode = PQN_V.poll();
 			SubstrateNode sNode = PQN_S.poll();
@@ -104,7 +104,7 @@ public class MappingRules {
 	@SuppressWarnings({ "rawtypes", "unused" })
 	private boolean rulesForLinks(VirtualNode virtualNode, SubstrateNode substrateNode, VirtualNetwork virtualNetwork,
 			SubstrateNetwork substrateNetwork) {
-		// °´ÕÕ´ø¿í´Ó´óµ½Ğ¡ÅÅĞò
+		// æŒ‰ç…§å¸¦å®½ä»å¤§åˆ°å°æ’åº
 		Comparator<Link> c = new Comparator<Link>() {
 			@Override
 			public int compare(Link o1, Link o2) {
@@ -120,7 +120,7 @@ public class MappingRules {
 				}
 			}
 		};
-		// copyµ×²ãÍøÂç
+		// copyåº•å±‚ç½‘ç»œ
 		SubstrateNetwork substrateNetwork_backup = substrateNetwork.getCopy(false, true);
 		PriorityQueue<VirtualLink> PQE_V = new PriorityQueue<>(c);
 		PriorityQueue<SubstrateLink> PQE_S = new PriorityQueue<>(c);
@@ -132,11 +132,11 @@ public class MappingRules {
 			double bandwith_v = Utils.getBandwith(vLink);
 			double bandwith_s = Utils.getBandwith(sLink);
 			if (Utils.smallEqual(bandwith_v, bandwith_s)) {
-				// Âú×ãÒªÇó
+				// æ»¡è¶³è¦æ±‚
 				Utils.setBandwith(sLink, bandwith_s - bandwith_v);
-				PQE_S.offer(sLink); // ±£³ÖÓĞĞò
+				PQE_S.offer(sLink); // ä¿æŒæœ‰åº
 			} else {
-				return false; // ²»Âú×ã´ø¿í¹æÔò
+				return false; // ä¸æ»¡è¶³å¸¦å®½è§„åˆ™
 			}
 		}
 		return true;

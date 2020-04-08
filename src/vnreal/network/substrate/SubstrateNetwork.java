@@ -187,7 +187,7 @@ public class SubstrateNetwork extends
 					result.addEdge(tmpSLink, tmpSNode, tmpDNode);
 				}
 			} else {
-				// ����ͼ
+				// 锟斤拷锟斤拷图
 				result.addEdge(tmpSLink.getCopy(deepCopy), getEndpoints(tmpSLink).getFirst(), getEndpoints(tmpSLink).getSecond());
 			}
 		}

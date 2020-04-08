@@ -9,8 +9,8 @@ import vnreal.network.Network;
 import vnreal.network.Node;
 
 /**
- * µ±È·¶¨ºÃÍøÂçÍØÆËºó£¬ÎªÍøÂçÑ¡ÔñÒ»¸öºËĞÄ½Úµã,Ò²³Æroot½Úµã
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç8:46:57
+ * å½“ç¡®å®šå¥½ç½‘ç»œæ‹“æ‰‘åï¼Œä¸ºç½‘ç»œé€‰æ‹©ä¸€ä¸ªæ ¸å¿ƒèŠ‚ç‚¹,ä¹Ÿç§°rootèŠ‚ç‚¹
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ8:46:57
  */
 public class SelectCoreNode {
 	private static double alpha = 1.0;
@@ -31,7 +31,7 @@ public class SelectCoreNode {
                 return -1;
             }
         });
-		return list.get(0); // Ñ¡È¡×ÊÔ´×î¶àµÄ
+		return list.get(0); // é€‰å–èµ„æºæœ€å¤šçš„
 	}
 	
 	@SuppressWarnings("rawtypes")

@@ -8,8 +8,8 @@ import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNode;
 
 /**
- * Îª½ÚµãÀàÀ©Õ¹µÄÊôĞÔ
- * 2019Äê10ÔÂ24ÈÕ ÏÂÎç9:26:54
+ * ä¸ºèŠ‚ç‚¹ç±»æ‰©å±•çš„å±æ€§
+ * 2019å¹´10æœˆ24æ—¥ ä¸‹åˆ9:26:54
  */
 public class DTOSubstrate {
 	private double[] BTL;

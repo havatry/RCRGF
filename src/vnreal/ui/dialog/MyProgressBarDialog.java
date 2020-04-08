@@ -39,10 +39,10 @@ import vnreal.ui.UI;
 /**
  * An implementation of MuLaViTo's {@link ProgessBarDialog}.
  * <br>
- * ¶þ½×¶ÎµÄÁ÷³Ì
- * MyProgressBarDialogµÄ¹¹Ôìº¯Êý -> µ÷ÓÃsuperµÄ¹¹Ôìº¯Êý,´«Èëalg -> ÊµÀý»¯ProgressTask(alg)ÈÎÎñ -> µ¯³ö¿òÊÇ·ñÑ¡ÔñHiddenHop & Ö´ÐÐÈÎÎñ 
- * -> µ÷ÓÃÈÎÎñµÄdoInBackground·½·¨ -> Ö´ÐÐAbstractAlgorithmµÄperformEvaluation·½·¨ -> Ö´ÐÐAbstractSequentialAlgorithmµÄevalute·½·¨
- * -> Ö´ÐÐGenericMappingAlgorithmµÄprocess·½·¨ -> Ö´ÐÐ´«ÈëalgµÄnodemappingºÍlinkmapping·½·¨ -> Í³¼ÆËã·¨µÄ¼ÆËã½á¹û£¬ÔÚonDoneµÄÊ±ºòÏÔÊ¾
+ * äºŒé˜¶æ®µçš„æµç¨‹
+ * MyProgressBarDialogçš„æž„é€ å‡½æ•° -> è°ƒç”¨superçš„æž„é€ å‡½æ•°,ä¼ å…¥alg -> å®žä¾‹åŒ–ProgressTask(alg)ä»»åŠ¡ -> å¼¹å‡ºæ¡†æ˜¯å¦é€‰æ‹©HiddenHop & æ‰§è¡Œä»»åŠ¡ 
+ * -> è°ƒç”¨ä»»åŠ¡çš„doInBackgroundæ–¹æ³• -> æ‰§è¡ŒAbstractAlgorithmçš„performEvaluationæ–¹æ³• -> æ‰§è¡ŒAbstractSequentialAlgorithmçš„evaluteæ–¹æ³•
+ * -> æ‰§è¡ŒGenericMappingAlgorithmçš„processæ–¹æ³• -> æ‰§è¡Œä¼ å…¥algçš„nodemappingå’Œlinkmappingæ–¹æ³• -> ç»Ÿè®¡ç®—æ³•çš„è®¡ç®—ç»“æžœï¼Œåœ¨onDoneçš„æ—¶å€™æ˜¾ç¤º
  * @author Michael Duelli
  * @since 2010-11-18
  */

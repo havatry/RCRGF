@@ -44,7 +44,7 @@ package vnreal.algorithms;
 public abstract class AbstractSequentialAlgorithm<P> extends AbstractAlgorithm {
 	@Override
 	protected void evaluate() {
-		// ÷ÿ÷√curItem
+		// ÈáçÁΩÆcurItem
 		reset();
 		while (hasNext())
 			if (!process(getNext()))

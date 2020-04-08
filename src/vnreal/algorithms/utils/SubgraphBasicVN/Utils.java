@@ -611,9 +611,9 @@ public class Utils {
 	}
 
 	/**
-	 * 链路上所有资源被映射到其他实体的数量
-	 * @param e 链路
-	 * @return 链路压力水平
+	 * 閾捐矾涓婃墍鏈夎祫婧愯鏄犲皠鍒板叾浠栧疄浣撶殑鏁伴噺
+	 * @param e 閾捐矾
+	 * @return 閾捐矾鍘嬪姏姘村钩
 	 */
 	public static int getStressLevel(NetworkEntity<? extends AbstractResource> e) {
 		List<NetworkEntity<?>> vEntities = new LinkedList<NetworkEntity<?>>();

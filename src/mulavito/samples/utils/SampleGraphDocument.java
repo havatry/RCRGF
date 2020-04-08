@@ -3,7 +3,7 @@
  * 
  * This work has been funded by the Federal Ministry of Education
  * and Research of the Federal Republic of Germany
- * (BMBF F枚rderkennzeichen 01BP0775). It is part of the EUREKA project
+ * (BMBF F鏋歳derkennzeichen 01BP0775). It is part of the EUREKA project
  * "100 Gbit/s Carrier-Grade Ethernet Transport Technologies
  * (CELTIC CP4-001)". The authors alone are responsible for this work.
  *
@@ -100,11 +100,11 @@ public class SampleGraphDocument {
 			
 			// create 0-2*|V| edges
 			int numEdges = rnd.nextInt(numVertices * 2);
-			MyV[] vertices = layer.getVertices().toArray(new MyV[0]); // 自动扩容
+			MyV[] vertices = layer.getVertices().toArray(new MyV[0]); // 鑷姩鎵╁
 			for (int j = 0; j < numEdges; j++) {
 				MyV a = vertices[rnd.nextInt(numVertices - 1)];
 				MyV b = vertices[rnd.nextInt(numVertices - 1)];
-				if (a == b || layer.findEdge(a, b) != null) // 两点重合或者两点之间没有边
+				if (a == b || layer.findEdge(a, b) != null) // 涓ょ偣閲嶅悎鎴栬�呬袱鐐逛箣闂存病鏈夎竟
 					continue;
 				layer.addEdge(layer.getEdgeFactory().create(), a, b);
 			}

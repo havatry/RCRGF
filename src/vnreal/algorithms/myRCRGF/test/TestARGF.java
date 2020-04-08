@@ -19,7 +19,7 @@ public class TestARGF {
 		networkStack = scenario.getNetworkStack();
 	}
 	
-	@Test // ²âÊÔËã·¨¹¦ÄÜ
+	@Test // æµ‹è¯•ç®—æ³•åŠŸèƒ½
 	public void test01() {
 		RCRGFStackAlgorithm argfStackAlgorithm = new RCRGFStackAlgorithm(networkStack);
 		argfStackAlgorithm.performEvaluation();

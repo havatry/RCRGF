@@ -87,10 +87,10 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 			VirtualNetwork virtualNetwork = getNext();
 			boolean result = algorithm.compute(ns.getSubstrate(), virtualNetwork);
 			if (!result) {
-				// δӳ��ɹ�
+				// 未映射成功
 				statistics.setSuccVns(0);
 			} else {
-				// ӳ��ɹ�
+				// 映射成功
 				statistics.setSuccVns(1);
 			}
 		}
@@ -103,7 +103,7 @@ public class RCRGFStackAlgorithm extends AbstractAlgorithm{
 	@Override
 	protected void postRun() {
 		//Created method stubs
-		// ��ӡstatics
+		// 打印statics
 		try {
 			PrintWriter out = new PrintWriter(new FileWriter(Constants.WRITE_FILE + "simulation.txt", true));
 			out.print(statistics);

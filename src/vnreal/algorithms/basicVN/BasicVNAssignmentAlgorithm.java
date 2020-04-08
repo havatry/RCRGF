@@ -349,8 +349,6 @@ public class BasicVNAssignmentAlgorithm extends AbstractAlgorithm {
 	/**
 	 * mapping of nodes
 	 * 
-	 * @param degrees
-	 * @param nrValues
 	 * @param result
 	 * @return
 	 */

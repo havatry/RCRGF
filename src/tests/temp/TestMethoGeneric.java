@@ -21,8 +21,8 @@ public class TestMethoGeneric {
         List<Object> as = new ArrayList<>();
         List<String> bs = new ArrayList<>();
         test(bs, as); // right
-//        test1(bs, as); // ±¨´í
-//        test1(as, bs); // ±¨´í
+//        test1(bs, as); // æŠ¥é”™
+//        test1(as, bs); // æŠ¥é”™
         test1(bs, bs); // right
     }
 }
