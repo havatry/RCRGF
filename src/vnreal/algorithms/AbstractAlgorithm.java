@@ -32,6 +32,7 @@
 package vnreal.algorithms;
 
 import mulavito.algorithms.IAlgorithm;
+import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 
 /**

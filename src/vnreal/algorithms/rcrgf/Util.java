@@ -81,7 +81,7 @@ public class Util {
     }
 
     // 计算给定节点的reference值
-    private double getReferenceValue(Node node, Network network) {
+    public static double getReferenceValue(Node node, Network network) {
         double bandwidth = 0.0;
         for (Object o : network.getOutEdges(node)) {
             // 强制转换为Link
