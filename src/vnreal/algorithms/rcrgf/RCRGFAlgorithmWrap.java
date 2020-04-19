@@ -21,7 +21,7 @@ public class RCRGFAlgorithmWrap extends AbstractAlgorithm{
 
     public RCRGFAlgorithmWrap(NetworkStack network) {
         this.ns = network;
-        // TODO
+        this.algorithm = new RCRGFAlgorithm();
     }
 
     @Override

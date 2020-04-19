@@ -20,6 +20,7 @@ import static vnreal.algorithms.rcrgf.Util.greatEqual;
 
 /**
  * Created on 2020/4/19
+ * RCRGF Version 1
  */
 public class RCRGFAlgorithm {
     private NodeLinkMapping nodeLinkMapping = new NodeLinkMapping();
@@ -74,7 +75,7 @@ public class RCRGFAlgorithm {
                         if (greatEqual(getReferenceValue(s, substrateNetwork), getReferenceValue(second, virtualNetwork))) {
                             // 满足条件 映射节点
                             if (!NodeLinkAssignation.vnm(second, s)) {
-
+                                substrateNetwork.clearMappings(); // 撤回底层资源
                                 return false;
                             }
                             nodeLinkMapping.add(second, s);
@@ -83,6 +84,7 @@ public class RCRGFAlgorithm {
                             List<SubstrateLink> path = bfsTravel.update(nodeLinkMapping.getSubstrateNode(first),
                                     nodeLinkMapping.getSubstrateNode(second), getBandwidth(vl));
                             if (!NodeLinkAssignation.vlm(vl, path, substrateNetwork, nodeLinkMapping.getSubstrateNode(first))) {
+                                substrateNetwork.clearMappings(); // 撤回底层资源
                                 return false;
                             }
                             nodeLinkMapping.add(vl, path);
@@ -95,8 +97,8 @@ public class RCRGFAlgorithm {
                     }
                 }
             }
-            // 增加link
+            virtualLinks.addAll(currentAdd);
         }
-        return false;
+        return virtualLinks.isEmpty(); // 都完成了虚拟链路的映射
     }
 }
