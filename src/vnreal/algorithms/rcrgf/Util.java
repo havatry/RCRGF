@@ -90,4 +90,22 @@ public class Util {
         }
         return getCpu(node) * bandwidth;
     }
+
+    // 基本double判断条件
+    private static final double esp = 1e-3;
+    public static boolean equal(double a, double b) {
+        return a <= b + esp && a >= b - esp;
+    }
+    public static boolean great(double a, double b) {
+        return a > b + esp;
+    }
+    public static boolean small(double a, double b) {
+        return a < b - esp;
+    }
+    public static boolean greatEqual(double a, double b) {
+        return !small(a, b);
+    }
+    public static boolean smallEqual(double a, double b) {
+        return !great(a, b);
+    }
 }

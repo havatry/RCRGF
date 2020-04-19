@@ -15,6 +15,7 @@ import java.util.Map;
 public class GlobalVariable {
     private static Map<VirtualNode, VirtualNode> virtualMap = new HashMap<>();
     private static Map<SubstrateNode, SubstrateNode> substrateMap = new HashMap<>();
+    private static Map<SubstrateNode, Boolean> visited = new HashMap<>();
     // 设置值
     public static void setVirtualUpStream(VirtualNode cur, VirtualNode up) {
         virtualMap.put(cur, up);
@@ -22,11 +23,20 @@ public class GlobalVariable {
     public static void setSubstrateUpStream(SubstrateNode cur, SubstrateNode up) {
         substrateMap.put(cur, up);
     }
+    public static void setVisited(SubstrateNode cur) {
+        visited.put(cur, true);
+    }
+    public static void cancelVisited(SubstrateNode cur) {
+        visited.put(cur, false);
+    }
     // 获取值
     public static VirtualNode getVirtualUpStream(VirtualNode cur) {
         return virtualMap.get(cur);
     }
     public static SubstrateNode getSubstrateUpStream(SubstrateNode cur) {
         return substrateMap.get(cur);
+    }
+    public static Boolean isVisited(SubstrateNode cur) {
+        return visited.getOrDefault(cur, false);
     }
 }
