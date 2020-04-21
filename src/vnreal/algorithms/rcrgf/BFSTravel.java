@@ -3,17 +3,12 @@ package vnreal.algorithms.rcrgf;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
-import vnreal.network.virtual.VirtualLink;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static vnreal.algorithms.rcrgf.GlobalVariable.isVisited;
-import static vnreal.algorithms.rcrgf.GlobalVariable.setSubstrateUpStream;
-import static vnreal.algorithms.rcrgf.Util.equal;
-import static vnreal.algorithms.rcrgf.Util.getBandwidth;
 import static vnreal.algorithms.rcrgf.GlobalVariable.*;
-import static vnreal.algorithms.rcrgf.Util.setBandwidth;
+import static vnreal.algorithms.rcrgf.Util.*;
 
 /**
  * Created on 2020/4/19

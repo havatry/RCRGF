@@ -75,7 +75,7 @@ public class RCRGFAlgorithm {
                         if (greatEqual(getReferenceValue(s, substrateNetwork), getReferenceValue(second, virtualNetwork))) {
                             // 满足条件 映射节点
                             if (!NodeLinkAssignation.vnm(second, s)) {
-                                substrateNetwork.clearMappings(); // 撤回底层资源
+                                nodeLinkMapping.freeAllResources();
                                 return false;
                             }
                             nodeLinkMapping.add(second, s);
@@ -84,7 +84,7 @@ public class RCRGFAlgorithm {
                             List<SubstrateLink> path = bfsTravel.update(nodeLinkMapping.getSubstrateNode(first),
                                     nodeLinkMapping.getSubstrateNode(second), getBandwidth(vl));
                             if (!NodeLinkAssignation.vlm(vl, path, substrateNetwork, nodeLinkMapping.getSubstrateNode(first))) {
-                                substrateNetwork.clearMappings(); // 撤回底层资源
+                                nodeLinkMapping.freeAllResources();
                                 return false;
                             }
                             nodeLinkMapping.add(vl, path);
@@ -100,5 +100,10 @@ public class RCRGFAlgorithm {
             virtualLinks.addAll(currentAdd);
         }
         return virtualLinks.isEmpty(); // 都完成了虚拟链路的映射
+    }
+
+    // 返回映射结果
+    public NodeLinkMapping getNodeLinkMapping() {
+        return nodeLinkMapping;
     }
 }

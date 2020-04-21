@@ -1,14 +1,16 @@
 package vnreal.algorithms.rcrgf;
 
+import junit.framework.Assert;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
-import vnreal.algorithms.myRCRGF.core.RCRGFAlgorithm;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.virtual.VirtualNetwork;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import static vnreal.algorithms.rcrgf.Util.*;
 
 /**
  * Created on 2020/4/19
@@ -19,6 +21,11 @@ public class RCRGFAlgorithmWrap extends AbstractAlgorithm{
     private Iterator<VirtualNetwork> curIt = null;
     private Iterator<? extends Network<?, ?, ?>> curNetIt = null;
 
+    //----------------测量指标
+    private boolean success;
+    private int execution;
+    private double costToRevenue;
+
     public RCRGFAlgorithmWrap(NetworkStack network) {
         this.ns = network;
         this.algorithm = new RCRGFAlgorithm();
@@ -26,12 +33,23 @@ public class RCRGFAlgorithmWrap extends AbstractAlgorithm{
 
     @Override
     protected boolean preRun() {
-        return false;
+        // 预处理阶段
+        Assert.assertTrue("the virtual network must be one", ns.getVirtuals().size() == 1);
+        VirtualNetwork virtualNetwork = ns.getVirtuals().get(0);
+        return RemoveEdge.work(virtualNetwork);
     }
 
     @Override
     protected void evaluate() {
-
+        // 这里只处理一个底层网络和一个虚拟网络的情况
+        long start = System.currentTimeMillis();
+        if (hasNext()) {
+            VirtualNetwork virtualNetwork = getNext();
+            success = algorithm.work(ns.getSubstrate(), virtualNetwork);
+        }
+        execution = (int) (System.currentTimeMillis() - start);
+        // 计算代价收益比
+        costToRevenue = computeCostToRevenue(algorithm.getNodeLinkMapping());
     }
 
     @Override
@@ -64,8 +82,47 @@ public class RCRGFAlgorithmWrap extends AbstractAlgorithm{
         }
     }
 
+    // 返回结果计量参数
     @Override
     public List<AbstractAlgorithmStatus> getStati() {
-        return null;
+        // 返回执行时间、接受率、收益代价比
+        List<AbstractAlgorithmStatus> list = new ArrayList<>(4);
+        list.add(new AbstractAlgorithmStatus("Mapped Success") {
+            @Override
+            public Number getValue() {
+                return success ? 1 : 0;
+            }
+
+            @Override
+            public Number getMaximum() {
+                return 1.0;
+            }
+        });
+
+        list.add(new AbstractAlgorithmStatus("Execution Rime") {
+            @Override
+            public Number getValue() {
+                return execution;
+            }
+
+            @Override
+            public Number getMaximum() {
+                return 1.0;
+            }
+        });
+
+        list.add(new AbstractAlgorithmStatus("Cost to Revenue") {
+            @Override
+            public Number getValue() {
+                return costToRevenue;
+            }
+
+            @Override
+            public Number getMaximum() {
+                return 1.0;
+            }
+        });
+
+        return list;
     }
 }

@@ -82,9 +82,9 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 		if (preRun()) {
 			evaluate();
 			postRun();
-		} else
-//			throw new AssertionError("preRun failed!");
-			System.out.println("SKIP THIS TEST");
+		} else {
+			throw new AssertionError("preRun failed!");
+		}
 	}
 	
 	public void setStack(NetworkStack ns) {

@@ -17,7 +17,7 @@ import java.util.List;
 public class RemoveEdge {
 	// 采用生成树kurskal算法，将不在生成树中的边标记下，作为候选删除集合
 	// 然后找出环路，删除环路中最小带宽，并将该边加入进去
-	private static boolean work(VirtualNetwork virtualNetwork) {
+	public static boolean work(VirtualNetwork virtualNetwork) {
 		// 1. 对所有边 按照带宽从大到小排序
 		List<VirtualLink> links = new ArrayList<>(virtualNetwork.getEdges());
 		Collections.sort(links, Util::compareLinkBandwidth);

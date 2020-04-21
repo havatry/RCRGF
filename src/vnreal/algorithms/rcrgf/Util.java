@@ -1,5 +1,7 @@
 package vnreal.algorithms.rcrgf;
 
+import vnreal.algorithms.utils.NodeLinkAssignation;
+import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;
@@ -11,6 +13,7 @@ import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created at 2020/4/10
@@ -89,6 +92,17 @@ public class Util {
             bandwidth += getBandwidth(l);
         }
         return getCpu(node) * bandwidth;
+    }
+
+    // 计算当前网络的代价收益比
+    public static double computeCostToRevenue(NodeLinkMapping nodeLinkMapping) {
+        double cpu_total = nodeLinkMapping.getNodeEntries().keySet().stream()
+                .collect(Collectors.summarizingDouble(Util::getCpu)).getSum();
+        return (cpu_total + nodeLinkMapping.getLinkEntries().keySet().stream()
+                .collect(Collectors.summarizingDouble(Util::getBandwidth)).getSum())
+                / (cpu_total + nodeLinkMapping.getLinkEntries().keySet().stream()
+                .collect(Collectors.summarizingDouble(x -> getBandwidth(x)
+                        * nodeLinkMapping.getLinkEntries().get(x).size())).getSum());
     }
 
     // 基本double判断条件
