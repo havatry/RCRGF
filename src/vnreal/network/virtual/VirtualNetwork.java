@@ -33,7 +33,7 @@ package vnreal.network.virtual;
 
 import edu.uci.ics.jung.graph.util.Pair;
 import org.apache.commons.collections15.Factory;
-import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.mapping.Mapping;
 import vnreal.network.Network;

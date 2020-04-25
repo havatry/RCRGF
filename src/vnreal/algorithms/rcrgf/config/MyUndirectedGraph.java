@@ -1,4 +1,4 @@
-package vnreal.algorithms.myRCRGF.save;
+package vnreal.algorithms.rcrgf.config;
 
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
 

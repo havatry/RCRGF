@@ -31,16 +31,11 @@
  * ***** END LICENSE BLOCK ***** */
 package vnreal.algorithms.isomorphism;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
 import vnreal.algorithms.AlgorithmParameter;
 import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm.MappingCandidate;
-import vnreal.algorithms.myRCRGF.util.Utils;
+import vnreal.algorithms.rcrgf.utils.Util;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
@@ -49,6 +44,11 @@ import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * See
@@ -170,10 +170,10 @@ public class SubgraphIsomorphismStackAlgorithm extends AbstractAlgorithm {
 				// TODO Auto-generated method stub
 				double nodeRevenue = 0.0, linkRevenue = 0.0;
 				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
-					nodeRevenue += Utils.getCpu(vn);
+					nodeRevenue += Util.getCpu(vn);
 				}
 				for (VirtualLink vl : ns.getVirtuals().get(0).getEdges()) {
-					linkRevenue += Utils.getBandwith(vl);
+					linkRevenue += Util.getBandwidth(vl);
 				}
 				return nodeRevenue + linkRevenue;
 			}

@@ -1,14 +1,7 @@
-package vnreal.algorithms.myRCRGF.test;
+package vnreal.algorithms.rcrgf.produce;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import vnreal.algorithms.myRCRGF.util.Constants;
-import vnreal.algorithms.myRCRGF.util.Utils;
+import vnreal.algorithms.rcrgf.utils.Constants;
+import vnreal.algorithms.rcrgf.utils.Util;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
 import vnreal.constraints.resources.BandwidthResource;
@@ -19,6 +12,12 @@ import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
 import vnreal.ui.dialog.ConstraintsGeneratorDialog;
 import vnreal.ui.dialog.ScenarioWizard;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GenerateTopology {
 	private int snodes = 100; // 从100 120 140 160 180
@@ -70,7 +69,7 @@ public class GenerateTopology {
 		while (true) {
 			networkStack = ScenarioWizard.generateTopology(snodes, 1.0, 0.5, virtualNetworks, virtualNodesArray(),
 					virtualAlphaArray(), virtualBetaArray());
-			if (Utils.complete((VirtualNode)networkStack.getLayer(1).getVertices().iterator().next(), 
+			if (Util.complete((VirtualNode)networkStack.getLayer(1).getVertices().iterator().next(),
 					(VirtualNetwork)networkStack.getLayer(1))) {
 				break;
 			}
@@ -109,9 +108,6 @@ public class GenerateTopology {
 		ConstraintsGeneratorDialog.generateConstraintsVirtual(resClassesToGenerate_vn_all,
 				resParamNamesToGenerate_vn_all, resMaxValues_vn_all, networkStack);
 		XMLExporter.exportStack(Constants.WRITE_RESOURCE + filename, networkStack);
-//		PrintWriter out = new PrintWriter(Constants.WRITE_RESOURCE + logname);
-//		out.println(toString());
-//		out.close();
 	}
 
 	@Override

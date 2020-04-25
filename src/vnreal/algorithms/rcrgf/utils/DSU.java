@@ -1,5 +1,8 @@
-package vnreal.algorithms.myRCRGF.util;
+package vnreal.algorithms.rcrgf.utils;
 
+/**
+ * Created on 2020/4/25
+ */
 public class DSU{
     int[] parent;
 

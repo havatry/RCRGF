@@ -1,9 +1,7 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.core;
 
-import vnreal.algorithms.myRCRGF.core.SelectCoreNode;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
-import vnreal.algorithms.utils.SubgraphBasicVN.Utils;
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
 import vnreal.network.substrate.SubstrateNode;
@@ -13,10 +11,8 @@ import vnreal.network.virtual.VirtualNode;
 
 import java.util.*;
 
-import static vnreal.algorithms.rcrgf.GlobalVariable.setVisited;
-import static vnreal.algorithms.rcrgf.Util.getBandwidth;
-import static vnreal.algorithms.rcrgf.Util.getReferenceValue;
-import static vnreal.algorithms.rcrgf.Util.greatEqual;
+import static vnreal.algorithms.rcrgf.config.GlobalVariable.setVisited;
+import static vnreal.algorithms.rcrgf.utils.Util.*;
 
 /**
  * Created on 2020/4/19
@@ -34,8 +30,8 @@ public class RCRGFAlgorithm {
         Objects.requireNonNull(virtualNetwork, "virtual network cannot be null");
 
         // 获取网络中的核心节点
-        VirtualNode root = (VirtualNode) SelectCoreNode.selectForRoot(virtualNetwork);
-        SubstrateNode core = (SubstrateNode) SelectCoreNode.selectForRoot(substrateNetwork);
+        VirtualNode root = (VirtualNode) selectCore(virtualNetwork).get();
+        SubstrateNode core = (SubstrateNode) selectCore(substrateNetwork).get();
 
         // 初始化BFS候选集合
         Set<SubstrateNode> bfsSet = new HashSet<>(4);

@@ -36,8 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mulavito.graph.ILayer;
-import vnreal.algorithms.myRCRGF.save.MyUndirectedGraph;
-import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.rcrgf.config.MyUndirectedGraph;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.constraints.AbstractConstraint;
 import edu.uci.ics.jung.graph.DirectedOrderedSparseMultigraph;
 import edu.uci.ics.jung.graph.ObservableGraph;

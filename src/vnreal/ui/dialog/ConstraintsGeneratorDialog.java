@@ -66,7 +66,6 @@ import mulavito.ui.dialogs.AbstractButtonDialog;
 import mulavito.utils.ClassScanner;
 import mulavito.utils.distributions.UniformStream;
 import vnreal.ExchangeParameter;
-import vnreal.algorithms.myRCRGF.util.Constants;
 import vnreal.constraints.ILinkConstraint;
 import vnreal.constraints.INodeConstraint;
 import vnreal.constraints.demands.AbstractDemand;

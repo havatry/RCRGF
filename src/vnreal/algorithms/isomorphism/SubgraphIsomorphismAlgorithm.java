@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.algorithms.singlenetworkmapping.SingleNetworkMappingAlgorithm;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.algorithms.utils.SubgraphBasicVN.ResourceDemandEntry;

@@ -1,7 +1,6 @@
-package vnreal.algorithms.myRCRGF.test;
+package vnreal.algorithms.rcrgf.produce;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 

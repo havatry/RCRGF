@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.demands.IdDemand;

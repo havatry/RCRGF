@@ -1,6 +1,8 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.core;
 
-import vnreal.algorithms.myRCRGF.util.DSU;
+import vnreal.algorithms.rcrgf.config.GlobalVariable;
+import vnreal.algorithms.rcrgf.utils.DSU;
+import vnreal.algorithms.rcrgf.utils.Util;
 import vnreal.network.virtual.VirtualLink;
 import vnreal.network.virtual.VirtualNetwork;
 import vnreal.network.virtual.VirtualNode;
@@ -46,7 +48,7 @@ public class RemoveEdge {
 			VirtualNode s = virtualNetwork.getEndpoints(r).getFirst();
 			VirtualNode t = virtualNetwork.getEndpoints(r).getSecond();
 			if ((GlobalVariable.getVirtualUpStream(s) == null && s != root)
-					|| (t.getDtoVirtual().getUpnode() == null && t != root)) {
+					|| GlobalVariable.getVirtualUpStream(t) == null && t != root) {
 				// 说明在其他分支上 存在多个连通分量
 				return false;
 			}

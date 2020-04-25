@@ -1,6 +1,5 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.utils;
 
-import vnreal.algorithms.utils.NodeLinkAssignation;
 import vnreal.algorithms.utils.SubgraphBasicVN.NodeLinkMapping;
 import vnreal.constraints.demands.BandwidthDemand;
 import vnreal.constraints.demands.CpuDemand;
@@ -11,8 +10,12 @@ import vnreal.network.Network;
 import vnreal.network.Node;
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualLink;
+import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -69,7 +72,7 @@ public class Util {
      * @param network 给定的网络拓扑
      * @return 该网络这reference值最大的那个， 可能为null
      */
-    public Optional<Node> selectCore(Network network) {
+    public static Optional<Node> selectCore(Network network) {
         double referenceValue = -1.0;
         Node select = null;
         for (Object o : network.getVertices()) {
@@ -103,6 +106,24 @@ public class Util {
                 / (cpu_total + nodeLinkMapping.getLinkEntries().keySet().stream()
                 .collect(Collectors.summarizingDouble(x -> getBandwidth(x)
                         * nodeLinkMapping.getLinkEntries().get(x).size())).getSum());
+    }
+
+    // 判断连通性
+    public static boolean complete(VirtualNode root, VirtualNetwork virtualNetwork) {
+        // 判断树是否只有一个连通分量
+        Set<VirtualNode> connect = new HashSet<>();
+        dfs(root, connect, virtualNetwork);
+        return connect.size() == virtualNetwork.getVertexCount();
+    }
+
+    private static void dfs (VirtualNode root, Set<VirtualNode> visited, VirtualNetwork virtualNetwork) {
+        for (VirtualNode child : virtualNetwork.getNeighbors(root)) {
+            if (visited.contains(child)) {
+                continue;
+            }
+            visited.add(child);
+            dfs(child, visited, virtualNetwork);
+        }
     }
 
     // 基本double判断条件

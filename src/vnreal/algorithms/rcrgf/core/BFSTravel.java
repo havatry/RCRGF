@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.core;
 
 import vnreal.network.substrate.SubstrateLink;
 import vnreal.network.substrate.SubstrateNetwork;
@@ -7,8 +7,8 @@ import vnreal.network.substrate.SubstrateNode;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static vnreal.algorithms.rcrgf.GlobalVariable.*;
-import static vnreal.algorithms.rcrgf.Util.*;
+import static vnreal.algorithms.rcrgf.config.GlobalVariable.*;
+import static vnreal.algorithms.rcrgf.utils.Util.*;
 
 /**
  * Created on 2020/4/19

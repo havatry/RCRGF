@@ -1,8 +1,10 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.main;
 
 import junit.framework.Assert;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import vnreal.algorithms.AbstractAlgorithm;
+import vnreal.algorithms.rcrgf.core.RCRGFAlgorithm;
+import vnreal.algorithms.rcrgf.core.RemoveEdge;
 import vnreal.network.Network;
 import vnreal.network.NetworkStack;
 import vnreal.network.virtual.VirtualNetwork;
@@ -10,7 +12,7 @@ import vnreal.network.virtual.VirtualNetwork;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import static vnreal.algorithms.rcrgf.Util.*;
+import static vnreal.algorithms.rcrgf.utils.Util.*;
 
 /**
  * Created on 2020/4/19

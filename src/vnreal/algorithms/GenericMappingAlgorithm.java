@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import mulavito.algorithms.AbstractAlgorithmStatus;
-import vnreal.algorithms.myRCRGF.util.Utils;
+import vnreal.algorithms.rcrgf.utils.Util;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.hiddenhopmapping.IHiddenHopMapping;
 import vnreal.network.Network;
@@ -166,10 +166,10 @@ public abstract class GenericMappingAlgorithm extends
 				// �ڵ�����
 				double nodeRevenue = 0.0, linkRevenue = 0.0;
 				for (VirtualNode vn : ns.getVirtuals().get(0).getVertices()) {
-					nodeRevenue += Utils.getCpu(vn);
+					nodeRevenue += Util.getCpu(vn);
 				}
 				for (VirtualLink vl : ns.getVirtuals().get(0).getEdges()) {
-					linkRevenue += Utils.getBandwith(vl);
+					linkRevenue += Util.getBandwidth(vl);
 				}
 				return nodeRevenue + linkRevenue;
 			}

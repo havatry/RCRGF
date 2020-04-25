@@ -35,7 +35,7 @@ import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 import mulavito.algorithms.AbstractAlgorithmStatus;
 import org.apache.commons.collections15.ListUtils;
 import vnreal.algorithms.AbstractSequentialAlgorithm;
-import vnreal.algorithms.myRCRGF.util.Constants;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.constraints.demands.AbstractDemand;
 import vnreal.constraints.resources.AbstractResource;
 import vnreal.network.Network;

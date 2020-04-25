@@ -1,4 +1,4 @@
-package vnreal.algorithms.rcrgf;
+package vnreal.algorithms.rcrgf.config;
 
 import vnreal.network.substrate.SubstrateNode;
 import vnreal.network.virtual.VirtualNode;

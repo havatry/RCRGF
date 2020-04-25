@@ -1,18 +1,11 @@
-package vnreal.algorithms.myRCRGF.test;
+package vnreal.algorithms.rcrgf.main;
 
 import vnreal.algorithms.AlgorithmParameter;
-import vnreal.algorithms.AvailableResources;
-import vnreal.algorithms.isomorphism.SubgraphIsomorphismAlgorithm;
-import vnreal.algorithms.isomorphism.SubgraphIsomorphismStackAlgorithm;
-import vnreal.algorithms.myRCRGF.util.AvailableResourcesCompare;
-import vnreal.algorithms.myRCRGF.util.Constants;
-import vnreal.algorithms.myRCRGF.core.RCRGFStackAlgorithm;
-import vnreal.algorithms.myRCRGF.util.SubgraphIsomorphismCompare;
+import vnreal.algorithms.rcrgf.utils.Constants;
 import vnreal.core.Scenario;
 import vnreal.io.XMLImporter;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -40,16 +33,13 @@ public class Simulation {
 	}
 	
 	private void doSubgraph(String filename) {
-		Scenario scenario = XMLImporter.importScenario(filename);
-		SubgraphIsomorphismStackAlgorithm algorithm =
-				new SubgraphIsomorphismCompare(scenario.getNetworkStack(), new SubgraphIsomorphismAlgorithm());
-		algorithm.performEvaluation();
+
 	}
 	
 	private void doRCRGF(String filename) {
 		Scenario scenario = XMLImporter.importScenario(filename);
-		RCRGFStackAlgorithm rcrgfStackAlgorithm =
-				new RCRGFStackAlgorithm(scenario.getNetworkStack());
+		RCRGFAlgorithmWrap rcrgfStackAlgorithm =
+				new RCRGFAlgorithmWrap(scenario.getNetworkStack());
 		rcrgfStackAlgorithm.performEvaluation();
 	}
 	
@@ -60,9 +50,6 @@ public class Simulation {
 		param.put("kShortestPaths", "1"); //
 		param.put("overload", "False");
 		param.put("PathSplitting", "False");
-		AvailableResourcesCompare availableResources
-			= new AvailableResourcesCompare(param);
-		availableResources.setStack(scenario.getNetworkStack());
-		availableResources.performEvaluation();
+
 	}
 }
