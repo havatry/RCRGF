@@ -1,0 +1,163 @@
+Network stack:
+Substrate Network
+NODES:
+[id:0 name:0
+  CpuResource.classname:CpuResource_cycles:7310.0_occupiedCycles:0.0
+]
+[id:8 name:8
+  CpuResource.classname:CpuResource_cycles:5975.0_occupiedCycles:0.0
+]
+[id:14 name:14
+  CpuResource.classname:CpuResource_cycles:9848.0_occupiedCycles:0.0
+]
+[id:2 name:2
+  CpuResource.classname:CpuResource_cycles:2405.0_occupiedCycles:0.0
+]
+[id:4 name:4
+  CpuResource.classname:CpuResource_cycles:6374.0_occupiedCycles:0.0
+]
+[id:10 name:10
+  CpuResource.classname:CpuResource_cycles:3332.0_occupiedCycles:0.0
+]
+[id:18 name:18
+  CpuResource.classname:CpuResource_cycles:9412.0_occupiedCycles:0.0
+]
+[id:16 name:16
+  CpuResource.classname:CpuResource_cycles:8792.0_occupiedCycles:0.0
+]
+[id:6 name:6
+  CpuResource.classname:CpuResource_cycles:5504.0_occupiedCycles:0.0
+]
+[id:12 name:12
+  CpuResource.classname:CpuResource_cycles:3852.0_occupiedCycles:0.0
+]
+
+EDGES:
+[id:46 name:46
+46  (2-->6)
+  BandwidthResource.classname:BandwidthResource_bandwidth:7332.0_occupiedBandwidth:0.0
+]
+[id:20 name:20
+20  (14-->8)
+  BandwidthResource.classname:BandwidthResource_bandwidth:2750.0_occupiedBandwidth:0.0
+]
+[id:68 name:68
+68  (4-->10)
+  BandwidthResource.classname:BandwidthResource_bandwidth:4630.0_occupiedBandwidth:0.0
+]
+[id:40 name:40
+40  (14-->4)
+  BandwidthResource.classname:BandwidthResource_bandwidth:9907.0_occupiedBandwidth:0.0
+]
+[id:56 name:56
+56  (18-->8)
+  BandwidthResource.classname:BandwidthResource_bandwidth:1339.0_occupiedBandwidth:0.0
+]
+[id:42 name:42
+42  (0-->14)
+  BandwidthResource.classname:BandwidthResource_bandwidth:4872.0_occupiedBandwidth:0.0
+]
+[id:72 name:72
+72  (14-->6)
+  BandwidthResource.classname:BandwidthResource_bandwidth:715.0_occupiedBandwidth:0.0
+]
+[id:36 name:36
+36  (8-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:4108.0_occupiedBandwidth:0.0
+]
+[id:54 name:54
+54  (6-->8)
+  BandwidthResource.classname:BandwidthResource_bandwidth:8993.0_occupiedBandwidth:0.0
+]
+[id:32 name:32
+32  (12-->4)
+  BandwidthResource.classname:BandwidthResource_bandwidth:1045.0_occupiedBandwidth:0.0
+]
+[id:48 name:48
+48  (6-->10)
+  BandwidthResource.classname:BandwidthResource_bandwidth:8173.0_occupiedBandwidth:0.0
+]
+[id:22 name:22
+22  (0-->12)
+  BandwidthResource.classname:BandwidthResource_bandwidth:1289.0_occupiedBandwidth:0.0
+]
+[id:28 name:28
+28  (0-->4)
+  BandwidthResource.classname:BandwidthResource_bandwidth:5467.0_occupiedBandwidth:0.0
+]
+[id:30 name:30
+30  (4-->6)
+  BandwidthResource.classname:BandwidthResource_bandwidth:9645.0_occupiedBandwidth:0.0
+]
+[id:38 name:38
+38  (12-->18)
+  BandwidthResource.classname:BandwidthResource_bandwidth:7763.0_occupiedBandwidth:0.0
+]
+[id:52 name:52
+52  (8-->4)
+  BandwidthResource.classname:BandwidthResource_bandwidth:5267.0_occupiedBandwidth:0.0
+]
+[id:74 name:74
+74  (14-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:3484.0_occupiedBandwidth:0.0
+]
+[id:26 name:26
+26  (10-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:232.0_occupiedBandwidth:0.0
+]
+[id:44 name:44
+44  (0-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:7462.0_occupiedBandwidth:0.0
+]
+[id:50 name:50
+50  (2-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:8389.0_occupiedBandwidth:0.0
+]
+[id:34 name:34
+34  (10-->8)
+  BandwidthResource.classname:BandwidthResource_bandwidth:6251.0_occupiedBandwidth:0.0
+]
+[id:70 name:70
+70  (4-->18)
+  BandwidthResource.classname:BandwidthResource_bandwidth:45.0_occupiedBandwidth:0.0
+]
+[id:64 name:64
+64  (12-->10)
+  BandwidthResource.classname:BandwidthResource_bandwidth:7150.0_occupiedBandwidth:0.0
+]
+[id:66 name:66
+66  (12-->14)
+  BandwidthResource.classname:BandwidthResource_bandwidth:1432.0_occupiedBandwidth:0.0
+]
+[id:58 name:58
+58  (0-->2)
+  BandwidthResource.classname:BandwidthResource_bandwidth:831.0_occupiedBandwidth:0.0
+]
+[id:60 name:60
+60  (4-->16)
+  BandwidthResource.classname:BandwidthResource_bandwidth:9786.0_occupiedBandwidth:0.0
+]
+[id:62 name:62
+62  (2-->18)
+  BandwidthResource.classname:BandwidthResource_bandwidth:7224.0_occupiedBandwidth:0.0
+]
+[id:24 name:24
+24  (14-->10)
+  BandwidthResource.classname:BandwidthResource_bandwidth:1466.0_occupiedBandwidth:0.0
+]
+
+Virtual Network (1)
+NODES:
+id:78 name:78
+  classname:CpuDemand_demandedCycles:1719.0
+id:80 name:80
+  classname:CpuDemand_demandedCycles:1943.0
+id:76 name:76
+  classname:CpuDemand_demandedCycles:678.0
+
+EDGES:
+id:84 name:84  (76-->78)
+  classname:BandwidthDemand_demandedBandwidth:1225.0
+id:82 name:82  (76-->80)
+  classname:BandwidthDemand_demandedBandwidth:1731.0
+

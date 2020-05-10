@@ -1,5 +1,6 @@
 package vnreal.algorithms.rcrgf.core;
 
+import org.junit.Assert;
 import vnreal.algorithms.rcrgf.config.GlobalVariable;
 import vnreal.algorithms.rcrgf.utils.DSU;
 import vnreal.algorithms.rcrgf.utils.Util;
@@ -20,11 +21,17 @@ public class RemoveEdge {
 	// 采用生成树kurskal算法，将不在生成树中的边标记下，作为候选删除集合
 	// 然后找出环路，删除环路中最小带宽，并将该边加入进去
 	public static boolean work(VirtualNetwork virtualNetwork) {
+	    if (virtualNetwork.getEdgeCount() == virtualNetwork.getVertexCount() - 1) {
+	        return true; // 不需要剪枝
+        }
 		// 1. 对所有边 按照带宽从大到小排序
 		List<VirtualLink> links = new ArrayList<>(virtualNetwork.getEdges());
 		Collections.sort(links, Util::compareLinkBandwidth);
 		// 每次选择最大的带宽边
-		DSU dsu = new DSU(virtualNetwork.getVertexCount());
+        // 获取最大的id
+        long max = virtualNetwork.getVertices().stream().mapToLong(VirtualNode::getId).summaryStatistics().getMax();
+        Assert.assertTrue("虚拟节点规模较大 预处理暂不支持", max < 10000L);
+        DSU dsu = new DSU((int) (max + 1));
 		LinkedList<VirtualLink> other = new LinkedList<>(); // 待删除的边
 		LinkedList<VirtualLink> remaining = new LinkedList<>(); // 保留的边
 		for (VirtualLink l : links) {

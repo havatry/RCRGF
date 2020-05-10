@@ -20,6 +20,7 @@ public class BFSTravel {
     private int count = 0;
     private Map<SubstrateNode, Map<SubstrateNode, Double>> BTL;
 
+
     public BFSTravel(SubstrateNetwork substrateNetwork) {
         this.EBTL = new HashMap<>(16);
         this.substrateNetwork = substrateNetwork;
@@ -102,7 +103,7 @@ public class BFSTravel {
      * @return
      */
     public boolean hasNext() {
-        return count >= substrateNetwork.getVertices().size();
+        return count < substrateNetwork.getVertices().size();
     }
 
 

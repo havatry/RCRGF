@@ -117,11 +117,6 @@ public class GenerateTopology {
 				+ ", cpu_resource=" + cpu_resource
 				+ ", bandwith_resource=" + bandwith_resource + "]";
 	}
-	
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		GenerateTopology generateTopology = new GenerateTopology();
-		generateTopology.write();
-	}
 
 	public void setSnodes(int snodes) {
 		this.snodes = snodes;

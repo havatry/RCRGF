@@ -32,7 +32,12 @@ public class RCRGFAlgorithm {
         // 获取网络中的核心节点
         VirtualNode root = (VirtualNode) selectCore(virtualNetwork).get();
         SubstrateNode core = (SubstrateNode) selectCore(substrateNetwork).get();
-
+        // 是否满足约束
+        if (small(getReferenceValue(core, substrateNetwork), getReferenceValue(root, virtualNetwork))
+                || small(getCpu(core), getCpu(root))) {
+            return false;
+        }
+        nodeLinkMapping.add(root, core);
         // 初始化BFS候选集合
         Set<SubstrateNode> bfsSet = new HashSet<>(4);
         bfsSet.add(core);
@@ -59,37 +64,35 @@ public class RCRGFAlgorithm {
                 // 找到两个端点
                 VirtualNode first = virtualNetwork.getEndpoints(vl).getFirst();
                 VirtualNode second = virtualNetwork.getEndpoints(vl).getSecond();
-                if (nodeLinkMapping.isMapped(first)) {
-                    // first被映射 那么应该为second进行匹配
-                    // 找到first被映射的底层节点
-                    SubstrateNode substrateNode = nodeLinkMapping.getSubstrateNode(first);
-                    Objects.requireNonNull(substrateNode, "this substrate node can not be null");
-                    // 找到这个的候选集
-                    List<SubstrateNode> candicate = bfsTravel.filter(substrateNode, getBandwidth(vl));
-                    // 依次匹配
-                    for (SubstrateNode s : candicate) {
-                        if (greatEqual(getReferenceValue(s, substrateNetwork), getReferenceValue(second, virtualNetwork))) {
-                            // 满足条件 映射节点
-                            if (!NodeLinkAssignation.vnm(second, s)) {
-                                nodeLinkMapping.freeAllResources();
-                                return false;
-                            }
-                            nodeLinkMapping.add(second, s);
-                            iterator.remove(); // 去掉已经映射的
-                            // 更新上下文
-                            List<SubstrateLink> path = bfsTravel.update(nodeLinkMapping.getSubstrateNode(first),
-                                    nodeLinkMapping.getSubstrateNode(second), getBandwidth(vl));
-                            if (!NodeLinkAssignation.vlm(vl, path, substrateNetwork, nodeLinkMapping.getSubstrateNode(first))) {
-                                nodeLinkMapping.freeAllResources();
-                                return false;
-                            }
-                            nodeLinkMapping.add(vl, path);
-                            for (VirtualLink vlink : virtualNetwork.getOutEdges(second)) {
-                                currentAdd.add(vlink);
-                            }
-                            currentAdd.remove(vl); // 去掉已经完成映射的
-                            break;
+                VirtualNode process = nodeLinkMapping.isMapped(first) ? second : first;
+                VirtualNode mapped = nodeLinkMapping.isMapped(first) ? first : second;
+                SubstrateNode substrateNode = nodeLinkMapping.getSubstrateNode(mapped);
+                Objects.requireNonNull(substrateNode, "this substrate node can not be null");
+                // 找到这个的候选集
+                List<SubstrateNode> candicate = bfsTravel.filter(substrateNode, getBandwidth(vl));
+                // 依次匹配
+                for (SubstrateNode s : candicate) {
+                    if (greatEqual(getReferenceValue(s, substrateNetwork), getReferenceValue(process, virtualNetwork))) {
+                        // 满足条件 映射节点
+                        if (!NodeLinkAssignation.vnm(process, s)) {
+                            nodeLinkMapping.freeAllResources();
+                            return false;
                         }
+                        nodeLinkMapping.add(process, s);
+                        iterator.remove(); // 去掉已经映射的
+                        // 更新上下文
+                        List<SubstrateLink> path = bfsTravel.update(nodeLinkMapping.getSubstrateNode(mapped),
+                                nodeLinkMapping.getSubstrateNode(process), getBandwidth(vl));
+                        if (!NodeLinkAssignation.vlm(vl, path, substrateNetwork, nodeLinkMapping.getSubstrateNode(mapped))) {
+                            nodeLinkMapping.freeAllResources();
+                            return false;
+                        }
+                        nodeLinkMapping.add(vl, path);
+                        for (VirtualLink vlink : virtualNetwork.getOutEdges(process)) {
+                            currentAdd.add(vlink);
+                        }
+                        currentAdd.remove(vl); // 去掉已经完成映射的
+                        break;
                     }
                 }
             }
