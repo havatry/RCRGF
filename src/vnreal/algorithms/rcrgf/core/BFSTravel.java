@@ -38,7 +38,7 @@ public class BFSTravel {
     /**
      * EBTL的元素，被放置于优先队列中进行排序 排序的依据是value值
      */
-    private class Node implements Comparable<Node>{
+    private class Node implements Comparable<Node> {
         private SubstrateNode substrateNode;
         private double value;
 
@@ -64,18 +64,20 @@ public class BFSTravel {
     /**
      * 目前实现比较简单版本 将当前轮遍历的底层节点全部设置已经访问
      * 之后看测试再调整这个方面 只将映射的节点设置已经访问*
+     *
      * @param sourceSet 给定的初始集
      */
     public Set<SubstrateNode> travel(Set<SubstrateNode> sourceSet) {
         Set<SubstrateNode> access = new HashSet<>(16);
         // 遍历给定的集合 计算出EBTL
         for (SubstrateNode up : sourceSet) {
-            for (SubstrateNode cur: substrateNetwork.getNeighbors(up)) {
+            for (SubstrateNode cur : substrateNetwork.getNeighbors(up)) {
                 // 判断是否已经遍历了
                 if (isVisited(cur)) {
                     continue;
                 }
-                access.add(cur); // 访问的节点
+                // 访问的节点
+                access.add(cur);
                 count++;
                 // 设置上游
                 setSubstrateUpStream(cur, up);
@@ -87,19 +89,23 @@ public class BFSTravel {
 
     /**
      * 按照给定带宽过滤指定节点中的一些其他可达节点
-     * @param spec 其他可到当前的节点
+     *
+     * @param spec          其他可到当前的节点
+     * @param baseCpu   当前虚拟节点的cpu需求
      * @param baseBandwidth 当前虚拟节点的带宽需求
      * @return 过滤当前节点的可达节点
      */
-    public List<SubstrateNode> filter(SubstrateNode spec, double baseBandwidth) {
+    public List<SubstrateNode> filter(SubstrateNode spec, double baseCpu, double baseBandwidth) {
         // 遍历所以的节点
-        return BTL.get(spec).keySet().stream().filter(x -> BTL.get(spec).get(x) >= baseBandwidth)
+        return BTL.get(spec).keySet().stream().filter(x -> greatEqual(getCpu(x), baseCpu))
+                .filter(x -> BTL.get(spec).get(x) >= baseBandwidth)
                 .sorted(Comparator.comparingDouble(x -> BTL.get(spec).get(x)).reversed())
                 .collect(Collectors.toList());
     }
 
     /**
      * 判断是否还有下一次的遍历
+     *
      * @return
      */
     public boolean hasNext() {
@@ -109,15 +115,18 @@ public class BFSTravel {
 
     /**
      * 在底层网络中从起点更新到终点的路径
+     *
      * @param src 起点
      * @param dst 终点
      * @return 路径
      */
     public List<SubstrateLink> update(SubstrateNode src, SubstrateNode dst, final double baseBandwith) {
-        List<SubstrateLink> p = null;
+        List<SubstrateLink> p;
         if (getSubstrateUpStream(dst) != src) {
             // 递归
             p = update(src, getSubstrateUpStream(dst), baseBandwith);
+        } else {
+            p = new ArrayList<>();
         }
         // 开始工作
         SubstrateLink sl = substrateNetwork.findEdge(getSubstrateUpStream(dst), dst);

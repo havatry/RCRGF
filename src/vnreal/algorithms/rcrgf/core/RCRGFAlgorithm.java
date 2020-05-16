@@ -41,6 +41,7 @@ public class RCRGFAlgorithm {
         // 初始化BFS候选集合
         Set<SubstrateNode> bfsSet = new HashSet<>(4);
         bfsSet.add(core);
+        setVisited(core);
         BFSTravel bfsTravel = new BFSTravel(substrateNetwork);
         // 初始化虚拟网络中待映射的边
         TreeSet<VirtualLink> virtualLinks = new TreeSet<>((l1, l2) -> Double.compare(getBandwidth(l2), getBandwidth(l1)));
@@ -50,6 +51,8 @@ public class RCRGFAlgorithm {
         while (!virtualLinks.isEmpty() && bfsTravel.hasNext()) {
             // 将bfsSet传入作为当前的集合进行遍历
             Set<SubstrateNode> currentSet = bfsTravel.travel(bfsSet);
+            // 清除当前轮次的bfs搜索集
+            bfsSet.clear();
             // 更新访问状态为已访问
             for (SubstrateNode sn : currentSet) {
                 setVisited(sn);
@@ -69,7 +72,7 @@ public class RCRGFAlgorithm {
                 SubstrateNode substrateNode = nodeLinkMapping.getSubstrateNode(mapped);
                 Objects.requireNonNull(substrateNode, "this substrate node can not be null");
                 // 找到这个的候选集
-                List<SubstrateNode> candicate = bfsTravel.filter(substrateNode, getBandwidth(vl));
+                List<SubstrateNode> candicate = bfsTravel.filter(substrateNode, getCpu(process), getBandwidth(vl));
                 // 依次匹配
                 for (SubstrateNode s : candicate) {
                     if (greatEqual(getReferenceValue(s, substrateNetwork), getReferenceValue(process, virtualNetwork))) {
@@ -79,6 +82,8 @@ public class RCRGFAlgorithm {
                             return false;
                         }
                         nodeLinkMapping.add(process, s);
+                        // 将当前轮次映射的节点加入到下次bfs搜索候选集中
+                        bfsSet.add(s);
                         iterator.remove(); // 去掉已经映射的
                         // 更新上下文
                         List<SubstrateLink> path = bfsTravel.update(nodeLinkMapping.getSubstrateNode(mapped),
@@ -91,17 +96,21 @@ public class RCRGFAlgorithm {
                         for (VirtualLink vlink : virtualNetwork.getOutEdges(process)) {
                             currentAdd.add(vlink);
                         }
-                        currentAdd.remove(vl); // 去掉已经完成映射的
+                        // 去掉已经完成映射的
+                        currentAdd.remove(vl);
                         break;
                     }
                 }
             }
             virtualLinks.addAll(currentAdd);
         }
-        return virtualLinks.isEmpty(); // 都完成了虚拟链路的映射
+        // 都完成了虚拟链路的映射
+        return virtualLinks.isEmpty();
     }
 
-    // 返回映射结果
+    /**
+     * @return 返回映射结果
+     */
     public NodeLinkMapping getNodeLinkMapping() {
         return nodeLinkMapping;
     }
