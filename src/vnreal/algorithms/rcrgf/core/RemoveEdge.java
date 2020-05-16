@@ -90,6 +90,8 @@ public class RemoveEdge {
             // 获取链路
             VirtualLink vl = virtualNetwork.findEdge(cur, up);
             links.add(vl);
+            // 继续往上游找
+            cur = up;
         }
         return links;
     }

@@ -64,7 +64,8 @@ public class Util {
 
 
     public static int compareLinkBandwidth(Link l1, Link l2) {
-        return Double.compare(getBandwidth(l1), getBandwidth(l2));
+        // 从大到小 因此参数互换位置
+        return Double.compare(getBandwidth(l2), getBandwidth(l1));
     }
 
     /**
